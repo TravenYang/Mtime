@@ -1,0 +1,20 @@
+{
+  "name": "mtime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index_mtime.js",
+  "dependencies": {
+    "figlet": "^1.2.0",
+    "koa": "^1.2.4",
+    "koa-middlewares": "^3.1.0",
+    "koa-onerror": "^3.0.1",
+    "koa-static": "^2.0.0",
+    "requireindex": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Traven",
+  "license": "ISC"
+}
