@@ -3,7 +3,7 @@
  */
 'use strict';
 module.exports = function(app){
-  app.get('/a',function *(){
+  app.get('/list',function *(){
       try{
          this.body = 'i am aaaaaa!!!!!';
       }catch(e){

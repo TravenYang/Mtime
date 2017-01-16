@@ -28,7 +28,7 @@ app.use(function *(next) {
             this.throw(this.status, 'sys:服务端未知错误');
     }
 });
-app.use(staticServer(path.join(__dirname, 'static')));
+app.use(staticServer(path.join(__dirname, 'dist')));
 app.listen(Config.dev.mtime.port);
 require('figlet').text('Mtime', {
     font: 'Roman'
