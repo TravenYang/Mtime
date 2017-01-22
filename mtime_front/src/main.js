@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import routerConfig from './router_config'
+import store from './store/index'
 /* eslint-disable no-new */
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
@@ -11,5 +12,6 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  store
 })
