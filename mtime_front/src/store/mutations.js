@@ -3,12 +3,17 @@
  */
 import {SHOWHEADADV} from './types';
 const state ={
+  url:'http://mokebuy.com:13009/',
   showHeadAdvVal:true
 };
 
 const getters = {
   showHeadAdvVal:(state)=>{
     return state.showHeadAdvVal;
+  },
+  url:(state)=>{
+    console.log(state.url);
+    return state.url;
   }
 }
 const mutations = {

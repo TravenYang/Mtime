@@ -36,7 +36,7 @@
     .tab {
       width: 100%;
       display: flex;
-      background:#000;
+      background:#1C2635;
       .tab-item{
         flex:1;
         text-align:center;

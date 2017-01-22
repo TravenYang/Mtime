@@ -2,12 +2,19 @@
   <div class="home">
     我是home
     1111111111
-    <img src="http://mokebuy.com:13009/1.jpg">
+    <img :src="url+'116.jpg'">
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default{};
+  import{mapGetters}from 'vuex';
+  export default{
+    computed:{
+      ...mapGetters([
+        'url'
+      ])
+    }
+  };
 </script>
 
 <style>
