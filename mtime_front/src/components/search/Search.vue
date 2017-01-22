@@ -22,7 +22,6 @@
   .search {
     display: flex;
     padding: .8rem 1.5rem .75rem;
-    width: 100%;
     background: #f6f6f6;
     /*background: #1c2635;*/
     align-items: center;
@@ -62,12 +61,12 @@
       }
       .search_clear {
         position: absolute;
-        right: 24px/$ppr;
-        top: -6%;
+        right:1.4rem;
+        top: 28%;
         display: inline-block;
-        width: 5rem;
-        height: 3.3rem;
-        background: url("search_clear.png") no-repeat 2.5rem center;
+        width: 2.2rem;
+        height: 2.2rem;
+        background: url("search_clear.png") no-repeat ;
         background-size: 1.3rem 1.3rem;
       }
     }
