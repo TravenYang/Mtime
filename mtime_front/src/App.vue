@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeadAdv></HeadAdv>
-    <Tab></Tab>
+    <Tab :head="true"></Tab>
     <SearchBox></SearchBox>
     <keep-alive>
       <router-view></router-view>
@@ -13,6 +13,7 @@
 import Tab from 'components/tab/Tab';
 import HeadAdv from 'components/headAdv/HeadAdv';
 import SearchBox from 'components/search/Search'
+
 export default {
   name: 'app',
   components:{
