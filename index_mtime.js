@@ -8,6 +8,10 @@ let app = koa();
 let staticServer = require('koa-static');
 let path = require('path');
 let middlewares = require('koa-middlewares');
+app.use(function*(next){
+    yield next;
+    this.set('Access-Control-Allow-Origin','*');
+});
 app.use(middlewares.router(app));
 require('./router')(app);
 app.use(function *(next) {
@@ -29,6 +33,7 @@ app.use(function *(next) {
     }
 });
 app.use(staticServer(path.join(__dirname, 'dist')));
+
 app.listen(Config.dev.mtime.port);
 require('figlet').text('Mtime', {
     font: 'Roman'

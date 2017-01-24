@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div class="home" @click="showData">
     <div class="home_movie">
       <TitleBar></TitleBar>
-      <MoviePic></MoviePic>
+      <MoviePic :hotMovie="movieData"></MoviePic>
       <BorderBar></BorderBar>
       <TitleBar></TitleBar>
     </div>
@@ -18,18 +18,45 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import{mapGetters}from 'vuex';
   import TitleBar from 'components/titleBar/TitleBar'
   import MoviePic from 'components/moviePic/MoviePic'
   import BorderBar from 'components/borderBar/BorderBar'
   import LoopAdv from 'components/loopAdv/LoopAdv'
   import News from 'components/news/News'
   import Tab from 'components/tab/Tab';
+  import{mapGetters}from 'vuex';
   export default{
     computed: {
       ...mapGetters([
         'url'
       ])
+    },
+    data(){
+      return {
+        movieData: {}
+      }
+    },
+    mounted(){
+      this.fetchMovie();
+    },
+    methods: {
+      fetchMovie(){
+        let _this = this;
+        _this.$http.get('/mtime/list_home',{
+          params: {
+            page: 0,
+            number:8
+          }
+        }).then(function (res) {
+          _this.movieData = res.data;
+        }).catch(function (err) {
+          console.log('home页出错: ', err);
+        });
+        ;
+      },
+      showData(){
+        console.log('this.movieData2', this.movieData);
+      }
     },
     components: {
       TitleBar,
@@ -48,9 +75,9 @@
       padding: .5rem 1.5rem .3rem;
 
     }
-    .loopAdv_container{
-      padding:1.2rem 0 2rem 0;
-      background:#F6F6F6;
+    .loopAdv_container {
+      padding: 1.2rem 0 2rem 0;
+      background: #F6F6F6;
     }
   }
 

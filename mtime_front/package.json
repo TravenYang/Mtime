@@ -11,10 +11,10 @@
   "dependencies": {
     "axios": "^0.15.3",
     "vue": "^2.1.0",
-    "vue-router": "^2.1.1",
-    "vuex": "^2.1.1"
+    "vue-router": "^2.1.1"
   },
   "devDependencies": {
+    "vuex": "^2.1.1",
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",

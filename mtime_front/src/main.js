@@ -5,9 +5,12 @@ import App from './App'
 import VueRouter from 'vue-router'
 import routerConfig from './router_config'
 import store from './store/index'
+import axios from 'axios';
 /* eslint-disable no-new */
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
+axios.defaults.baseURL = 'http://127.0.0.1:13000';
+Vue.prototype.$http = axios;
 new Vue({
   el: '#app',
   router,
