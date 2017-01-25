@@ -1,7 +1,7 @@
 <template>
   <div class="head-adv" v-show="showHeadAdvVal">
     <a>
-      <div class="head-close" @click="showHeadAdv">
+      <div class="head-close" @click.stop="showHeadAdv">
         <i class="head-close-pic"></i>
       </div>
       <div class="head-logo">

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home_movie">
-      <TitleBar :routeTarget='hotMovieRoute'></TitleBar>
+      <TitleBar :routeTarget='hotMovieRoute' @click.native="showNavAndSearch"></TitleBar>
       <MoviePic :hotMovie="movieData"></MoviePic>
       <BorderBar></BorderBar>
       <TitleBar></TitleBar>
@@ -24,7 +24,7 @@
   import LoopAdv from 'components/loopAdv/LoopAdv'
   import News from 'components/news/News'
   import Tab from 'components/tab/Tab';
-  import{mapGetters}from 'vuex';
+  import{mapGetters,mapActions}from 'vuex';
   import router from 'vue-router'
   export default{
     computed: {
@@ -35,13 +35,16 @@
     data(){
       return {
         movieData: {},
-        hotMovieRoute:'/home_movie'
+        hotMovieRoute:'/home_movie/now_movie'
       }
     },
     mounted(){
       this.fetchMovie();
     },
     methods: {
+      ...mapActions([
+        'showNavAndSearch'
+      ]),
       fetchMovie(){
         let _this = this;
         _this.$http.get('/mtime/list_home',{
@@ -55,9 +58,6 @@
           console.log('home页出错: ', err);
         });
         ;
-      },
-      showData(){
-        console.log('this.movieData2', this.movieData);
       }
     },
     components: {

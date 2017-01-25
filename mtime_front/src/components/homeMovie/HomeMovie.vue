@@ -1,5 +1,6 @@
 <template>
   <div class="homeMovie">
+    <i class="backToHome" @click="showNavAndSearch(),backToHome()"></i>
     <div class="hotMovie_text_cnt">
       <div>
         <router-link to="/home_movie/now_movie" @click.stop.native="chooseMovieType"
@@ -18,6 +19,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapGetters,mapActions} from 'vuex';
   import SearchBox from 'components/search/Search'
   export default{
     data(){
@@ -26,9 +28,14 @@
       }
     },
     methods: {
+      ...mapActions([
+        'showNavAndSearch'
+      ]),
       chooseMovieType(){
-        console.log(this.isNow);
         return this.isNow = !this.isNow;
+      },
+      backToHome(){
+        this.$router.push('/home');
       }
     },
     components: {
@@ -39,6 +46,16 @@
 
 <style lang="scss">
   .homeMovie {
+    position: relative;
+    .backToHome{
+      background: url('./h_btn_back.png') no-repeat center center;
+      background-size: 1.2rem 1.5rem;
+      width:3rem;
+      height:100%;
+      position:absolute;
+      left:0;
+      top:0;
+    }
     width: 100%;
     height: 100%;
     background: #1C2635;
@@ -50,8 +67,6 @@
       justify-content: center;
       margin: 0 auto;
       align-items: center;
-      background: url('./h_btn_back.png') no-repeat 1.5rem center;
-      background-size: auto 1.5rem;
       & > div {
         background: #0D121A;
         border-radius: 4rem;
