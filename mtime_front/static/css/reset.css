@@ -49,9 +49,10 @@ table {
 }
 
 /* custom */
-a {
+a,a:link,a:visited,a:hover ,a:active {
   text-decoration: none;
   -webkit-backface-visibility: hidden;
+  color:#000;
 }
 
 li {

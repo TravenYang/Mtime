@@ -1,17 +1,24 @@
 <template>
-<div class="title_bar">
-  <div class="title">正在热映(51部)</div>
-  <div class="title_icon"></div>
-</div>
+  <router-link :to="{path:routeTarget}" class="title_bar">
+      <div class="title">正在热映(51部)</div>
+      <div class="title_icon"></div>
+  </router-link>
 </template>
 
 <script type="text/ecmascript-6">
-
+export default{
+  props:{
+    routeTarget:{
+      type:null
+    }
+  }
+};
 </script>
 
 <style lang="scss">
   .title_bar{
     display: flex;
+    color:#000;
     .title{
       width:100%;
       height:3.6rem;

@@ -33,7 +33,7 @@
     },
     props: {
       hotMovie: {
-        type: Array
+        type: null
       }
     }
   };

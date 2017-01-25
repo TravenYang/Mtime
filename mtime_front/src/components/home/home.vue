@@ -1,7 +1,7 @@
 <template>
-  <div class="home" @click="showData">
+  <div class="home">
     <div class="home_movie">
-      <TitleBar></TitleBar>
+      <TitleBar :routeTarget='hotMovieRoute'></TitleBar>
       <MoviePic :hotMovie="movieData"></MoviePic>
       <BorderBar></BorderBar>
       <TitleBar></TitleBar>
@@ -25,6 +25,7 @@
   import News from 'components/news/News'
   import Tab from 'components/tab/Tab';
   import{mapGetters}from 'vuex';
+  import router from 'vue-router'
   export default{
     computed: {
       ...mapGetters([
@@ -33,7 +34,8 @@
     },
     data(){
       return {
-        movieData: {}
+        movieData: {},
+        hotMovieRoute:'/home_movie'
       }
     },
     mounted(){
