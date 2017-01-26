@@ -21,6 +21,28 @@ export default {
     Tab,
     SearchBox
   },
+  watch:{
+      $route(to){
+        console.log(to);
+        switch(to.path) {
+          case '/home':
+            this.showNavAndSearch();
+           break;
+           case '/home_movie/now_movie':
+            this.hideNavAndSearch();
+           break;
+           case '/home_movie/will_movie':
+            this.hideNavAndSearch();
+           break;
+        }
+      }
+  },
+  methods: {
+      ...mapActions([
+        'showNavAndSearch',
+        'hideNavAndSearch'
+      ])
+  },
   computed:{
     ...mapGetters([
       'showNavVal',

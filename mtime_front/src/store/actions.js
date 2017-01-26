@@ -12,7 +12,13 @@ export default{
   showSearchVal:({commit})=>{
     commit(types.SHOW_SEARCH_VAL);
   },
+  hideNavAndSearch:({commit})=>{
+    commit(types.HIDE_NAV_AND_SEARCH);
+  },
   showNavAndSearch:({commit})=>{
     commit(types.SHOW_NAV_AND_SEARCH);
-  }
+  },
+  chooseMovieType:({commit},n)=>{
+    commit(types.CHOOSE_MOVIE_TYPE_HOME,n);
+  },
 }

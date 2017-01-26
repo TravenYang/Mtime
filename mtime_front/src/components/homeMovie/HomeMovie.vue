@@ -1,12 +1,12 @@
 <template>
   <div class="homeMovie">
-    <i class="backToHome" @click="showNavAndSearch(),backToHome()"></i>
+    <i class="backToHome" @click="backToHome()"></i>
     <div class="hotMovie_text_cnt">
       <div>
-        <router-link to="/home_movie/now_movie" @click.stop.native="chooseMovieType"
+        <router-link to="/home_movie/now_movie" @click.stop.native="chooseMovieType(true)"
                      :class="['hotMovie_text_now',{active:isNow}]">正在热映
         </router-link>
-        <router-link to="/home_movie/will_movie" @click.stop.native="chooseMovieType"
+        <router-link to="/home_movie/will_movie" @click.stop.native="chooseMovieType(false)"
                      :class="['hotMovie_text_will',{active:!isNow}]">即将上映
         </router-link>
       </div>
@@ -22,20 +22,22 @@
   import {mapGetters,mapActions} from 'vuex';
   import SearchBox from 'components/search/Search'
   export default{
-    data(){
-      return {
-        isNow: true
-      }
+    mounted(){
+        this.hideNavAndSearch();
+    },
+    computed:{
+      ...mapGetters([
+        'isNow'
+      ])
     },
     methods: {
       ...mapActions([
-        'showNavAndSearch'
+        'hideNavAndSearch',
+        'chooseMovieType'
       ]),
-      chooseMovieType(){
-        return this.isNow = !this.isNow;
-      },
       backToHome(){
         this.$router.push('/home');
+        this.chooseMovieType(true);
       }
     },
     components: {

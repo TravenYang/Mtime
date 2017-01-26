@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home_movie">
-      <TitleBar :routeTarget='hotMovieRoute' @click.native="showNavAndSearch"></TitleBar>
+      <TitleBar :routeTarget='hotMovieRoute'></TitleBar>
       <MoviePic :hotMovie="movieData"></MoviePic>
       <BorderBar></BorderBar>
       <TitleBar></TitleBar>
@@ -40,6 +40,7 @@
     },
     mounted(){
       this.fetchMovie();
+      //this.showNavAndSearch();
     },
     methods: {
       ...mapActions([

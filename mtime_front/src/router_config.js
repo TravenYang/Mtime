@@ -12,6 +12,7 @@ import WillMovie from './components/willMovie/WillMovie'
 
 export default{
   routes:[
+    {path:'/',component:Home},
     {path:'/home',component:Home},
     {path:'/ticket',component:Ticket},
     {path:'/shop',component:Shop},

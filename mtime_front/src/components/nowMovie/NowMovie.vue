@@ -29,7 +29,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapGetters} from 'vuex';
+  import {mapGetters,mapActions} from 'vuex';
   export default{
     computed: {
       ...mapGetters([
@@ -44,8 +44,12 @@
     },
     mounted(){
       this.fetchMovie();
+      this.chooseMovieType(true);
     },
     methods: {
+      ...mapActions([
+        'chooseMovieType'
+      ]),
       fetchMovie(){
         let _this = this;
         _this.loading = true;

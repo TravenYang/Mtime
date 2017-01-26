@@ -11,12 +11,21 @@
 <script type="text/ecmascript-6">
   import WillMovieItem from 'components/willMovieItem/WillMovieItem';
   import LoopAdv from 'components/loopAdv/LoopAdv';
-export default{
-  components:{
-    WillMovieItem,
-    LoopAdv
-  }
-};
+  import {mapGetters,mapActions} from 'vuex';
+  export default{
+    methods:{
+      ...mapActions([
+        'chooseMovieType'
+      ])
+    },
+    mounted(){
+      this.chooseMovieType(false);
+    },
+    components: {
+      WillMovieItem,
+      LoopAdv
+    }
+  };
 </script>
 
 <style lang="scss">
@@ -25,8 +34,8 @@ export default{
   .willMovie {
     display: flex;
     flex-direction: column;
-    padding:1.5rem;;
-    .loopAdv{
+    padding: 1.5rem;;
+    .loopAdv {
       margin-bottom: 1.5rem;
     }
     .most_want {
