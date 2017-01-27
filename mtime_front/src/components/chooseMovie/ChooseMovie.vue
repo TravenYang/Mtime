@@ -1,7 +1,7 @@
 <template>
   <div class="chooseMovie">
     <div class="header">
-      <div class="back">1</div>
+      <div class="back"></div>
       <div class="share"></div>
     </div>
     <div class="cinima">
@@ -39,6 +39,184 @@
       <span class="txt">用时光网App购票，更优惠！</span>
       <span class="download">立即下载</span>
     </div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
+      </div>
+    </div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
+      </div>
+    </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div><div class="ticket_info">
+    <div class="ticket_item">
+      <div class="ticket_item_1">
+        <div class="start">09:05</div>
+        <div class="end">10:35散场</div>
+      </div>
+      <div class="ticket_item_2">
+        <div class="threed">3D/中文</div>
+        <div class="place">优酷厅(60帧)</div>
+      </div>
+      <div class="ticket_item_3">
+        <div class="ori_price">￥45</div>
+        <div class="old_price">￥60</div>
+      </div>
+      <div class="purchase">购票</div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -72,7 +250,6 @@
         .cinima_name {
           font-size: 1.5rem;
           font-weight: bold;
-          /*padding-right:10.3rem;*/
           margin-bottom: 1rem;
         }
         .cinima_service {
@@ -114,7 +291,7 @@
         align-items: center;
         margin-left: 5rem;
         & > div {
-          border-left: 1px solid #7e8c8d;
+          border-left: 1px solid #D8D8D8;
           padding-left: 1rem;
           .contact_phone, .contact_location {
             height: 2.2rem;
@@ -138,26 +315,26 @@
       padding: 1.5rem;
       padding-left: 0;
       position: relative;
-      margin-right:1rem;
+      margin-right: 1rem;
       .movie_name {
         font-size: 1.6rem;
         font-weight: bold;
       }
-      .movie_info{
+      .movie_info {
         color: #777;
         font-size: 1.3rem;
-        margin-top:.6rem;
+        margin-top: .6rem;
         .movie_info_time {
           color: #ff8600;
           font-size: 1.3rem;
         }
       }
-      .toDetail{
+      .toDetail {
         width: 1.4rem;
         height: 2rem;
         position: absolute;
-        right:0;
-        top:1.4rem;
+        right: 0;
+        top: 1.4rem;
         padding: 1rem;
         background: url('./i-tmore.png') no-repeat center;
         background-size: auto .8rem;
@@ -165,37 +342,91 @@
       }
 
     }
-    .adv_bar{
-      height:5rem;
+    .adv_bar {
+      height: 5rem;
       width: 100%;
       padding: 1.5rem;
-      .pic{
+      .pic {
         display: inline-block;
         width: 3rem;
         height: 5rem;
-        background:url('./icon_light.png') no-repeat center center;
+        background: url('./icon_light.png') no-repeat center center;
         background-size: 2.5rem auto;
         vertical-align: middle;
       }
-      .txt{
+      .txt {
         vertical-align: middle;
         line-height: 1.5;
         font-style: normal;
         font-size: 1.2rem;
         color: #f94931;
       }
-      .download{
+      .download {
         width: 7rem;
         height: 2.5rem;
         margin-left: 1.4rem;
         color: #f34546;
         border: 1px solid #f34546;
         font-size: 1.1rem;
-        font-weight:bold;
+        font-weight: bold;
         border-radius: 1.5rem;
         display: inline-block;
         text-align: center;
         line-height: 2.5rem;
+      }
+    }
+    .ticket_info {
+      display: flex;
+      flex-direction: column;
+      .ticket_item {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 1.5rem;
+        .ticket_item_1 {
+          text-align: center;
+          .start {
+            font-size: 2.1rem;
+            font-weight: bold;
+            margin-bottom: .4rem;
+          }
+          .end {
+            font-size: 1.2rem;
+            color: #777;
+          }
+        }
+        .ticket_item_2 {
+          font-size: 1.3rem;
+          text-align: center;
+          color: #575757;
+          .threed{
+            margin-bottom: .4rem;
+          }
+        }
+        .ticket_item_3{
+          text-align: center;
+          .ori_price{
+            font-size: 1.6rem;
+            color: #ff8600;
+            font-weight: bold;
+            margin-bottom: .4rem;
+          }
+          .old_price{
+            font-size: 1.2em;
+            color: #777;
+            font-weight: bold;
+            text-decoration: line-through;
+          }
+        }
+        .purchase{
+          min-width: 7.5rem;
+          background: #ff8600;
+          color: #fff;
+          border: 1px solid #ff8600;
+          padding: .65rem 0;
+          border-radius: 40rem;
+          text-align: center;
+        }
       }
     }
   }
