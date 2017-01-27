@@ -39,23 +39,27 @@
       <span class="txt">用时光网App购票，更优惠！</span>
       <span class="download">立即下载</span>
     </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
+
+    <router-link to="/ticket/choose_movie/choose_seat">
+      <div class="ticket_info">
+        <div class="ticket_item">
+          <div class="ticket_item_1">
+            <div class="start">09:05</div>
+            <div class="end">10:35散场</div>
+          </div>
+          <div class="ticket_item_2">
+            <div class="threed">3D/中文</div>
+            <div class="place">优酷厅(60帧)</div>
+          </div>
+          <div class="ticket_item_3">
+            <div class="ori_price">￥45</div>
+            <div class="old_price">￥60</div>
+          </div>
+          <div class="purchase">购票</div>
         </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
       </div>
-    </div>
+    </router-link>
+
     <div class="ticket_info">
       <div class="ticket_item">
         <div class="ticket_item_1">
@@ -295,7 +299,7 @@
           padding-left: 1rem;
           .contact_phone, .contact_location {
             height: 2.2rem;
-            width: 1.7em;
+            width: 1.7rem;
             line-height: 2.2rem;
             background: url('./i_address_01.png') no-repeat;
             background-size: cover;

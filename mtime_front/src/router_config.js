@@ -10,12 +10,14 @@ import HomeMovie from './components/homeMovie/HomeMovie'
 import NowMovie from './components/nowMovie/NowMovie'
 import WillMovie from './components/willMovie/WillMovie'
 import ChooseMovie from './components/chooseMovie/ChooseMovie'
+import ChooseSeat from './components/chooseSeat/ChooseSeat'
 
 export default{
   routes:[
     {path:'/',component:Home},
     {path:'/home',component:Home},
     {path:'/ticket/choose_movie',component:ChooseMovie},
+    {path:'/ticket/choose_movie/choose_seat',component:ChooseSeat},
     {path:'/ticket',component:Ticket},
     {path:'/shop',component:Shop},
     {path:'/find',component:Find},
