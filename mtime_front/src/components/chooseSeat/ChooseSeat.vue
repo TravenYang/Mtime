@@ -305,6 +305,15 @@
 
       </ul>
     </div>
+    <div class="price_bar">
+      <div class="left">
+        <span class="price_cnt">总价:
+          <b class="price">￥135</b>
+          <i>(含服务费￥5/张)</i>
+        </span>
+      </div>
+      <span class="price_confirm">下一步</span>
+    </div>
   </div>
 </template>
 
@@ -430,7 +439,6 @@
         font-size: 1.3rem;
         line-height: 1.4;
       }
-
       .seat_ticket_choose {
         display: flex;
         flex-wrap: wrap;
@@ -472,6 +480,36 @@
             }
           }
         }
+      }
+    }
+    .price_bar{
+      align-items: center;
+      font-size: 1.2rem;
+      height: 3.5rem;
+      line-height: 3.5rem;
+      display: flex;
+      .left{
+        flex: 1;
+        .price{
+          vertical-align: middle;
+          font-size: 2rem;
+          color: #ff8600;
+          align-items: center;
+        }
+        i{
+          font-style: normal;
+          color:#999 ;
+        }
+      }
+      .price_confirm{
+        width: 9.5rem;
+        text-align: center;
+        font-size: 1.4rem;
+        height: 100%;
+        display: inline-block;
+        color: #fff;
+        background: #ff8600;
+      ;
       }
     }
   }
