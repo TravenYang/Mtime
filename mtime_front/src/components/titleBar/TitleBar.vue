@@ -20,11 +20,11 @@ export default{
     display: flex;
     color:#000;
     .title{
-      width:100%;
       height:3.6rem;
       line-height:3.6rem;
       font-size:1.8rem;
       font-weight: bold;
+      margin-right: 14rem;
     }
     .title_icon{
       width:1.4rem;

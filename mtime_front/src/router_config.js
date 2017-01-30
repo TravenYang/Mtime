@@ -11,6 +11,7 @@ import NowMovie from './components/nowMovie/NowMovie'
 import WillMovie from './components/willMovie/WillMovie'
 import ChooseMovie from './components/chooseMovie/ChooseMovie'
 import ChooseSeat from './components/chooseSeat/ChooseSeat'
+import MovieDetail from './components/movieDetail/MovieDetail'
 
 export default{
   routes:[
@@ -27,6 +28,7 @@ export default{
         {path:'will_movie',component:WillMovie},
         {path:'now_movie',component:NowMovie}
       ]
-    }
+    },
+    {path:'/home_movie/movie_detail',component:MovieDetail}
   ]
 }

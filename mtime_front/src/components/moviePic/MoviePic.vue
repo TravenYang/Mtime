@@ -1,12 +1,12 @@
 <template>
   <div class="movie_pic">
-    <a v-for="item in hotMovie" class="movie_item">
+    <router-link to="/home_movie/movie_detail" v-for="item in hotMovie" class="movie_item">
       <div class="movie_item_pic">
         <img class="img" :src="url+item.movieInfoImage">
         <span v-show="item.score" class="score">{{item.score | toDecimal1}}</span>
       </div>
       <h1 class="title">{{item.movieName}}</h1>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -52,9 +52,9 @@
         height: 3.8rem;
         width: 100%;
         text-align: center;
-        font-size:1.4rem;
+        font-size: 1.4rem;
         line-height: 1.2;
-        color:#333;
+        color: #333;
       }
       .movie_item_pic {
         position: relative;
