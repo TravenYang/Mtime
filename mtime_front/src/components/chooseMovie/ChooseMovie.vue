@@ -1,12 +1,12 @@
 <template>
   <div class="chooseMovie">
     <div class="header">
-      <div class="back"></div>
+      <div class="back" @click='backToHome'></div>
       <div class="share"></div>
     </div>
     <div class="cinima">
       <div class="cinima_left">
-        <b class="cinima_name">SFC上影影城（永华店）</b>
+        <b class="cinima_name">{{cinemaName}}</b>
         <div class="cinima_service">
           <i class="cinima_service_01"></i>
           <i class="cinima_service_02"></i>
@@ -225,7 +225,27 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default{};
+  import {mapGetters,mapActions} from 'vuex';
+  export default{
+    computed:{
+      cinemaName(){
+        return this.$route.query.name;
+      }
+    },
+    mounted(){
+      this.hideNavAndSearch();
+    },
+    methods: {
+      ...mapActions([
+        'hideNavAndSearch',
+        'showNavAndSearch'
+      ]),
+      backToHome(){
+        this.$router.push('/ticket');
+        this.showNavAndSearch();
+      }
+    },
+  };
 </script>
 
 <style lang="scss">
@@ -249,6 +269,7 @@
       display: flex;
       padding: 1.5rem;
       .cinima_left {
+        flex: 1;
         display: flex;
         flex-direction: column;
         .cinima_name {
@@ -293,7 +314,6 @@
       .contact {
         display: flex;
         align-items: center;
-        margin-left: 5rem;
         & > div {
           border-left: 1px solid #D8D8D8;
           padding-left: 1rem;

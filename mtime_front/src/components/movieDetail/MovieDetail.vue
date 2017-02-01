@@ -1,7 +1,7 @@
 <template>
   <div class="movie_detail">
     <div class="header">
-      <div class="back"></div>
+      <div class="back" @click='back'></div>
       <div class="favorite"></div>
       <div class="share"></div>
     </div>
@@ -227,10 +227,22 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import TitleBar from 'components/titleBar/TitleBar'
+  import TitleBar from 'components/titleBar/TitleBar';
+  import {mapGetters,mapActions} from 'vuex';
   export default{
     components: {
       TitleBar
+    },
+    mounted(){
+      this.hideNavAndSearch();
+    },
+    methods: {
+      ...mapActions([
+        'hideNavAndSearch'
+      ]),
+      back(){
+        this.$router.push('/home');
+      }
     }
   };
 
@@ -482,42 +494,44 @@
     }
     .movie_pic_box {
       padding: 1.4rem;
-      .movie_pic_cnt{
+      .movie_pic_cnt {
         display: flex;
         align-items: center;
-        img{
+        img {
           width: 6.6rem;
           height: 6.6rem;
-          margin:0 auto;
+          margin: 0 auto;
         }
       }
     }
-    .short_desc_box{
+    .short_desc_box {
       padding: 0 1.5rem 1.5rem 1.5rem;
-      .short_desc_item{
-        margin-top:1.5rem;
+      .short_desc_item {
+        margin-top: 1.5rem;
         display: flex;
         border-bottom: 1px solid #7e8c8d;
-        .head_icon{
+        .head_icon {
           margin-right: 1rem;
-          img{
+          img {
             height: 4rem;
             width: 4rem;
             border-radius: 4.1rem;
           }
         }
-        .commet_box{
-          .content{
+        .commet_box {
+          .content {
             font-size: 1.2rem;
             color: #999;
             line-height: 1.8;
             display: flex;
-            .name{
-              flex:1;
+            .name {
+              flex: 1;
 
             }
-            .time{font-style: normal;}
-            .score{
+            .time {
+              font-style: normal;
+            }
+            .score {
               font-size: 1.1rem;
               background: #659d0e;
               width: 2em;
@@ -527,18 +541,18 @@
               margin-left: .5rem;
             }
           }
-          .txt{
+          .txt {
             font-size: 1.4em;
             line-height: 1.5;
-            margin-top:1rem;
+            margin-top: 1rem;
           }
         }
-        .btn_box{
+        .btn_box {
           text-align: right;
           font-size: 1.2rem;
           color: #777;
           margin-top: -.5rem;
-          .feed_icon{
+          .feed_icon {
             display: inline-block;
             margin: 0 .1rem 0 0;
             width: 1.8rem;
@@ -547,10 +561,10 @@
             background-size: cover;
             vertical-align: middle;
           }
-          .feed{
+          .feed {
             margin-right: 1rem;
           }
-          .good{
+          .good {
             display: inline-block;
             margin: 0 .08rem 0 0;
             width: 1.8rem;

@@ -12,11 +12,11 @@ export default{
   showSearchVal:({commit})=>{
     commit(types.SHOW_SEARCH_VAL);
   },
-  hideNavAndSearch:({commit})=>{
-    commit(types.HIDE_NAV_AND_SEARCH);
+  hideNavAndSearch:({commit},n1,n2)=>{
+    commit(types.HIDE_NAV_AND_SEARCH,n1,n2);
   },
-  showNavAndSearch:({commit})=>{
-    commit(types.SHOW_NAV_AND_SEARCH);
+  showNavAndSearch:({commit},n1,n2)=>{
+    commit(types.SHOW_NAV_AND_SEARCH,n1,n2);
   },
   chooseMovieType:({commit},n)=>{
     commit(types.CHOOSE_MOVIE_TYPE_HOME,n);

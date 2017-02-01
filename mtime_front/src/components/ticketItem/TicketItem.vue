@@ -1,10 +1,10 @@
 <template>
 <div class="ticket_item">
   <div class="cinima_name_cnt">
-    <b class="cinima_name">SFC上影影城（永华店）</b>
-    <span class="cinima_price">￥<b>45</b>起</span>
+    <b class="cinima_name">{{info.name}}</b>
+    <span class="cinima_price">￥<b>{{roundPrice}}</b>起</span>
   </div>
-  <div class="cinima_address">上海市虹桥路1号徐家汇港汇广场六楼</div>
+  <div class="cinima_address">{{info.address}}</div>
   <div class="cinima_service">
     <i class="cinima_service_01"></i>
     <i class="cinima_service_02"></i>
@@ -17,18 +17,29 @@
 </template>
 
 <script type="text/ecmascript-6">
- export default{};
+ export default{
+   props:{
+     info:{}
+   },
+   computed:{
+     roundPrice(){
+       return Math.floor(Math.random()*(60-30+1)+30);
+     }
+   }
+ };
 </script>
 
 <style lang="scss">
 .ticket_item{
   border-bottom: 1px solid #D8D8D8;
-  padding: 1.2rem 0;
+  padding: 1.2rem 1.5rem;
   .cinima_name_cnt{
+    display: flex;
     .cinima_name{
       font-size: 1.5rem;
       font-weight: bold;
-      padding-right:10.3rem;
+      line-height: 2rem;
+      flex: 1;
     }
     .cinima_price{
       font-size: 1.2rem;

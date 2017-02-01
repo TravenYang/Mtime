@@ -1,7 +1,7 @@
 <template>
   <div class="movie_pic">
     <router-link to="/home_movie/movie_detail" v-for="item in hotMovie" class="movie_item">
-      <div class="movie_item_pic">
+      <div class="movie_item_pic" @click='hideNavAndSearch'>
         <img class="img" :src="url+item.movieInfoImage">
         <span v-show="item.score" class="score">{{item.score | toDecimal1}}</span>
       </div>
@@ -11,11 +11,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapGetters} from 'vuex';
+  import {mapGetters,mapActions} from 'vuex';
   export default{
     computed: {
       ...mapGetters([
         'url'
+      ])
+    },
+    methods:{
+      ...mapActions([
+        'hideNavAndSearch'
       ])
     },
     filters: {

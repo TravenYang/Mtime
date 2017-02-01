@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>Mtime</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"><link rel=stylesheet href=static/css/reset.css><link rel=stylesheet href=static/css/swiper-3.4.1.min.css><link href=/static/css/app.24439732db014bde1550b42fc8a2525a.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.1362352cc1a6cfc7aebf.js></script><script type=text/javascript src=/static/js/vendor.53e367f6233fcbc69630.js></script><script type=text/javascript src=/static/js/app.9ae912afce5423fd38ee.js></script></body><script>(function(win) {
+      var doc = win.document;
+      var docEl = doc.documentElement;
+      var tid;
+      function refreshRem() {
+        var width = docEl.getBoundingClientRect().width;
+//        if (width > 540) { // 最大宽度
+//          width = 540;
+//        }
+        var rem = width / 32; // 将屏幕宽度分成10份， 1份为1rem
+        docEl.style.fontSize = rem + 'px';
+      }
+      win.addEventListener('resize', function() {
+        clearTimeout(tid);
+//        tid = setTimeout(refreshRem, 300);
+        tid = refreshRem();
+      }, false);
+      win.addEventListener('pageshow', function(e) {
+        if (e.persisted) {
+          clearTimeout(tid);
+//          tid = setTimeout(refreshRem, 300);
+          tid = refreshRem();
+        }
+      }, false);
+      refreshRem();
+    })(window);</script></html>

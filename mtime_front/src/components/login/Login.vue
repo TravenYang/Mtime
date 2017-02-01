@@ -1,11 +1,5 @@
 <template>
   <div class="login_page">
-    <div class="login_header">
-      <a class="login_back"></a>
-      <div class="login_logo_cnt">
-        <i class="login_logo"></i>
-      </div>
-    </div>
     <div class="login_box">
       <div class="login_user">
         <i class="login_user_img"></i>
@@ -38,7 +32,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default{};
+  import {mapGetters,mapActions} from 'vuex';
+  export default{
+    mounted(){
+      this.hideNavAndSearch(true);
+    },
+    methods:{
+      ...mapActions([
+        'hideNavAndSearch'
+      ])
+    }
+  };
 </script>
 
 <style lang="scss">
@@ -46,34 +50,6 @@
   .login_page {
     background: #F6F6F6;
     height:614px/$ppr;
-    .login_header {
-      display: flex;
-      height: 4.4rem;
-      background: #1C2635;
-      .login_back {
-        width: 4.4rem;
-        height: 4.4rem;
-        display: block;
-        background: url('./h_btn_back.png') no-repeat 1.5rem center;
-        background-size: auto 1.5rem;
-      }
-      .login_logo_cnt {
-        text-align: center;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .login_logo {
-          display: block;
-          background: url('logo_mtime.png') no-repeat center center;
-          background-size: contain;
-          width: 5.6rem;
-          height: 1.8rem;
-          margin-right: 2.2rem;
-          height: 100%;
-        }
-      }
-    }
     .login_box {
       padding: 0 1.5rem;
       background: #fff;

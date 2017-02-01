@@ -9,7 +9,7 @@ import axios from 'axios';
 /* eslint-disable no-new */
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
-axios.defaults.baseURL = 'http://127.0.0.1:13000';
+axios.defaults.baseURL = 'http://192.168.1.3:13000';
 Vue.prototype.$http = axios;
 new Vue({
   el: '#app',

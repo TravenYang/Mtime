@@ -9,34 +9,34 @@ import {
   SHOW_NAV_AND_SEARCH,
   CHOOSE_MOVIE_TYPE_HOME
 } from './types';
-const state ={
-  url:'http://mokebuy.com:13009/',
-  showHeadAdvVal:true,
-  showNavVal:true,
-  showSearchVal:true,
+const state = {
+  url: 'http://mokebuy.com:13009/',
+  showHeadAdvVal: true,
+  showNavVal: true,
+  showSearchVal: true,
   isNow: true
 };
 
 const getters = {
-  showHeadAdvVal:(state)=>{
+  showHeadAdvVal: (state)=> {
     return state.showHeadAdvVal;
   },
-  showNavVal:(state)=>{
+  showNavVal: (state)=> {
     return state.showNavVal;
   },
-  showSearchVal:(state)=>{
+  showSearchVal: (state)=> {
     return state.showSearchVal;
   },
-  url:(state)=>{
+  url: (state)=> {
     return state.url;
   },
-  isNow:(state)=>{
+  isNow: (state)=> {
     return state.isNow;
   }
 }
 const mutations = {
-  [CHOOSE_MOVIE_TYPE_HOME](state,n){
-    console.log('val',n);
+  [CHOOSE_MOVIE_TYPE_HOME](state, n){
+    console.log('val', n);
     state.isNow = n;
   },
   [SHOW_HEAD_ADV](state){
@@ -48,13 +48,14 @@ const mutations = {
   [SHOW_SEARCH_VAL](state){
     state.showSearchVal = !state.showSearchVal;
   },
-  [HIDE_NAV_AND_SEARCH](state){
-    state.showNavVal = false;
-    state.showSearchVal = false;
+  [HIDE_NAV_AND_SEARCH](state, n1, n2){
+    state.showNavVal = n1 || false;
+    state.showSearchVal = n2 || false;
+    console.log('hide');
   },
-  [SHOW_NAV_AND_SEARCH](state){
-    state.showNavVal = true;
-    state.showSearchVal = true;
+  [SHOW_NAV_AND_SEARCH](state, n1, n2){
+    state.showNavVal = n1 || true;
+    state.showSearchVal = n2 || true;
   }
 };
 export default{
