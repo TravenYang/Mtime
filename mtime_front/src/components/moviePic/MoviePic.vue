@@ -1,27 +1,48 @@
 <template>
   <div class="movie_pic">
-    <router-link to="/home_movie/movie_detail" v-for="item in hotMovie" class="movie_item">
+    <a @click="goto(item.movieId)" v-for="item in hotMovie" class="movie_item" :myMovieId='item.movieId'>
+      {{myMovieId}}
       <div class="movie_item_pic" @click='hideNavAndSearch'>
         <img class="img" :src="url+item.movieInfoImage">
         <span v-show="item.score" class="score">{{item.score | toDecimal1}}</span>
       </div>
       <h1 class="title">{{item.movieName}}</h1>
-    </router-link>
+    </a>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {mapGetters,mapActions} from 'vuex';
   export default{
+    data(){
+      return {
+        myMovieId: ''
+      }
+    },
+    props: {
+      hotMovie: {
+        type: null
+      }
+    },
     computed: {
       ...mapGetters([
-        'url'
-      ])
+        'url',
+        'movieId'
+      ]),
+      getMyMovieID(){
+        console.log(this.myMovieId);
+        this.getMovieId(this.myMovieId);
+        return this.movieId;
+      }
     },
-    methods:{
+    methods: {
       ...mapActions([
-        'hideNavAndSearch'
-      ])
+        'hideNavAndSearch',
+        'getMovieId'
+      ]),
+      goto(movieId){
+        this.$router.push({path: '/home_movie/movie_detail', query: {movieId: movieId}})
+      }
     },
     filters: {
       toDecimal1(val){
@@ -31,14 +52,6 @@
           s += '.0';
         }
         return s
-      }
-    },
-    data(){
-      return {}
-    },
-    props: {
-      hotMovie: {
-        type: null
       }
     }
   };

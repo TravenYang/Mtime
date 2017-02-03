@@ -6,20 +6,20 @@
       <div class="share"></div>
     </div>
     <div class="bg_cnt">
-      <div class="bg_cinema" style="background-image:url('http://mokebuy.com:13009/4001.jpg')">
-        <div class="bg_img" style="background-image:url('http://mokebuy.com:13009/4001.jpg')"></div>
+      <div class="bg_cinema" :style="{backgroundImage:bgImg}">
+        <div class="bg_img" :style="{backgroundImage:bgImg}"></div>
         <p></p>
       </div>
     </div>
     <div class="cinemabox">
-      <img src="http://mokebuy.com:13009/4001.jpg">
+      <img :src="url+movieData.imageId+'.jpg'">
       <div class="cinema_txt">
         <div class="txt_cnt">
-          <h1 class="title">西游伏妖篇</h1>
-          <h2 class="title_en">Journey to the West: Demon Chapter</h2>
-          <div class="during">108分钟</div>
-          <div class="type">奇幻 / 动作 / 喜剧</div>
-          <div class="playtime">2017年1月28日中国上映</div>
+          <h1 class="title">{{movieData.movieName}}</h1>
+          <h2 class="title_en">{{movieData.englishName}}</h2>
+          <div class="during">{{movieData.duringTime}}</div>
+          <div class="type">{{movieData.mvType}}</div>
+          <div class="playtime">{{movieData.playTime}}</div>
         </div>
         <div class="btn">
           <div class="want">我想看</div>
@@ -29,15 +29,15 @@
     </div>
     <div class="short_desc">
       <i></i>
-      <b>唐僧"重色轻友"与悟空反目</b>
+      <b>{{movieData.desc}}</b>
     </div>
     <div class="btn_box">
-      <div class="purchase_btn">查影讯/购票</div>
+      <div class="purchase_btn">{{movieData.purchaseType}}</div>
     </div>
     <div class="bar"></div>
     <div class="long_desc_cnt">
       <div class="long_desc">
-        作为《西游降魔篇》的后继故事，唐三藏在上集感化了杀死段小姐的齐天大圣，并收其为徒后，带着孙悟空、猪八戒及沙僧，一行四人踏上西天取经之旅，路途凶险，除魔伏妖，师徒四人也在取经的过程中有个各自的成长与改变。
+        {{movieData.movieContent}}
       </div>
       <div class="show_more_btn"></div>
     </div>
@@ -50,8 +50,8 @@
             <div class="type">导演</div>
             <div class="info_cnt">
               <img class="director_pic" src="http://mokebuy.com:13009/4001.jpg">
-              <div class="name">徐克</div>
-              <div class="name_en">Hark Tsui</div>
+              <div class="name">{{movieData.dirctor}}</div>
+              <div class="name_en">{{movieData.englishName}}</div>
             </div>
           </div>
           <div class="actor">
@@ -233,16 +233,42 @@
     components: {
       TitleBar
     },
+    data(){
+      return {
+        movieData: [],
+        bgImg:''
+      }
+    },
+    computed:{
+      ...mapGetters([
+        'url'
+      ])
+    },
     mounted(){
       this.hideNavAndSearch();
-    },
+      let _this = this;
+      console.log(_this.$route.query.movieId);
+      _this.$http.get('/mtime/list_now_one/', {
+        params: {
+          movieId: _this.$route.query.movieId
+        }
+      }).then(function (res) {
+        _this.movieData = res.data[0];
+        _this.bgImg =  `url('${_this.url}${_this.movieData.imageId}.jpg')`;
+      }).catch(function (err) {
+          console.log('err', err, 'movie_detail err');
+        }
+      );
+    }
+    ,
     methods: {
       ...mapActions([
         'hideNavAndSearch'
       ]),
       back(){
         this.$router.push('/home');
-      }
+      },
+
     }
   };
 

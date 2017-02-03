@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home_movie">
       <TitleBar :routeTarget='hotMovieRoute'></TitleBar>
-      <MoviePic :hotMovie="movieData"></MoviePic>
+      <MoviePic :hotMovie="homeMovieData"></MoviePic>
       <BorderBar></BorderBar>
       <TitleBar></TitleBar>
     </div>
@@ -29,7 +29,8 @@
   export default{
     computed: {
       ...mapGetters([
-        'url'
+        'url',
+        'homeMovieData'
       ])
     },
     data(){
@@ -44,7 +45,8 @@
     },
     methods: {
       ...mapActions([
-        'showNavAndSearch'
+        'showNavAndSearch',
+        'getMovieData'
       ]),
       fetchMovie(){
         let _this = this;
@@ -54,7 +56,7 @@
             number:8
           }
         }).then(function (res) {
-          _this.movieData = res.data;
+          _this.getMovieData(res.data);
         }).catch(function (err) {
           console.log('home页出错: ', err);
         });

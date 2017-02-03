@@ -17,5 +17,16 @@ module.exports = function (app) {
             console.log(e.toString());
         }
     });
+    app.get('/mtime/list_now_one/',function*(){
+        try{
+            console.log('query',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM movieInfo WHERE movieId='${movieId}' ORDER BY playTime LIMIT 1;`;
+            let r = yield mysql.query(sortSql);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
 
 };

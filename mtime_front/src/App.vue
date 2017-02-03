@@ -3,9 +3,7 @@
     <HeadAdv></HeadAdv>
     <Tab :head="true" v-show="showNavVal"></Tab>
     <SearchBox v-show="showSearchVal"></SearchBox>
-    <keep-alive>
       <router-view></router-view>
-    </keep-alive>
   </div>
 </template>
 

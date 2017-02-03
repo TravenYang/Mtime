@@ -7,14 +7,18 @@ import {
   SHOW_SEARCH_VAL,
   HIDE_NAV_AND_SEARCH,
   SHOW_NAV_AND_SEARCH,
-  CHOOSE_MOVIE_TYPE_HOME
+  CHOOSE_MOVIE_TYPE_HOME,
+  HOME_MOVIE_DATA,
+  GET_MOVIE_ID
 } from './types';
 const state = {
   url: 'http://mokebuy.com:13009/',
   showHeadAdvVal: true,
   showNavVal: true,
   showSearchVal: true,
-  isNow: true
+  isNow: true,
+  homeMovieData:[],
+  movieId:''
 };
 
 const getters = {
@@ -32,9 +36,24 @@ const getters = {
   },
   isNow: (state)=> {
     return state.isNow;
+  },
+  homeMovieData:(state)=>{
+    return state.homeMovieData;
+  },
+  movieId:(state)=>{
+    console.log(state.movieId);
+    return state.movieId;
   }
 }
 const mutations = {
+  [HOME_MOVIE_DATA](state, n){
+    console.log('val', n);
+    state.homeMovieData = n;
+  },
+  [GET_MOVIE_ID](state, n){
+    console.log('val', n);
+    state.movieId = n;
+  },
   [CHOOSE_MOVIE_TYPE_HOME](state, n){
     console.log('val', n);
     state.isNow = n;

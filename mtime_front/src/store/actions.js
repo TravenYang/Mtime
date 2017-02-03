@@ -21,4 +21,11 @@ export default{
   chooseMovieType:({commit},n)=>{
     commit(types.CHOOSE_MOVIE_TYPE_HOME,n);
   },
+  getMovieData:({commit},n)=>{
+    commit(types.HOME_MOVIE_DATA,n);
+  },
+  getMovieId:({commit},n)=>{
+    console.log(n);
+    commit(types.GET_MOVIE_ID,n);
+  },
 }
