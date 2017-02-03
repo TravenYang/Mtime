@@ -4,6 +4,7 @@
 'use strict';
 let mysql = require('../models/mysql');
 module.exports = function (app) {
+    //获取电影信息数据
     app.get('/mtime/list_home/',function*(){
         try{
             console.log('query',this.query);
@@ -17,12 +18,55 @@ module.exports = function (app) {
             console.log(e.toString());
         }
     });
+    //查询一条电影数据
     app.get('/mtime/list_now_one/',function*(){
         try{
             console.log('query',this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM movieInfo WHERE movieId='${movieId}' ORDER BY playTime LIMIT 1;`;
             let r = yield mysql.query(sortSql);
+            console.log(r);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
+    //查询演员图片
+    app.get('/mtime/list_actor_image/',function*(){
+        try{
+            console.log('query actor',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM actor WHERE movieId='${movieId}' LIMIT 2;`;
+            let r = yield mysql.query(sortSql);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
+    //查询剧照
+    app.get('/mtime/list_movie_image/',function*(){
+        try{
+            console.log('query image',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM movieImage LIMIT 4;`;
+            let r = yield mysql.query(sortSql);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
+    //
+    app.get('/mtime/list_movie_commet/',function*(){
+        try{
+            console.log('query commet',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM commet WHERE movieId='${movieId}' LIMIT 10;`;
+            let r = yield mysql.query(sortSql);
+            if(r[0] == undefined){
+                sortSql = `select * FROM commet LIMIT 10;`;
+                r = yield mysql.query(sortSql);
+            }
+            console.log('commet',r);
             this.body = r;
         }catch(e){
             console.log(e.toString());

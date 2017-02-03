@@ -24,8 +24,10 @@ export default{
   getMovieData:({commit},n)=>{
     commit(types.HOME_MOVIE_DATA,n);
   },
-  getMovieId:({commit},n)=>{
-    console.log(n);
-    commit(types.GET_MOVIE_ID,n);
+  saveCinemaData:({commit},n)=>{
+    commit(types.CINEMA_DATA,n);
   },
+  saveCurrentLocation:({commit},n)=>{
+    commit(types.CURRENT_LOCATION,n);
+  }
 }

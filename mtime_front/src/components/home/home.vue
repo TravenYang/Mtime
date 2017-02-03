@@ -1,16 +1,16 @@
 <template>
   <div class="home">
     <div class="home_movie">
-      <TitleBar :routeTarget='hotMovieRoute'></TitleBar>
+      <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
       <MoviePic :hotMovie="homeMovieData"></MoviePic>
       <BorderBar></BorderBar>
-      <TitleBar></TitleBar>
+      <TitleBar :titleName='titleBarName[1]'></TitleBar>
     </div>
     <div class="loopAdv_container">
       <LoopAdv></LoopAdv>
     </div>
     <div class="home_movie">
-      <TitleBar></TitleBar>
+      <TitleBar :titleName='titleBarName[2]'></TitleBar>
       <News></News>
     </div>
     <Tab :head="false"></Tab>
@@ -36,7 +36,8 @@
     data(){
       return {
         movieData: {},
-        hotMovieRoute:'/home_movie/now_movie'
+        hotMovieRoute:'/home_movie/now_movie',
+        titleBarName:['正在热映','即将上映','今日热点']
       }
     },
     mounted(){

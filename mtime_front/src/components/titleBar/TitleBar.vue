@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{path:routeTarget}" class="title_bar">
-      <div class="title">正在热映(51部)</div>
+      <div class="title">{{titleName}}(51部)</div>
       <div class="title_icon"></div>
   </router-link>
 </template>
@@ -10,6 +10,9 @@ export default{
   props:{
     routeTarget:{
       type:null
+    },
+    titleName:{
+      type:String
     }
   }
 };

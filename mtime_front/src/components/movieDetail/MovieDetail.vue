@@ -1,5 +1,5 @@
 <template>
-  <div class="movie_detail">
+  <div class="movie_detail" v-if="movieData">
     <div class="header">
       <div class="back" @click='back'></div>
       <div class="favorite"></div>
@@ -36,40 +36,35 @@
     </div>
     <div class="bar"></div>
     <div class="long_desc_cnt">
-      <div class="long_desc">
+      <div :class="['long_desc',{show_more:show}]">
         {{movieData.movieContent}}
       </div>
-      <div class="show_more_btn"></div>
+      <div class="show_more_btn" @click="showContent"></div>
     </div>
     <div class="bar"></div>
-    <div class="actor_cnt_border">
+    <div class="actor_cnt_border" v-if="actor">
       <div class="actor_cnt">
-        <TitleBar></TitleBar>
+        <TitleBar :titleName='titleBarName[0]'></TitleBar>
         <div class="actor_pic_cnt">
           <div class="director">
             <div class="type">导演</div>
-            <div class="info_cnt">
-              <img class="director_pic" src="http://mokebuy.com:13009/4001.jpg">
-              <div class="name">{{movieData.dirctor}}</div>
-              <div class="name_en">{{movieData.englishName}}</div>
+            <div class="info_cnt" >
+              <img class="director_pic" :src="url+'actorImg'+actor[0].directorImg">
+              <div class="name">{{actor[0].dirctor}}</div>
+              <div class="name_en">{{actor[0].directorEn}}</div>
             </div>
           </div>
           <div class="actor">
             <div class="type">主要演员</div>
             <div class="actor_item">
-              <div class="info_cnt">
-                <img class="actor_fact" src="http://mokebuy.com:13009/4001.jpg">
-                <div class="name">吴亦凡</div>
-                <div class="name_en">Kris Wu</div>
-                <img class="actor_role" src="http://mokebuy.com:13009/4001.jpg">
-                <div class="role_name">饰：唐三藏</div>
-              </div>
-              <div class="info_cnt">
-                <img class="actor_fact" src="http://mokebuy.com:13009/4001.jpg">
-                <div class="name">林更新</div>
-                <div class="name_en">Kenny Lin</div>
-                <img class="actor_role" src="http://mokebuy.com:13009/4001.jpg">
-                <div class="role_name">饰：孙悟空</div>
+              <div class="info_cnt" v-for="act in actor">
+                <div class="top">
+                  <img class="actor_fact" :src="url+'actorImg'+act.actorImg">
+                  <div class="name">{{act.actorName}}</div>
+                  <div class="name_en">{{act.actorNameEn}}</div>
+                </div>
+                <img class="actor_role" :src="url+'actorImg'+act.actorImgRole">
+                <div class="role_name">{{act.actorRole}}</div>
               </div>
             </div>
           </div>
@@ -77,142 +72,25 @@
       </div>
     </div>
     <div class="bar"></div>
-    <div class="movie_pic_box">
-      <TitleBar></TitleBar>
+    <div class="movie_pic_box" v-if="movieImage">
+      <TitleBar :titleName='titleBarName[1]'></TitleBar>
       <div class="movie_pic_cnt">
-        <img src='http://mokebuy.com:13009/4001.jpg'>
-        <img src='http://mokebuy.com:13009/4001.jpg'>
-        <img src='http://mokebuy.com:13009/4001.jpg'>
-        <img src='http://mokebuy.com:13009/4001.jpg'>
+        <img v-for="movieImg in movieImage" :src='url+movieImg.movieImage'>
       </div>
     </div>
     <div class="short_desc_box">
-      <TitleBar></TitleBar>
-      <div class="short_desc_item">
+      <TitleBar :titleName='titleBarName[2]'></TitleBar>
+      <div class="short_desc_item" v-for="commet in movieCommet">
         <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
+          <img :src="url+commet.authorHeadImg">
         </div>
         <div class="commet_box">
           <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
+            <span class="name">{{commet.commetAuthor}}</span>
+            <i class="time">{{commet.timeAndSee}}<b v-if="commet.authorScore != 'null'">-评</b></i>
+            <b class="score" v-if="commet.authorScore != 'null'">{{commet.authorScore}}</b>
           </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
-          <div class="btn_box">
-            <i class="feed_icon"></i>
-            <span class="feed">回复</span>
-            <i class="good"></i>
-            <span class="good_num">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="short_desc_item">
-        <div class="head_icon">
-          <img src="http://mokebuy.com:13009/4001.jpg">
-        </div>
-        <div class="commet_box">
-          <div class="content">
-            <span class="name">如茶女子</span>
-            <i class="time">56分钟前-评</i>
-            <b class="score">8.4</b>
-          </div>
-          <p class="txt">虎头蛇尾吧 我觉得 不过整部片子看完 林更新太超乎我预期了 喜欢他的那个暗黑系的孙悟空 王丽坤非常适合演妖精呀</p>
+          <p class="txt">{{commet.commetall}}</p>
           <div class="btn_box">
             <i class="feed_icon"></i>
             <span class="feed">回复</span>
@@ -235,11 +113,16 @@
     },
     data(){
       return {
-        movieData: [],
-        bgImg:''
+        movieData: '',
+        bgImg: '',
+        show: false,
+        titleBarName: ['演职员', '剧照', '精彩评论'],
+        actor: '',
+        movieImage:'',
+        movieCommet:''
       }
     },
-    computed:{
+    computed: {
       ...mapGetters([
         'url'
       ])
@@ -247,14 +130,56 @@
     mounted(){
       this.hideNavAndSearch();
       let _this = this;
-      console.log(_this.$route.query.movieId);
+      //获取电影一条电影信息
       _this.$http.get('/mtime/list_now_one/', {
         params: {
           movieId: _this.$route.query.movieId
         }
       }).then(function (res) {
         _this.movieData = res.data[0];
-        _this.bgImg =  `url('${_this.url}${_this.movieData.imageId}.jpg')`;
+        _this.bgImg = `url('${_this.url}${_this.movieData.imageId}.jpg')`;
+      }).catch(function (err) {
+          console.log('err', err, 'movieData err');
+        }
+      );
+      //获取两条演职员信息
+      _this.$http.get('/mtime/list_actor_image/', {
+        params: {
+          movieId: _this.$route.query.movieId
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        //判断服务器返回数据，是否存在
+        if(res.data[0] != undefined){
+          _this.actor = res.data;
+        }
+      }).catch(function (err) {
+          console.log('err', err, 'movie_detail err');
+        }
+      );
+      //获取剧照
+      _this.$http.get('/mtime/list_movie_image/').then(function (res) {
+        console.log(res.data);
+        //判断服务器返回数据，是否存在
+        if(res.data[0] != undefined){
+          _this.movieImage = res.data;
+        }
+      }).catch(function (err) {
+          console.log('err', err, 'movie_detail err');
+        }
+      );
+      //
+      //获取评论
+      _this.$http.get('/mtime/list_movie_commet/',{
+        params: {
+          movieId: _this.$route.query.movieId
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        //判断服务器返回数据，是否存在
+        if(res.data[0] != undefined){
+          _this.movieCommet = res.data;
+        }
       }).catch(function (err) {
           console.log('err', err, 'movie_detail err');
         }
@@ -268,6 +193,9 @@
       back(){
         this.$router.push('/home');
       },
+      showContent(){
+        this.show = !this.show;
+      }
 
     }
   };
@@ -476,6 +404,9 @@
 
           .info_cnt {
             text-align: center;
+            .top{
+              height:14rem ;
+            }
             .director_pic {
               width: 8.55rem;
               overflow: hidden;

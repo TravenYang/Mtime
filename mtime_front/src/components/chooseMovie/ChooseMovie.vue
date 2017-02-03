@@ -25,6 +25,73 @@
         </div>
       </div>
     </div>
+
+    <div class="movie_pic_cinema">
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+      <a   class="movie_item_cinema">
+        <div class="movie_item_pic_cinema">
+          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
+          <span  class="score_cinema">11</span>
+        </div>
+        <h1 class="title_cinema">222</h1>
+      </a>
+
+
+
+
+
+    </div>
+
+
     <div class="movie_cnt">
       <div class="movie_name">西游伏妖篇</div>
       <div class="movie_info">
@@ -76,158 +143,167 @@
         </div>
         <div class="purchase">购票</div>
       </div>
-    </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
-      </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div><div class="ticket_info">
-    <div class="ticket_item">
-      <div class="ticket_item_1">
-        <div class="start">09:05</div>
-        <div class="end">10:35散场</div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
       </div>
-      <div class="ticket_item_2">
-        <div class="threed">3D/中文</div>
-        <div class="place">优酷厅(60帧)</div>
-      </div>
-      <div class="ticket_item_3">
-        <div class="ori_price">￥45</div>
-        <div class="old_price">￥60</div>
-      </div>
-      <div class="purchase">购票</div>
     </div>
-  </div>
+    <div class="ticket_info">
+      <div class="ticket_item">
+        <div class="ticket_item_1">
+          <div class="start">09:05</div>
+          <div class="end">10:35散场</div>
+        </div>
+        <div class="ticket_item_2">
+          <div class="threed">3D/中文</div>
+          <div class="place">优酷厅(60帧)</div>
+        </div>
+        <div class="ticket_item_3">
+          <div class="ori_price">￥45</div>
+          <div class="old_price">￥60</div>
+        </div>
+        <div class="purchase">购票</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {mapGetters,mapActions} from 'vuex';
   export default{
-    computed:{
+    computed: {
       cinemaName(){
         return this.$route.query.name;
       }
@@ -250,6 +326,52 @@
 
 <style lang="scss">
   .chooseMovie {
+    .movie_pic_cinema {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      background: #828282;
+      align-items: center;
+      height:16rem;
+      .movie_item_cinema {
+        width: 25%;
+        margin-left: 1.5em;
+        margin-top: .55rem;
+        .title_cinema {
+          padding: .5rem 0 0;
+          width: 100%;
+          text-align: center;
+          font-size: 1.4rem;
+          line-height: 1.2;
+          color: #fff;
+        }
+        .movie_item_pic_cinema {
+          position: relative;
+          width: 7.5rem;
+          height: 10.5rem;
+          text-align: center;
+          .img_cinema {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+          }
+          .score_cinema {
+            position: absolute;
+            right: .3rem;
+            top: .3rem;
+            width: 2rem;
+            height: 1.8rem;
+            background: #659d0e;
+            color: #fff;
+            line-height: 1.8rem;
+            text-align: center;
+          }
+        }
+      }
+
+    }
     .header {
       display: flex;
       background-color: #1C2635;
@@ -423,26 +545,26 @@
           font-size: 1.3rem;
           text-align: center;
           color: #575757;
-          .threed{
+          .threed {
             margin-bottom: .4rem;
           }
         }
-        .ticket_item_3{
+        .ticket_item_3 {
           text-align: center;
-          .ori_price{
+          .ori_price {
             font-size: 1.6rem;
             color: #ff8600;
             font-weight: bold;
             margin-bottom: .4rem;
           }
-          .old_price{
+          .old_price {
             font-size: 1.2em;
             color: #777;
             font-weight: bold;
             text-decoration: line-through;
           }
         }
-        .purchase{
+        .purchase {
           min-width: 7.5rem;
           background: #ff8600;
           color: #fff;
