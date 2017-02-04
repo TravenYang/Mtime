@@ -22,7 +22,9 @@
         </ul>
         <ol class="seat_row_seat_cnt">
           <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
-            <span  :class="['seat_row_seat_item',{seat_temp_select:seatData.tempSelect},{select:seatData.select},{seatnull:seatData.seatNull}]" v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(rowIdx,colIdx)"></span>
+            <span
+              :class="['seat_row_seat_item',{seat_temp_select:seatData.tempSelect},{select:seatData.select},{seatnull:seatData.seatNull}]"
+              v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(rowIdx,colIdx)"></span>
           </li>
         </ol>
       </div>
@@ -94,38 +96,83 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {
-  data(){
-    return {
-      seat:'',
-      seatNum:'',
-      chooseSeat:''
-    }
-  },
-  mounted(){
-    let _this = this;
-    this.$http.get('/mtime/list_movie_seat/',{
-      params:{
-        movieId:1
+  export default {
+    data(){
+      return {
+        seat: '',
+        seatNum: '',
+        chooseSeat: ''
       }
-    }).then(function(res){
-      _this.seat = JSON.parse(res.data[0].seat);
-    }).catch(function(err){
-      console.log('err seat',err);
-    });
-  },
-  methods:{
-    getSeatNum(rowIdx,colIdx){
-
-        this.seatNum = (rowIdx+1)+'排'+(colIdx+1)+'座';
-      console.log(this.seatNum);
-      let rowData = this.seat[rowIdx];
-      rowData[colIdx].seatNull = 1;
-      this.chooseSeat = rowData[colIdx];
-      console.log('colData',this.chooseSeat);
+    },
+    mounted(){
+      let _this = this;
+      this.$http.get('/mtime/list_movie_seat/', {
+        params: {
+          movieId: 1
+        }
+      }).then(function (res) {
+        _this.seat = JSON.parse(res.data[0].seat);
+      }).catch(function (err) {
+        console.log('err seat', err);
+      });
+    },
+    methods: {
+      getSeatNum(rowIdx, colIdx){
+        //tempSelect 多用户并发选座的冲突问题，留待日后优化
+        this.seatNum = (rowIdx + 1) + '排' + (colIdx + 1) + '座';
+        console.log(this.seatNum);
+        let colData = this.seat[rowIdx][colIdx];
+        this.chooseSeat = colData;
+        console.log('colData', this.chooseSeat);
+        let lastIdx = this.seat[0].length - 1;
+        console.log(lastIdx);
+        //选座规则：不允许留下单个空座
+        if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
+          let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
+          let nextSeat_1 = this.seat[rowIdx][colIdx + 1];
+          if (((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//判断前后座位是否被预定或被购买
+            if (colIdx !== 1 && colIdx !== lastIdx - 1) {//排除第前三个、后第三个座位，即范围在前第3到后第3座位之间
+              let prevSeat_2 = this.seat[rowIdx][colIdx - 2];
+              let nextSeat_2 = this.seat[rowIdx][colIdx + 2];
+              if (((prevSeat_2.select == 1) && prevSeat_2.seatNull !== 1) && ((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//第前2个被买，并且前1没被买
+                if (nextSeat_1.select == 1) {//后1被买
+                  selectSeat();
+                  console.log('可以选择 0');
+                } else {//后一没被买，就会留下单座
+                  console.log('请不要留下单个座位 0');
+                }
+              } else {
+                selectSeat();
+                console.log('可以选择 1');
+              }
+            } else if (nextSeat_1.select == 1) {//第3个被买的情况下，选择第二个
+              selectSeat();
+              console.log('可以选择 2');
+            } else {
+              console.log('请不要留下单个座位 2');
+            }
+          } else {
+            selectSeat();
+            console.log('可以选择 3');
+          }
+        } else {
+          selectSeat();
+          console.log('可以选择 4');
+        }
+        function selectSeat() {
+          if (colData.tempSelect == 1) {
+            alert('已被他人预定，请选择其他空座');
+          } else if (colData.seatNull !== 1 && colData.tempSelect !== 1) {
+            if (colData.select == 0) {
+              colData.select = 1;
+            } else {
+              colData.select = 0;
+            }
+          }
+        }
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -294,34 +341,33 @@ export default {
         }
       }
     }
-    .price_bar{
+    .price_bar {
       align-items: center;
       font-size: 1.2rem;
       height: 3.5rem;
       line-height: 3.5rem;
       display: flex;
-      .left{
+      .left {
         flex: 1;
-        .price{
+        .price {
           vertical-align: middle;
           font-size: 2rem;
           color: #ff8600;
           align-items: center;
         }
-        i{
+        i {
           font-style: normal;
-          color:#999 ;
+          color: #999;
         }
       }
-      .price_confirm{
+      .price_confirm {
         width: 9.5rem;
         text-align: center;
         font-size: 1.4rem;
         height: 100%;
         display: inline-block;
         color: #fff;
-        background: #ff8600;
-      ;
+        background: #ff8600;;
       }
     }
   }
