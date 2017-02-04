@@ -22,7 +22,7 @@
         </ul>
         <ol class="seat_row_seat_cnt">
           <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
-            <span class="seat_row_seat_item select" v-for="(seatData,colIdx) in seat[rowIdx]"></span>
+            <span  :class="['seat_row_seat_item',{seat_temp_select:seatData.tempSelect},{select:seatData.select},{seatnull:seatData.seatNull}]" v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(rowIdx,colIdx)"></span>
           </li>
         </ol>
       </div>
@@ -97,7 +97,9 @@
 export default {
   data(){
     return {
-      seat:''
+      seat:'',
+      seatNum:'',
+      chooseSeat:''
     }
   },
   mounted(){
@@ -107,11 +109,21 @@ export default {
         movieId:1
       }
     }).then(function(res){
-      console.log(res.data[0].seat);
       _this.seat = JSON.parse(res.data[0].seat);
     }).catch(function(err){
       console.log('err seat',err);
     });
+  },
+  methods:{
+    getSeatNum(rowIdx,colIdx){
+
+        this.seatNum = (rowIdx+1)+'排'+(colIdx+1)+'座';
+      console.log(this.seatNum);
+      let rowData = this.seat[rowIdx];
+      rowData[colIdx].seatNull = 1;
+      this.chooseSeat = rowData[colIdx];
+      console.log('colData',this.chooseSeat);
+    }
   }
 }
 </script>
@@ -208,6 +220,11 @@ export default {
               &.seatnull {
                 background: #fff;
               }
+              &.seat_temp_select {
+                background: url("./temSelect.png") no-repeat 0 0;
+                background-size: 1.35rem 1.125rem;
+              }
+
             }
           }
         }
