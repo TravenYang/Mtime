@@ -18,235 +18,11 @@
       </div>
       <div class="seat_row_cnt">
         <ul class="seat_row_num">
-          <li class="seat_row_num_item">1</li>
-          <li class="seat_row_num_item">2</li>
-          <li class="seat_row_num_item">3</li>
-          <li class="seat_row_num_item">4</li>
-          <li class="seat_row_num_item">5</li>
-          <li class="seat_row_num_item">6</li>
-          <li class="seat_row_num_item">7</li>
-          <li class="seat_row_num_item">8</li>
-          <li class="seat_row_num_item">9</li>
-          <li class="seat_row_num_item">10</li>
-          <li class="seat_row_num_item">11</li>
-          <li class="seat_row_num_item">12</li>
+          <li class="seat_row_num_item" v-for="(seatData,rowIdx) in seat">{{rowIdx+1}}</li>
         </ul>
         <ol class="seat_row_seat_cnt">
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item seatnull"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item seatnull"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item seatnull"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-          </li>
-          <li class="seat_row_seat">
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item select"></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
-            <span class="seat_row_seat_item "></span>
+          <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
+            <span class="seat_row_seat_item select" v-for="(seatData,colIdx) in seat[rowIdx]"></span>
           </li>
         </ol>
       </div>
@@ -318,7 +94,26 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+export default {
+  data(){
+    return {
+      seat:''
+    }
+  },
+  mounted(){
+    let _this = this;
+    this.$http.get('/mtime/list_movie_seat/',{
+      params:{
+        movieId:1
+      }
+    }).then(function(res){
+      console.log(res.data[0].seat);
+      _this.seat = JSON.parse(res.data[0].seat);
+    }).catch(function(err){
+      console.log('err seat',err);
+    });
+  }
+}
 </script>
 
 <style lang="scss">

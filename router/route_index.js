@@ -84,5 +84,17 @@ module.exports = function (app) {
             console.log(e.toString());
         }
     });
+    //获取座位
+    app.get('/mtime/list_movie_seat/',function*(){
+        try{
+            console.log('query seat',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM seat WHERE movieId='${movieId}'`;
+            let r = yield mysql.query(sortSql);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
 
 };

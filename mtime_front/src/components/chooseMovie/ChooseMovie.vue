@@ -41,12 +41,12 @@
     </div>
 
 
-    <div class="movie_cnt">
-      <div class="movie_name">西游伏妖篇</div>
+    <div class="movie_cnt" v-if="currentMovie">
+      <div class="movie_name">{{currentMovie.movieName}}</div>
       <div class="movie_info">
-        <span class="movie_info_time"> 明天上映</span>
-        -
-        <span class="movie_info_type">108分钟 - 奇幻 | 动作 | 喜剧</span>
+        <span class="movie_info_time" v-if="currentMovie.willtosell"> 明天上映-</span>
+
+        <span class="movie_info_type">{{currentMovie.duringTime}} - {{currentMovie.mvType}}</span>
       </div>
       <div class="toDetail"></div>
     </div>
@@ -93,15 +93,14 @@
     data(){
       return {
         time: '',
-        movie:''
+        movie:'',
+        currentMovie:'',
+        movieId:''
       }
     },
     mounted(){
       let _this = this;
       this.hideNavAndSearch();
-      this.fetchTime();
-      this.fetchMovie();
-      this.$nextTick(function () {
         _this.loopMovie = new Swiper('.swiper-container-movie', {
           observer:true,
           slidesPerView: 3,
@@ -113,15 +112,22 @@
           coverflow: {
             depth: 250
           },
-          onSlideNextStart: function(swiper){
-            alert(swiper.activeIndex);
+          onInit: function(swiper){
+            let idx = swiper.activeIndex;
+            _this.fetchMovie(initData);
+            function initData(){
+              _this.currentMovie = _this.movie[idx];
+              _this.movieId = _this.currentMovie.movieId;
+              _this.fetchTime(_this.movieId);
+            }
           },
-          onSlidePrevStart: function(swiper){
-            alert(swiper.activeIndex);
+          onTransitionEnd: function(swiper){
+            let idx = swiper.activeIndex;
+            _this.currentMovie = _this.movie[idx]
+            _this.movieId = _this.currentMovie.movieId;
+            _this.fetchTime(_this.movieId);
           }
         });
-
-      })
     },
     methods: {
       ...mapActions([
@@ -132,11 +138,11 @@
         this.$router.push('/ticket');
         this.showNavAndSearch();
       },
-      fetchTime(){
+      fetchTime(id){
         let _this = this;
         _this.$http.get('/mtime/list_movie_time/', {
           params: {
-            movieId: 1
+            movieId: id
           }
         }).then(function (res) {
           _this.time = res.data;
@@ -144,10 +150,13 @@
           console.log('err time', err);
         });
       },
-      fetchMovie(){
+      fetchMovie(callback){
         let _this = this;
         _this.$http.get('/mtime/list_home/').then(function (res) {
           _this.movie = res.data;
+          if(callback){
+            callback();
+          }
         }).catch(function (err) {
           console.log('err time', err);
         });
