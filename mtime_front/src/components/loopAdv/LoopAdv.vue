@@ -30,7 +30,6 @@ export default{
       autoplayDisableOnInteraction : false
     });
   }
-
 }
 </script>
 

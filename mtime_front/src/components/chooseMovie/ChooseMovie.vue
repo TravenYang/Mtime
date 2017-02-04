@@ -26,69 +26,18 @@
       </div>
     </div>
 
-    <div class="movie_pic_cinema">
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-      <a   class="movie_item_cinema">
-        <div class="movie_item_pic_cinema">
-          <img class="img_cinema" src="http://mokebuy.com:13009/4000.jpg">
-          <span  class="score_cinema">11</span>
-        </div>
-        <h1 class="title_cinema">222</h1>
-      </a>
-
-
-
-
-
+    <div class="movie_pic_cinema swiper-container-movie">
+      <div class="loop_btn prev"></div>
+      <div class="loop_btn next"></div>
+      <div class="swiper-wrapper">
+        <a class="movie_item_cinema swiper-slide" v-for="movieData in movie">
+          <div class="movie_item_pic_cinema">
+            <img class="img_cinema" :src="url+movieData.movieInfoImage">
+            <span class="score_cinema">{{movieData.score}}</span>
+          </div>
+          <h1 class="title_cinema">{{movieData.movieName}}</h1>
+        </a>
+      </div>
     </div>
 
 
@@ -107,209 +56,72 @@
       <span class="download">立即下载</span>
     </div>
 
-    <router-link to="/ticket/choose_movie/choose_seat">
+    <router-link to="/ticket/choose_movie/choose_seat" v-for="cinemaTime in time">
       <div class="ticket_info">
         <div class="ticket_item">
           <div class="ticket_item_1">
-            <div class="start">09:05</div>
-            <div class="end">10:35散场</div>
+            <div class="start">{{cinemaTime.start}}</div>
+            <div class="end">{{cinemaTime.end}}散场</div>
           </div>
           <div class="ticket_item_2">
-            <div class="threed">3D/中文</div>
-            <div class="place">优酷厅(60帧)</div>
+            <div class="threed">{{cinemaTime.type}}</div>
+            <div class="place">{{cinemaTime.place}}</div>
           </div>
           <div class="ticket_item_3">
-            <div class="ori_price">￥45</div>
-            <div class="old_price">￥60</div>
+            <div class="ori_price">￥{{cinemaTime.nowPrice}}</div>
+            <div class="old_price">￥{{cinemaTime.oldPrice}}</div>
           </div>
           <div class="purchase">购票</div>
         </div>
       </div>
     </router-link>
-
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
-    <div class="ticket_info">
-      <div class="ticket_item">
-        <div class="ticket_item_1">
-          <div class="start">09:05</div>
-          <div class="end">10:35散场</div>
-        </div>
-        <div class="ticket_item_2">
-          <div class="threed">3D/中文</div>
-          <div class="place">优酷厅(60帧)</div>
-        </div>
-        <div class="ticket_item_3">
-          <div class="ori_price">￥45</div>
-          <div class="old_price">￥60</div>
-        </div>
-        <div class="purchase">购票</div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Swiper from 'assets/js/swiper-3.4.1.min.js'
   import {mapGetters,mapActions} from 'vuex';
   export default{
     computed: {
+      ...mapGetters([
+        'url'
+      ]),
       cinemaName(){
         return this.$route.query.name;
       }
     },
+    data(){
+      return {
+        time: '',
+        movie:''
+      }
+    },
     mounted(){
+      let _this = this;
       this.hideNavAndSearch();
+      this.fetchTime();
+      this.fetchMovie();
+      this.$nextTick(function () {
+        _this.loopMovie = new Swiper('.swiper-container-movie', {
+          observer:true,
+          slidesPerView: 3,
+          centeredSlides: true,
+          direction: 'horizontal',
+          prevButton: '.prev',
+          nextButton: '.next',
+          effect: 'coverflow',
+          coverflow: {
+            depth: 250
+          },
+          onSlideNextStart: function(swiper){
+            alert(swiper.activeIndex);
+          },
+          onSlidePrevStart: function(swiper){
+            alert(swiper.activeIndex);
+          }
+        });
+
+      })
     },
     methods: {
       ...mapActions([
@@ -319,6 +131,26 @@
       backToHome(){
         this.$router.push('/ticket');
         this.showNavAndSearch();
+      },
+      fetchTime(){
+        let _this = this;
+        _this.$http.get('/mtime/list_movie_time/', {
+          params: {
+            movieId: 1
+          }
+        }).then(function (res) {
+          _this.time = res.data;
+        }).catch(function (err) {
+          console.log('err time', err);
+        });
+      },
+      fetchMovie(){
+        let _this = this;
+        _this.$http.get('/mtime/list_home/').then(function (res) {
+          _this.movie = res.data;
+        }).catch(function (err) {
+          console.log('err time', err);
+        });
       }
     },
   };
@@ -326,23 +158,38 @@
 
 <style lang="scss">
   .chooseMovie {
+    overflow: hidden;
     .movie_pic_cinema {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-y: hidden;
-      overflow-x: scroll;
       background: #828282;
       align-items: center;
-      height:16rem;
+      height: 16rem;
+      position: relative;
+      .loop_btn {
+        position: absolute;
+        top: 50%;
+        z-index: 100;
+        transform: translateY(-50%);
+        width: 9rem;
+        height: 14rem;
+        &.prev {
+          left: .7rem;
+        }
+        &.next {
+          right: .6rem;
+        }
+      }
       .movie_item_cinema {
         width: 25%;
-        margin-left: 1.5em;
         margin-top: .55rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         .title_cinema {
           padding: .5rem 0 0;
           width: 100%;
           text-align: center;
-          font-size: 1.4rem;
+          /*font-size: 1.4rem;*/
           line-height: 1.2;
           color: #fff;
         }
@@ -351,6 +198,8 @@
           width: 7.5rem;
           height: 10.5rem;
           text-align: center;
+          display: flex;
+          align-items: center;
           .img_cinema {
             width: 100%;
             height: 100%;
@@ -545,6 +394,7 @@
           font-size: 1.3rem;
           text-align: center;
           color: #575757;
+          width: 6rem;
           .threed {
             margin-bottom: .4rem;
           }

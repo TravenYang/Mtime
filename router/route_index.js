@@ -55,7 +55,7 @@ module.exports = function (app) {
             console.log(e.toString());
         }
     });
-    //
+    //获取评论
     app.get('/mtime/list_movie_commet/',function*(){
         try{
             console.log('query commet',this.query);
@@ -67,6 +67,18 @@ module.exports = function (app) {
                 r = yield mysql.query(sortSql);
             }
             console.log('commet',r);
+            this.body = r;
+        }catch(e){
+            console.log(e.toString());
+        }
+    });
+    //获取场次
+    app.get('/mtime/list_movie_time/',function*(){
+        try{
+            console.log('query commet',this.query);
+            let movieId = this.query.movieId;
+            let sortSql = `select * FROM time WHERE movieId='${movieId}' LIMIT 10;`;
+            let r = yield mysql.query(sortSql);
             this.body = r;
         }catch(e){
             console.log(e.toString());
