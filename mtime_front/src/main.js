@@ -10,6 +10,7 @@ import axios from 'axios';
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
 axios.defaults.baseURL = 'http://192.168.1.4:13000';
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.$http = axios;
 new Vue({
   el: '#app',

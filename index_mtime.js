@@ -8,6 +8,8 @@ let app = koa();
 let staticServer = require('koa-static');
 let path = require('path');
 let middlewares = require('koa-middlewares');
+let bodyParser = require('koa-bodyparser');
+app.use(bodyParser());
 app.use(function*(next){
     yield next;
     this.set('Access-Control-Allow-Origin','*');

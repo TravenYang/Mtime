@@ -12,7 +12,7 @@
         <div class="screen">
           <p class="screen_pic"></p>
           3号厅 银幕
-          <div class="seat_rest">（剩余145个座位）</div>
+          <div class="seat_rest">（剩余{{emptySeat}}个座位）</div>
           <div class="zoom"></div>
         </div>
       </div>
@@ -90,18 +90,20 @@
           <i>(含服务费￥5/张)</i>
         </span>
       </div>
-      <span class="price_confirm">下一步</span>
+      <span class="price_confirm" @click="comfirmTicket">下一步</span>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import qs from 'qs';
   export default {
     data(){
       return {
         seat: '',
         seatNum: '',
-        chooseSeat: ''
+        chooseSeat: '',
+        emptySeat: ''
       }
     },
     mounted(){
@@ -112,6 +114,7 @@
         }
       }).then(function (res) {
         _this.seat = JSON.parse(res.data[0].seat);
+        _this.emptySeat = JSON.parse(res.data[0].emptySeat);
       }).catch(function (err) {
         console.log('err seat', err);
       });
@@ -121,55 +124,77 @@
         //tempSelect 多用户并发选座的冲突问题，留待日后优化
         this.seatNum = (rowIdx + 1) + '排' + (colIdx + 1) + '座';
         console.log(this.seatNum);
+        //colData 当前座位信息
         let colData = this.seat[rowIdx][colIdx];
         this.chooseSeat = colData;
         console.log('colData', this.chooseSeat);
         let lastIdx = this.seat[0].length - 1;
         console.log(lastIdx);
         //选座规则：不允许留下单个空座
-        if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
-          let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
-          let nextSeat_1 = this.seat[rowIdx][colIdx + 1];
-          if (((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//判断前后座位是否被预定或被购买
-            if (colIdx !== 1 && colIdx !== lastIdx - 1) {//排除第前三个、后第三个座位，即范围在前第3到后第3座位之间
-              let prevSeat_2 = this.seat[rowIdx][colIdx - 2];
-              let nextSeat_2 = this.seat[rowIdx][colIdx + 2];
-              if (((prevSeat_2.select == 1) && prevSeat_2.seatNull !== 1) && ((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//第前2个被买，并且前1没被买
-                if (nextSeat_1.select == 1) {//后1被买
-                  selectSeat();
-                  console.log('可以选择 0');
-                } else {//后一没被买，就会留下单座
-                  console.log('请不要留下单个座位 0');
-                }
-              } else {
-                selectSeat();
-                console.log('可以选择 1');
-              }
-            } else if (nextSeat_1.select == 1) {//第3个被买的情况下，选择第二个
-              selectSeat();
-              console.log('可以选择 2');
-            } else {
-              console.log('请不要留下单个座位 2');
-            }
-          } else {
-            selectSeat();
-            console.log('可以选择 3');
-          }
-        } else {
-          selectSeat();
-          console.log('可以选择 4');
-        }
-        function selectSeat() {
+        //if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
+        //  let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
+        //  let nextSeat_1 = this.seat[rowIdx][colIdx + 1];
+        //  if (((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//判断前后座位是否被预定或被购买
+        //    if (colIdx !== 1 && colIdx !== lastIdx - 1) {//排除第前三个、后第三个座位，即范围在前第3到后第3座位之间
+        //      let prevSeat_2 = this.seat[rowIdx][colIdx - 2];
+        //      let nextSeat_2 = this.seat[rowIdx][colIdx + 2];
+        //      if (((prevSeat_2.select == 1) && prevSeat_2.seatNull !== 1) && ((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//第前2个被买，并且前1没被买
+        //        if (nextSeat_1.select == 1) {//后1被买
+        //          selectSeat();
+        //          console.log('可以选择 0');
+        //        } else {//后一没被买，就会留下单座
+        //          console.log('请不要留下单个座位 0');
+        //        }
+        //      } else {
+        //        selectSeat();
+        //        console.log('可以选择 1');
+        //      }
+        //    } else if (nextSeat_1.select == 1) {//第3个被买的情况下，选择第二个
+        //      selectSeat();
+        //      console.log('可以选择 2');
+        //    } else {
+        //      console.log('请不要留下单个座位 2');
+        //    }
+        //  } else {
+        //    selectSeat();
+        //    console.log('可以选择 3');
+        //  }
+        //} else {
+        //  selectSeat();
+        //  console.log('可以选择 4');
+        //}
+        //function selectSeat() {
+        //  if (colData.tempSelect == 1) {
+        //    alert('已被他人预定，请选择其他空座');
+        //  } else if (colData.seatNull !== 1 && colData.tempSelect !== 1) {
+        //    if (colData.select == 0) {
+        //      colData.select = 1;
+        //    } else {
+        //      colData.select = 0;
+        //    }
+        //  }
+        //}
+        changeTemp();
+        function changeTemp() {
           if (colData.tempSelect == 1) {
-            alert('已被他人预定，请选择其他空座');
-          } else if (colData.seatNull !== 1 && colData.tempSelect !== 1) {
-            if (colData.select == 0) {
-              colData.select = 1;
-            } else {
-              colData.select = 0;
-            }
+            colData.tempSelect = 0;
+          } else {
+            colData.tempSelect = 1;
           }
         }
+      },
+      comfirmTicket(){
+        let _this = this;
+        _this.$http.post('/mtime/update_movie_seat', qs.stringify(
+          {
+            movieId: 1,
+            seat: _this.seat
+          }
+        )).then(function (res) {
+          console.log(res.data);
+        }).catch(function (err) {
+          console.log('err post seat', err);
+        });
       }
     }
   }
