@@ -1,6 +1,7 @@
 <template>
   <div class="home_cnt">
     <div class="home">
+      <SearchBox></SearchBox>
       <div class="home_movie">
         <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
         <MoviePic :hotMovie="homeMovieData"></MoviePic>
@@ -29,12 +30,20 @@
   import Tab from 'components/tab/Tab';
   import{mapGetters,mapActions}from 'vuex';
   import router from 'vue-router'
+  import SearchBox from 'components/search/Search'
   export default{
     computed: {
       ...mapGetters([
         'url',
-        'homeMovieData'
+        'homeMovieData',
+        'showHeadAdvVal'
       ])
+    },
+    watch:{
+      showHeadAdvVal(){
+        this.myscroll.refresh();
+        console.log('adv改变了');
+      }
     },
     data(){
       return {
@@ -45,7 +54,10 @@
       }
     },
     mounted(){
-      this.myscroll = new IScroll('.home_cnt');
+      this.myscroll = new IScroll('.home_cnt',{
+        mouseWheel: true,
+        click:true
+      });
       this.fetchMovie();
     },
     methods: {
@@ -77,26 +89,26 @@
       BorderBar,
       LoopAdv,
       News,
-      Tab
+      Tab,
+      SearchBox
     }
   };
 </script>
 
 <style lang="scss">
   .home_cnt{
-    height:400px;
-    z-index: 0;
-  }
-  .home {
-    .home_movie {
-      padding: .5rem 1.5rem .3rem;
+    .home {
+      .home_movie {
+        padding: .5rem 1.5rem .3rem;
 
-    }
-    .loopAdv_container {
-      padding: 1.2rem 0 2rem 0;
-      background: #F6F6F6;
+      }
+      .loopAdv_container {
+        padding: 1.2rem 0 2rem 0;
+        background: #F6F6F6;
+      }
     }
   }
+
 
 
 </style>

@@ -7,7 +7,7 @@
         </a>
         <div class="middle">
           <div class="middle_desc">
-            <h1>
+            <h1 class="middle_name">
               <a class="title">{{movie.movieName}}</a>
               <span class="score" v-if="movie.score">{{movie.score}}</span>
             </h1>
@@ -37,7 +37,8 @@
   export default{
     computed: {
       ...mapGetters([
-        'url'
+        'url',
+        'showHeadAdvVal'
       ])
     },
     data(){
@@ -47,8 +48,16 @@
         myscroll:''
       }
     },
+    watch:{
+      showHeadAdvVal(){
+        this.myscroll.refresh();
+        console.log('adv改变了');
+      }
+    },
     mounted(){
-      this.myscroll = new IScroll('.now_movie_cnt');
+      this.myscroll = new IScroll('.now_movie_cnt',{
+        click:true
+      });
       this.fetchMovie();
       this.chooseMovieType(true);
 
@@ -80,8 +89,7 @@
 <style lang="scss">
   @import "../../assets/scss/rem";
 .now_movie_cnt{
-  height: 551px;
-  overflow: hidden;
+
 }
   .nowMovie {
     .nowMovie_item {

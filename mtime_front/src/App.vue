@@ -2,8 +2,7 @@
   <div id="app">
     <HeadAdv></HeadAdv>
     <Tab :head="true" v-show="showNavVal"></Tab>
-    <SearchBox v-show="showSearchVal"></SearchBox>
-      <router-view></router-view>
+    <router-view class="app_content"></router-view>
   </div>
 </template>
 
@@ -46,11 +45,19 @@ export default {
       'showNavVal',
       'showSearchVal'
     ])
+
   }
 }
-
 </script>
-
 <style lang='scss'>
-
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    & > .app_content {
+      border: 1px solid #000;
+      overflow: hidden;
+      flex: 1;
+    }
+  }
 </style>
