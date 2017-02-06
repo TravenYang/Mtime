@@ -8,6 +8,7 @@
           <div class="favorite"></div>
           <div class="share"></div>
         </div>
+
         <div class="bg_cnt">
           <div class="bg_cinema" :style="{backgroundImage:bgImg}">
             <div class="bg_img" :style="{backgroundImage:bgImg}"></div>
@@ -143,6 +144,10 @@
       }
     },
     mounted(){
+      this.myscroll = new IScroll('.movie_detail_cnt',{
+        mouseWheel: true,
+        click:true
+      });
       this.hideNavAndSearch();
       let _this = this;
       //获取电影一条电影信息
@@ -153,6 +158,9 @@
       }).then(function (res) {
         _this.movieData = res.data[0];
         _this.bgImg = `url('${_this.url}${_this.movieData.imageId}.jpg')`;
+        setTimeout(function(){
+          _this.myscroll.refresh();
+        },0);
       }).catch(function (err) {
           console.log('err', err, 'movieData err');
         }
@@ -168,6 +176,9 @@
         if(res.data[0] != undefined){
           _this.actor = res.data;
         }
+        setTimeout(function(){
+          _this.myscroll.refresh();
+        },0);
       }).catch(function (err) {
           console.log('err', err, 'movie_detail err');
         }
@@ -179,6 +190,9 @@
         if(res.data[0] != undefined){
           _this.movieImage = res.data;
         }
+        setTimeout(function(){
+          _this.myscroll.refresh();
+        },0);
       }).catch(function (err) {
           console.log('err', err, 'movie_detail err');
         }
@@ -195,6 +209,9 @@
         if(res.data[0] != undefined){
           _this.movieCommet = res.data;
         }
+        setTimeout(function(){
+          _this.myscroll.refresh();
+        },0);
       }).catch(function (err) {
           console.log('err', err, 'movie_detail err');
         }
@@ -225,9 +242,7 @@
       .header {
         z-index: 2;
         display: flex;
-        position: absolute;
-        left: 0;
-        right: 0;
+        background:#1C2635;
         .back, .share, .favorite {
           width: 5.3rem;
           height: 4.4rem;

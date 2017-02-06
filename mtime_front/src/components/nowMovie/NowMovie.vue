@@ -106,7 +106,10 @@
         .middle_desc {
           min-height: 6.7rem;
           h1 {
+            display: flex;
+            align-items: center;
             .title {
+              flex:1;
               font-size: 1.5rem;
               vertical-align: middle;
             }
