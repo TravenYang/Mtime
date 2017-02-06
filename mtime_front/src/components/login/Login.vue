@@ -35,7 +35,6 @@
         </div>
       </div>
     </div>
-    <div class="用户信息">用户信息</div>
   </div>
 </template>
 
@@ -154,7 +153,7 @@
   .login {
     .login_page {
       background: #F6F6F6;
-      height: 541px/$ppr;
+      height: 600px/$ppr;
       .login_box {
         padding: 0 1.5rem;
         background: #fff;

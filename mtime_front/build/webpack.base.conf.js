@@ -12,7 +12,8 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
   externals: {
-    'AMap': 'window.AMap'
+    'AMap': 'window.AMap',
+    'IScroll':'window.IScroll'
   },
   entry: {
     app: './src/main.js'

@@ -1,35 +1,39 @@
 <template>
-  <div class="nowMovie">
-    <div class="nowMovie_item" v-for="movie in movieData">
-      <a class="image">
-        <img :src="url+movie.movieInfoImage">
-      </a>
-      <div class="middle">
-        <div class="middle_desc">
-          <h1>
-            <a class="title">{{movie.movieName}}</a>
-            <span class="score" v-if="movie.score">{{movie.score}}</span>
-          </h1>
-          <h2 class="desc" v-if="movie.desc">
-            <i></i>
-            <span>{{movie.desc}}</span>
-          </h2>
-          <div>
-            <i class="movie_01" v-if="movie.threeD"></i>
-            <i class="movie_01 movie_01_tv" v-if="movie.max"></i>
+  <div class="now_movie_cnt">
+    <div class="nowMovie">
+      <div class="nowMovie_item" v-for="movie in movieData">
+        <a class="image">
+          <img :src="url+movie.movieInfoImage">
+        </a>
+        <div class="middle">
+          <div class="middle_desc">
+            <h1>
+              <a class="title">{{movie.movieName}}</a>
+              <span class="score" v-if="movie.score">{{movie.score}}</span>
+            </h1>
+            <h2 class="desc" v-if="movie.desc">
+              <i></i>
+              <span>{{movie.desc}}</span>
+            </h2>
+            <div>
+              <i class="movie_01" v-if="movie.threeD"></i>
+              <i class="movie_01 movie_01_tv" v-if="movie.max"></i>
+            </div>
           </div>
-        </div>
-        <div class="cinema">
-          <span>{{movie.playNumber}}</span>
-          <a class="purchase">{{movie.purchaseType}}</a>
+          <div class="cinema">
+            <span>{{movie.playNumber}}</span>
+            <a class="purchase">{{movie.purchaseType}}</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script type="text/ecmascript-6">
   import {mapGetters,mapActions} from 'vuex';
+  import IScroll from 'IScroll';
   export default{
     computed: {
       ...mapGetters([
@@ -39,12 +43,15 @@
     data(){
       return {
         loading: true,
-        movieData: {}
+        movieData: {},
+        myscroll:''
       }
     },
     mounted(){
+      this.myscroll = new IScroll('.now_movie_cnt');
       this.fetchMovie();
       this.chooseMovieType(true);
+
     },
     methods: {
       ...mapActions([
@@ -60,6 +67,10 @@
         }).then(function (res) {
           _this.movieData = res.data;
           _this.loading = false;
+          setTimeout(function(){
+            _this.myscroll.refresh();
+          },0);
+
         })
       }
     }
@@ -68,7 +79,10 @@
 
 <style lang="scss">
   @import "../../assets/scss/rem";
-
+.now_movie_cnt{
+  height: 551px;
+  overflow: hidden;
+}
   .nowMovie {
     .nowMovie_item {
       padding: 1.5rem;
