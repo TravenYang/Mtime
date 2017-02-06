@@ -10,7 +10,9 @@ import {
   CHOOSE_MOVIE_TYPE_HOME,
   HOME_MOVIE_DATA,
   CINEMA_DATA,
-  CURRENT_LOCATION
+  CURRENT_LOCATION,
+  SAVE_ACCOUNT,
+  SAVE_NICK_NAME
 } from './types';
 const state = {
   url: 'http://mokebuy.com:13009/',
@@ -20,10 +22,18 @@ const state = {
   isNow: true,
   homeMovieData:[],
   cinemaData:'',
-  currentLocation:{lng:'',lat:'',place:''}
+  currentLocation:{lng:'',lat:'',place:''},
+  account_l:'',
+  nickName_l:''
 };
 
 const getters = {
+  getAccount:(state)=>{
+    return state.account_l;
+  },
+  getNickName:(state)=>{
+    return state.nickName_l;
+  },
   getCurrentLocation:(state)=>{
     return state.currentLocation;
   },
@@ -50,6 +60,14 @@ const getters = {
   }
 }
 const mutations = {
+  [SAVE_ACCOUNT](state, n){
+    console.log('val', n);
+    state.account_l = n;
+  },
+  [SAVE_NICK_NAME](state, n){
+    console.log('val', n);
+    state.nickName_l = n;
+  },
   [CURRENT_LOCATION](state, n){
     console.log('val', n);
     state.currentLocation = n;

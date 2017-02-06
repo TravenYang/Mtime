@@ -29,5 +29,11 @@ export default{
   },
   saveCurrentLocation:({commit},n)=>{
     commit(types.CURRENT_LOCATION,n);
+  },
+  saveAccount:({commit},n)=>{
+    commit(types.SAVE_ACCOUNT,n);
+  },
+  saveNickName:({commit},n)=>{
+    commit(types.SAVE_NICK_NAME,n);
   }
 }

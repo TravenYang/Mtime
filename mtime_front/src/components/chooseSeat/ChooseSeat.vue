@@ -23,8 +23,8 @@
         <ol class="seat_row_seat_cnt">
           <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
             <span
-              :class="['seat_row_seat_item',{seat_temp_select:seatData.tempSelect},{select:seatData.select},{seatnull:seatData.seatNull}]"
-              v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(rowIdx,colIdx)"></span>
+              :class="['seat_row_seat_item',{seat_temp_select:+seatData.tempSelect},{select:+seatData.select},{confirm:+seatData.confirm},{seatnull:+seatData.seatNull}]"
+              v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(+rowIdx,+colIdx)"></span>
           </li>
         </ol>
       </div>
@@ -34,59 +34,17 @@
       <span class="seat_time_change">更换场次</span>
       <div class="seat_movie_loacation">SFC上影影城（永华店）</div>
       <ul class="seat_ticket_choose">
-        <li class="seat_ticket_choose_item">
+        <li class="seat_ticket_choose_item" v-for="ticket in chooseSeat">
           <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
+            <i class="seat_ticket" v-for="tik in ticket">{{tik.row}}排{{tik.colum}}座</i>
           </span>
         </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-        <li class="seat_ticket_choose_item">
-          <span class="seat_ticket_cnt">
-            <i class="seat_ticket">7排5座</i>
-          </span>
-        </li>
-
-
       </ul>
     </div>
     <div class="price_bar">
       <div class="left">
         <span class="price_cnt">总价:
-          <b class="price">￥135</b>
+          <b class="price">￥{{totalPrice}}</b>
           <i>(含服务费￥5/张)</i>
         </span>
       </div>
@@ -97,17 +55,26 @@
 
 <script type="text/ecmascript-6">
   import qs from 'qs';
+  import {mapGetters,mapActions} from 'vuex';
   export default {
     data(){
       return {
         seat: '',
         seatNum: '',
-        chooseSeat: '',
-        emptySeat: ''
+        chooseSeat: [],
+        emptySeat: '',
+        price: 32,
+        count: 0
+      }
+    },
+    computed: {
+      totalPrice(){
+        return this.count * (5 + this.price);
       }
     },
     mounted(){
       let _this = this;
+      _this.hideNavAndSearch();
       this.$http.get('/mtime/list_movie_seat/', {
         params: {
           movieId: 1
@@ -120,75 +87,96 @@
       });
     },
     methods: {
+      ...mapActions([
+        'hideNavAndSearch'
+      ]),
       getSeatNum(rowIdx, colIdx){
+        let _this = this;
         //tempSelect 多用户并发选座的冲突问题，留待日后优化
         this.seatNum = (rowIdx + 1) + '排' + (colIdx + 1) + '座';
         console.log(this.seatNum);
         //colData 当前座位信息
         let colData = this.seat[rowIdx][colIdx];
-        this.chooseSeat = colData;
-        console.log('colData', this.chooseSeat);
+
         let lastIdx = this.seat[0].length - 1;
         console.log(lastIdx);
         //选座规则：不允许留下单个空座
-        //if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
-        //  let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
-        //  let nextSeat_1 = this.seat[rowIdx][colIdx + 1];
-        //  if (((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//判断前后座位是否被预定或被购买
-        //    if (colIdx !== 1 && colIdx !== lastIdx - 1) {//排除第前三个、后第三个座位，即范围在前第3到后第3座位之间
-        //      let prevSeat_2 = this.seat[rowIdx][colIdx - 2];
-        //      let nextSeat_2 = this.seat[rowIdx][colIdx + 2];
-        //      if (((prevSeat_2.select == 1) && prevSeat_2.seatNull !== 1) && ((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//第前2个被买，并且前1没被买
-        //        if (nextSeat_1.select == 1) {//后1被买
-        //          selectSeat();
-        //          console.log('可以选择 0');
-        //        } else {//后一没被买，就会留下单座
-        //          console.log('请不要留下单个座位 0');
-        //        }
-        //      } else {
-        //        selectSeat();
-        //        console.log('可以选择 1');
-        //      }
-        //    } else if (nextSeat_1.select == 1) {//第3个被买的情况下，选择第二个
-        //      selectSeat();
-        //      console.log('可以选择 2');
-        //    } else {
-        //      console.log('请不要留下单个座位 2');
-        //    }
-        //  } else {
-        //    selectSeat();
-        //    console.log('可以选择 3');
-        //  }
-        //} else {
-        //  selectSeat();
-        //  console.log('可以选择 4');
-        //}
-        //function selectSeat() {
-        //  if (colData.tempSelect == 1) {
-        //    alert('已被他人预定，请选择其他空座');
-        //  } else if (colData.seatNull !== 1 && colData.tempSelect !== 1) {
-        //    if (colData.select == 0) {
-        //      colData.select = 1;
-        //    } else {
-        //      colData.select = 0;
-        //    }
-        //  }
-        //}
-        changeTemp();
-        function changeTemp() {
-          if (colData.tempSelect == 1) {
-            colData.tempSelect = 0;
+        if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
+          let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
+          let nextSeat_1 = this.seat[rowIdx][colIdx + 1];
+          if (((prevSeat_1.select !== 1 || prevSeat_1.confirm !== 1 ) && prevSeat_1.seatNull !== 1)) {//判断前后座位是否被预定或被购买
+            if (colIdx !== 1 && colIdx !== lastIdx - 1) {//排除第前三个、后第三个座位，即范围在前第3到后第3座位之间
+              let prevSeat_2 = this.seat[rowIdx][colIdx - 2];
+              let nextSeat_2 = this.seat[rowIdx][colIdx + 2];
+              if (((prevSeat_2.select == 1 || prevSeat_2.confirm == 1) && prevSeat_2.seatNull !== 1) && ((prevSeat_1.select !== 1) && prevSeat_1.seatNull !== 1)) {//第前2个被买，并且前1没被买
+                if (nextSeat_1.select == 1 || nextSeat_1.confirm == 1) {//后1被买
+                  selectSeat();
+                  console.log('可以选择 0');
+                } else {//后一没被买，就会留下单座
+                  console.log('请不要留下单个座位 0');
+                }
+              } else {
+                selectSeat();
+                console.log('可以选择 1');
+              }
+            } else if (nextSeat_1.select == 1 || nextSeat_1.confirm == 1) {//第3个被买的情况下，选择第二个
+              selectSeat();
+              console.log('可以选择 2');
+            } else {
+              console.log('请不要留下单个座位 2');
+            }
           } else {
-            colData.tempSelect = 1;
+            selectSeat();
+            console.log('可以选择 3');
+          }
+        } else {
+          selectSeat();
+          console.log('可以选择 4');
+        }
+        function selectSeat() {
+          if (+colData.confirm == 1) {
+            alert('已经有人了，请选择其他空座');
+          } else if (+colData.tempSelect == 1) {
+            alert('已被他人预定，请选择其他空座');
+          } else if (+colData.seatNull !== 1 && +colData.tempSelect !== 1 && +colData.confirm !== 1) {
+            let key = `${rowIdx}${colIdx}`;
+            if (+colData.select == 0) {
+              colData.select = 1;
+              _this.emptySeat--;
+              _this.count++;
+              _this.chooseSeat[_this.chooseSeat.length] = {};
+              _this.chooseSeat[_this.chooseSeat.length - 1][key] = colData;
+              console.log('加座', _this.chooseSeat);
+            } else {
+              colData.select = 0;
+              _this.emptySeat++;
+              _this.count--;
+              for (let i = 0, l = _this.chooseSeat.length; i < l; i++) {
+                if (_this.chooseSeat[i][key] !== undefined) {
+                  _this.chooseSeat.splice(i, 1);
+                  console.log('减座', key);
+                }
+              }
+            }
           }
         }
+
+        //锁定座位
+        //changeTemp();
+        //function changeTemp() {
+        //  if (colData.tempSelect == 1) {
+        //    colData.tempSelect = 0;
+        //  } else {
+        //    colData.tempSelect = 1;
+        //  }
+        //}
       },
       comfirmTicket(){
         let _this = this;
         _this.$http.post('/mtime/update_movie_seat', qs.stringify(
           {
             movieId: 1,
-            seat: _this.seat
+            seat: _this.chooseSeat
           }
         )).then(function (res) {
           console.log(res.data);
@@ -293,8 +281,12 @@
                 background: #fff;
               }
               &.seat_temp_select {
-                background: url("./temSelect.png") no-repeat 0 0;
+                background: url("./Lock.png") no-repeat 0 0;
                 background-size: 1.35rem 1.125rem;
+              }
+              &.confirm {
+                background: url("./person.png") no-repeat 0 0;
+                background-size: cover;
               }
 
             }
@@ -361,6 +353,8 @@
               color: #363535;
               text-align: center;
               padding: 0 .8em;
+              font-style: normal;
+              width: 4.5rem;
             }
           }
         }

@@ -103,27 +103,105 @@ module.exports = function (app) {
     app.post('/mtime/update_movie_seat', function*() {
         try {
             console.log('进来了');
-            let a = this.request.body;
-            //console.log(a);
-            //console.log('query seat', this.request);
-            //console.log(this.req.body);
-            let movieId = a.seat;
-            console.log(a.seat);
-            //let seat = this.request.body.seat;
-            //console.log(seat);
-            //console.log(movieId);
-            //let sortSql = `UPDATE seat SET seat = ${data} WHERE movieId='${movieId}'`;
-            //let r = yield mysql.query(sortSql);
-            //let seat = JSON.parse(r[0].seat);
-            //let emptySeat = countSeat(seat);
-            //console.log(emptySeat);
-            //r[0].emptySeat = emptySeat;
-            this.body = 1;
+            let o = this.request.body;
+            let movieId = o.movieId;
+            let seat = o.seat;
+            console.log(movieId);
+            console.log(seat);
+            let sortSql = `select * FROM seat WHERE movieId='${movieId}';`;
+            let r = yield mysql.query(sortSql);
+            let seatInSql = JSON.parse(r[0].seat);
+            for (let i = 0, l = seat.length; i < l; i++) {
+                for (let k in seat[i]) {
+                    let row = seat[i][k].row - 1;
+                    let colum = seat[i][k].colum - 1;
+                    seat[i][k].confirm = 1;
+                    seat[i][k].select = 0;
+                    console.log(row, colum);
+                    console.log(seatInSql[row][colum]);
+                    seatInSql[row][colum] = seat[i][k];
+                    console.log('seatInSql[row][colum]', seatInSql[row][colum]);
+
+                }
+            }
+            let a = JSON.stringify(seatInSql);
+            let update = `UPDATE seat SET seat = '${a}' WHERE movieId='${movieId}';`;
+            let down = yield mysql.query(update);
+            this.body = 'update down';
         } catch (e) {
             console.log(e.toString());
         }
     });
-    //计算空座
+    //login
+    app.post('/mtime/login', function*() {
+        try {
+            console.log('登录');
+            let o = this.request.body;
+            let account = o.account;
+            let pwd = o.pwd;
+            let userInfo = `select * FROM user WHERE account='${account}';`;
+            let r = yield  mysql.query(userInfo);
+            let loginStatus = {};
+            if (r[0]) {
+                let serPwd = r[0].pwd;
+                if (serPwd == pwd) {
+                    loginStatus.status = true;
+                    loginStatus.account = account;
+                    loginStatus.name = r[0].name;
+                } else {
+                    loginStatus.status = false;
+                    loginStatus.msg = '密码不正确';
+                }
+            } else {
+                loginStatus.status = false;
+                loginStatus.msg = '账号不存在';
+
+            }
+            this.body = loginStatus;
+        } catch (e) {
+            console.log(e.toString());
+        }
+    });
+    //register
+    app.post('/mtime/register', function*() {
+            try {
+                console.log('注册');
+                let o = this.request.body;
+                let account = o.account;
+                let name = o.name;
+                let pwd = o.pwd;
+                console.log(account);
+                console.log(name);
+                console.log(pwd);
+                let searchAccount = `select * FROM user WHERE account='${account}';`;
+                let searchName = `select * FROM user WHERE account='${name}';`;
+                let sName = yield  mysql.query(searchName);
+                let sAccount = yield  mysql.query(searchAccount);
+                let registerInfo = {};
+                if (sAccount[0]) {
+                    registerInfo.msg = '账号已存在';
+                    registerInfo.status = false;
+                } else if (sName[0]) {
+                    registerInfo.msg = '昵称已存在';
+                    registerInfo.status = false;
+                } else {
+                    let userInfo = `INSERT INTO user SET account='${account}',name='${name}',pwd='${pwd}';`;
+                    let r = yield  mysql.query(userInfo);
+                    registerInfo.msg = '注册成功';
+                    registerInfo.status = true;
+                }
+                this.body = registerInfo;
+            }
+            catch
+                (e) {
+                console.log(e.toString());
+            }
+        }
+    )
+    ;
+
+
+//计算空座
     function countSeat(seat) {
         let emptySeat = 0;
         for (let rowId = 0, rowLen = seat.length; rowId < rowLen; rowId++) {
@@ -135,4 +213,5 @@ module.exports = function (app) {
         }
         return emptySeat;
     }
-};
+}
+;
