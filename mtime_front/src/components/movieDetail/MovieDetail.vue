@@ -109,7 +109,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -122,6 +121,7 @@
   import IScroll from 'IScroll';
   import TitleBar from 'components/titleBar/TitleBar';
   import {mapGetters,mapActions} from 'vuex';
+  import upDown from '../../assets/js/upDown';
   export default{
     components: {
       TitleBar
@@ -135,7 +135,8 @@
         actor: '',
         movieImage: '',
         movieCommet: '',
-        myscroll: ''
+        myscroll: '',
+        wrapperHeight: ''
       }
     },
     computed: {
@@ -151,9 +152,11 @@
       }
     },
     mounted(){
+      console.log(upDown);
       this.myscroll = new IScroll('.movie_detail_cnt', {
         mouseWheel: true,
-        click: true
+        click: true,
+        probeType: 3,
       });
       this.hideNavAndSearch();
       let _this = this;
@@ -162,9 +165,14 @@
       //获取两条演职员信息
       _this.fetchTwoActor(_this);
       //获取剧照
+      console.log(11111);
       _this.fetchMovieImage(_this);
       //获取评论
       _this.fetchCommet(_this);
+      console.log(2222222222);
+      _this.$nextTick(function () {
+        console.log('更新了更新了');
+      });
 
     }
     ,
@@ -179,10 +187,12 @@
         this.show = !this.show;
       },
       //获取评论
-      fetchCommet(_this){
+      fetchCommet(_this, page, number){
         _this.$http.get('/mtime/list_movie_commet/', {
           params: {
-            movieId: _this.$route.query.movieId
+            movieId: _this.$route.query.movieId,
+            page: page || '',
+            number: number || ''
           }
         }).then(function (res) {
           console.log(res.data);
@@ -246,11 +256,14 @@
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
+          console.log(33333);
+          upDown.fetchMore(_this);
         }).catch(function (err) {
             console.log('err', err, 'movieData err');
           }
         );
-      }
+      },
+
     }
   };
 

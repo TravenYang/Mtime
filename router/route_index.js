@@ -60,13 +60,15 @@ module.exports = function (app) {
         try {
             console.log('query commet', this.query);
             let movieId = this.query.movieId;
-            let sortSql = `select * FROM commet WHERE movieId='${movieId}' LIMIT 10;`;
+            let number = this.query.number || 10;
+            let page = this.query.page * number || 0;
+            let sortSql = `select * FROM commet WHERE movieId='${movieId}' LIMIT ${page},${number};`;
             let r = yield mysql.query(sortSql);
-            if (r[0] == undefined) {
-                sortSql = `select * FROM commet LIMIT 10;`;
+            if (r[0] == undefined) {//如果没有对应的评论，就选择其他数据
+                sortSql = `select * FROM commet LIMIT ${page},${number};`;
                 r = yield mysql.query(sortSql);
             }
-            console.log('commet', r);
+            //console.log('commet', r);
             this.body = r;
         } catch (e) {
             console.log(e.toString());
