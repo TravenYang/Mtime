@@ -1,10 +1,19 @@
 <template>
   <div class="willMovie">
-    <div class="most_want">最受关注<b> ( 10 部 )</b></div>
-    <WillMovieItem></WillMovieItem>
-    <LoopAdv class="loopAdv"></LoopAdv>
-    <div class="most_want">即将上映<b> ( 36 部 )</b></div>
-    <WillMovieItem></WillMovieItem>
+    <div class="will_wrap">
+      <div class="most_want">最受关注<b> ( 10 部 )</b></div>
+      <WillMovieItem></WillMovieItem>
+      <LoopAdv></LoopAdv>
+      <div class="most_want">即将上映<b> ( 36 部 )</b></div>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+      <WillMovieItem></WillMovieItem>
+    </div>
   </div>
 </template>
 
@@ -12,14 +21,77 @@
   import WillMovieItem from 'components/willMovieItem/WillMovieItem';
   import LoopAdv from 'components/loopAdv/LoopAdv';
   import {mapGetters,mapActions} from 'vuex';
+  import IScroll from 'IScroll';
+  import upDown from '../../assets/js/upDown';
   export default{
-    methods:{
-      ...mapActions([
-        'chooseMovieType'
+    computed: {
+      ...mapGetters([
+        'url',
+        'showHeadAdvVal'
       ])
+    },
+    data(){
+      return {
+        loading: true,
+        movieData: {},
+        myscroll: '',
+        wrapperHeight: '',
+        page: 0,
+        number: 6,
+      }
+    },
+    watch: {
+      showHeadAdvVal(){
+        this.myscroll.refresh();
+        console.log('adv改变了');
+      }
     },
     mounted(){
       this.chooseMovieType(false);
+      let _this = this;
+      _this.myscroll = new IScroll('.willMovie', {
+        click: true,
+        probeType: 3,
+        mouseWheel: true
+      });
+      _this.fetchMovie();
+      upDown.fetchMore(_this, _this.fetchMovie, _this.fetchMovie);
+
+    },
+    methods: {
+      ...mapActions([
+        'chooseMovieType'
+      ]),
+      fetchMovie(){
+        console.log(222222);
+        let _this = this;
+        _this.loading = true;
+        this.$http.get('/mtime/list_home', {
+          params: {
+            page: _this.page || '',
+            number: _this.number || ''
+          }
+        }).then(function (res) {
+          //判断服务器返回数据，是否存在,处理数据
+          if (res.data[0] != undefined) {
+            //page=0 就为下拉刷新
+            if (_this.page == 0) {
+              console.log('wei 0');
+              _this.movieData = res.data;
+            } else {
+              console.log('buwei0');
+              let data = _this.movieData.concat(res.data);
+              _this.movieData = data;
+            }
+            _this.page++;
+          } else {
+            console.log('没有更多了');
+          }
+          setTimeout(function () {
+            _this.myscroll.refresh();
+          }, 0);
+        })
+      }
     },
     components: {
       WillMovieItem,
@@ -32,9 +104,11 @@
   @import "../../assets/scss/rem";
 
   .willMovie {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem;;
+    padding: 1.5rem;
+    border: 1px solid red;
+    .will_wrap {
+      border: 1px solid blue;
+    }
     .loopAdv {
       margin-top: 7rem;
       margin-bottom: 1.5rem;
