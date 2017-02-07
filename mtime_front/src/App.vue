@@ -2,11 +2,13 @@
   <div id="app">
     <HeadAdv></HeadAdv>
     <Tab :head="true" v-show="showNavVal"></Tab>
+    <loading v-if="loading"></loading>
     <router-view class="app_content"></router-view>
   </div>
 </template>
 
 <script>
+import loading from 'components/loading/Loading'
 import Tab from 'components/tab/Tab';
 import HeadAdv from 'components/headAdv/HeadAdv';
 import SearchBox from 'components/search/Search'
@@ -16,7 +18,8 @@ export default {
   components:{
     HeadAdv,
     Tab,
-    SearchBox
+    SearchBox,
+    loading
   },
   watch:{
       $route(to){
@@ -43,7 +46,8 @@ export default {
   computed:{
     ...mapGetters([
       'showNavVal',
-      'showSearchVal'
+      'showSearchVal',
+      'loading'
     ])
 
   }

@@ -11,6 +11,20 @@ Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
 axios.defaults.baseURL = 'http://192.168.1.4:13000';
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.interceptors.request.use(function (config) {  //配置发送请求的信息
+  store.dispatch('showLoading')
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
+axios.interceptors.response.use(function (response) { //配置请求回来的信息
+  store.dispatch('hideLoading')
+  return response;
+}, function (error) {
+
+  return Promise.reject(error);
+});
 Vue.prototype.$http = axios;
 new Vue({
   el: '#app',

@@ -70,11 +70,11 @@
         img {
           width: 8.5rem;
           height: 12.75rem;
-          margin-right: 1.5rem;
         }
       }
       .movie_info {
-        width: 100%;
+        flex:1;
+        margin-left: 1.5rem;
         .movie_title {
           font-size: 1.5rem;
           color: #333;

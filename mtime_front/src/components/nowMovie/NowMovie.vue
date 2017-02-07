@@ -99,10 +99,10 @@
       img {
         width: 6.5rem;
         height: 9.8rem;
-        margin-right: 1.5rem;
       }
       .middle {
-        width: 100%;
+        flex:1;
+        margin-left: 1.5rem;
         .middle_desc {
           min-height: 6.7rem;
           h1 {

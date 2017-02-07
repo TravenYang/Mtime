@@ -33,7 +33,7 @@
   };
 </script>
 <style lang="scss">
-  @import "../../assets/scss/rem";;
+  @import "../../assets/scss/rem";
   .head-adv {
     background: #1e2837;
     & > a {

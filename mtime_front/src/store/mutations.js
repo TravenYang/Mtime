@@ -12,7 +12,9 @@ import {
   CINEMA_DATA,
   CURRENT_LOCATION,
   SAVE_ACCOUNT,
-  SAVE_NICK_NAME
+  SAVE_NICK_NAME,
+  SHOW_LOADING,
+  HIDE_LOADING
 } from './types';
 const state = {
   url: 'http://mokebuy.com:13009/',
@@ -24,10 +26,15 @@ const state = {
   cinemaData:'',
   currentLocation:{lng:'',lat:'',place:''},
   account_l:'',
-  nickName_l:''
+  nickName_l:'',
+  loading:false,
+  footerShow:true
 };
 
 const getters = {
+  loading(state){
+    return state.loading;
+  },
   getAccount:(state)=>{
     return state.account_l;
   },
@@ -60,6 +67,12 @@ const getters = {
   }
 }
 const mutations = {
+  [HIDE_LOADING](state){
+    state.loading=false;
+  },
+  [SHOW_LOADING](state){
+    state.loading=true;
+  },
   [SAVE_ACCOUNT](state, n){
     console.log('val', n);
     state.account_l = n;

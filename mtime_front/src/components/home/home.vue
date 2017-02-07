@@ -5,17 +5,14 @@
       <div class="home_movie">
         <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
         <MoviePic :hotMovie="homeMovieData"></MoviePic>
-        <BorderBar></BorderBar>
-        <TitleBar :titleName='titleBarName[1]'></TitleBar>
       </div>
       <div class="loopAdv_container">
         <LoopAdv></LoopAdv>
       </div>
       <div class="home_movie">
-        <TitleBar :titleName='titleBarName[2]'></TitleBar>
-        <News></News>
+        <TitleBar :titleName='titleBarName[1]'></TitleBar>
+        <MoviePic :hotMovie="homeMovieData"></MoviePic>
       </div>
-      <Tab :head="false"></Tab>
     </div>
   </div>
 </template>
@@ -49,7 +46,7 @@
       return {
         movieData: {},
         hotMovieRoute:'/home_movie/now_movie',
-        titleBarName:['正在热映','即将上映','今日热点'],
+        titleBarName:['正在热映','即将上映'],
         myscroll:''
       }
     },

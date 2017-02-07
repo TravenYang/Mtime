@@ -35,5 +35,11 @@ export default{
   },
   saveNickName:({commit},n)=>{
     commit(types.SAVE_NICK_NAME,n);
-  }
+  },
+  hideLoading:({commit})=>{
+    commit(types.HIDE_LOADING)
+  },
+  showLoading:({commit})=>{
+    commit(types.SHOW_LOADING)
+  },
 }

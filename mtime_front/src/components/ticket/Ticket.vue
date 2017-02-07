@@ -1,7 +1,11 @@
 <template>
   <div class="ticket">
-    <div v-if="getCurrentLocation.place">当前位置：{{getCurrentLocation.place}}</div>
-      <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>
+    <div v-if="getCurrentLocation.place" class="now_location">当前位置：{{getCurrentLocation.place}}</div>
+    <div class="scroll_wrap">
+      <div>
+        <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,21 +24,37 @@
         'saveCurrentLocation'
       ]),
       goto(name){
-        this.$router.push({path:'/ticket/choose_movie',query:{name:name}});
+        this.$router.push({path: '/ticket/choose_movie', query: {name: name}});
         this.hideNavAndSearch();
         document.body.scrollTop = 0;
       }
     },
-    computed:{
+    data(){
+      return {
+        myscroll:''
+      }
+    },
+    computed: {
       ...mapGetters([
         'getcinemaData',
-        'getCurrentLocation'
+        'getCurrentLocation',
+        'showHeadAdvVal'
       ])
+    },
+    watch: {
+      showHeadAdvVal(){
+        this.myscroll.refresh();
+        console.log('adv改变了');
+      }
     },
     mounted(){
       //key
       //35d76866a498d51fa701a70f7100099a
       //判断浏览器支持
+      this.myscroll = new IScroll('.scroll_wrap',{
+        mouseWheel: true,
+        click:true
+      });
       let _this = this;
       if (window.navigator.geolocation) {
         //调用getCurrentPosition方法
@@ -53,10 +73,10 @@
         _this.getCurrentLocation.lng = lng;
         _this.getCurrentLocation.lat = lat;
         _this.saveCurrentLocation(_this.getCurrentLocation);
-        let pos = lng+','+lat;
+        let pos = lng + ',' + lat;
         //获取地名
         getPlaceName(pos);
-        function getPlaceName(pos){
+        function getPlaceName(pos) {
           gaoDeAxios.get('http://restapi.amap.com/v3/geocode/regeo', {
             params: {
               output: 'json',
@@ -67,7 +87,7 @@
             }
           }).then(function (res) {
             console.log(res.data);
-            if(res.data.regeocode.pois[0] == undefined){
+            if (res.data.regeocode.pois[0] == undefined) {
               console.log('浏览器未能正确定位，开启默认测试坐标（121.034372，31.137282）');
               lng = 121.034372;
               lat = 31.137282;
@@ -76,7 +96,7 @@
               pos = lng + ',' + lat;
               //获取地名
               getPlaceName(pos);
-            }else{
+            } else {
               _this.getCurrentLocation.place = res.data.regeocode.formatted_address;
               _this.saveCurrentLocation(_this.getCurrentLocation);
               getCinema(pos);
@@ -100,6 +120,9 @@
         }).then(function (res) {
           console.log(res.data.pois);
           _this.saveCinemaData(res.data.pois);
+          setTimeout(function(){
+            _this.myscroll.refresh();
+          },0);
         }).catch(function (err) {
           console.log('err', err);
         });
@@ -128,5 +151,17 @@
 </script>
 
 <style lang="scss">
+  .ticket {
+    display: flex;
+    flex-direction: column;
+    .now_location {
+      padding: .8rem 0 .8rem 1.5rem;
+      border-bottom: 1px solid #D8D8D8;
+    }
+    .scroll_wrap{
+      overflow: hidden;
+      flex: 1;
+    }
+  }
 
 </style>

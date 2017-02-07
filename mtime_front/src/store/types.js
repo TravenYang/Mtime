@@ -12,4 +12,6 @@ export const CINEMA_DATA = 'CINEMA_DATA';
 export const CURRENT_LOCATION = 'CURRENT_LOCATION';
 export const SAVE_NICK_NAME = 'SAVE_NICK_NAME';
 export const SAVE_ACCOUNT = 'SAVE_ACCOUNT';
+export const HIDE_LOADING = 'HIDE_LOADING';
+export const SHOW_LOADING = 'SHOW_LOADING';
 

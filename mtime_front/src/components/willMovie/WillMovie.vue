@@ -36,6 +36,7 @@
     flex-direction: column;
     padding: 1.5rem;;
     .loopAdv {
+      margin-top: 7rem;
       margin-bottom: 1.5rem;
     }
     .most_want {
