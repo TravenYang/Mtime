@@ -7,7 +7,6 @@
       <div class="share"></div>
     </div>
     <div class="movie_detail_cnt">
-      <!--<div class="movie_detail" v-if="movieData">-->
       <div>
         <div class="movie_detail" v-if="movieData">
 
@@ -109,6 +108,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -122,9 +122,11 @@
   import TitleBar from 'components/titleBar/TitleBar';
   import {mapGetters,mapActions} from 'vuex';
   import upDown from '../../assets/js/upDown';
+  import loading from 'components/loading/Loading'
   export default{
     components: {
-      TitleBar
+      TitleBar,
+      loading
     },
     data(){
       return {
@@ -136,7 +138,9 @@
         movieImage: '',
         movieCommet: '',
         myscroll: '',
-        wrapperHeight: ''
+        wrapperHeight: '',
+        page:0,
+        number:6,
       }
     },
     computed: {
@@ -148,7 +152,6 @@
     watch: {
       showHeadAdvVal(){
         this.myscroll.refresh();
-        console.log('adv改变了');
       }
     },
     mounted(){
@@ -156,7 +159,7 @@
       this.myscroll = new IScroll('.movie_detail_cnt', {
         mouseWheel: true,
         click: true,
-        probeType: 3,
+        probeType: 3
       });
       this.hideNavAndSearch();
       let _this = this;
@@ -165,15 +168,11 @@
       //获取两条演职员信息
       _this.fetchTwoActor(_this);
       //获取剧照
-      console.log(11111);
       _this.fetchMovieImage(_this);
       //获取评论
       _this.fetchCommet(_this);
-      console.log(2222222222);
-      _this.$nextTick(function () {
-        console.log('更新了更新了');
-      });
-
+      //获取更多评论,传入的地方要是函数不要传参
+      upDown.fetchMore(_this,_this.fetchCommet);
     }
     ,
     methods: {
@@ -187,18 +186,29 @@
         this.show = !this.show;
       },
       //获取评论
-      fetchCommet(_this, page, number){
+      fetchCommet(_this){
+        console.log(_this.page);
         _this.$http.get('/mtime/list_movie_commet/', {
           params: {
             movieId: _this.$route.query.movieId,
-            page: page || '',
-            number: number || ''
+            page: _this.page || '',
+            number: _this.number || ''
           }
         }).then(function (res) {
-          console.log(res.data);
-          //判断服务器返回数据，是否存在
+
+          //判断服务器返回数据，是否存在,处理数据
           if (res.data[0] != undefined) {
-            _this.movieCommet = res.data;
+            if(_this.page == 0){
+              console.log('wei 0');
+              _this.movieCommet = res.data;
+            }else{
+              console.log('buwei0');
+              let data = _this.movieCommet.concat(res.data);
+              _this.movieCommet = data;
+            }
+            _this.page++;
+          }else{
+            console.log('没有更多了');
           }
           setTimeout(function () {
             _this.myscroll.refresh();
@@ -256,8 +266,6 @@
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
-          console.log(33333);
-          upDown.fetchMore(_this);
         }).catch(function (err) {
             console.log('err', err, 'movieData err');
           }
@@ -541,7 +549,7 @@
           }
         }
         .short_desc_box {
-          padding: 0 1.5rem 1.5rem 1.5rem;
+          padding: 0 1.5rem;
           .short_desc_item {
             margin-top: 1.5rem;
             display: flex;

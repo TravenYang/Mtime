@@ -81,7 +81,6 @@
         }).catch(function (err) {
           console.log('home now: ', err);
         });
-        ;
         //获取首页正在热映数据
         _this.$http.get('/mtime/list_home',{
           params: {

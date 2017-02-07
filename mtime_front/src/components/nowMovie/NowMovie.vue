@@ -34,6 +34,7 @@
 <script type="text/ecmascript-6">
   import {mapGetters,mapActions} from 'vuex';
   import IScroll from 'IScroll';
+  import upDown from '../../assets/js/upDown';
   export default{
     computed: {
       ...mapGetters([
@@ -45,7 +46,10 @@
       return {
         loading: true,
         movieData: {},
-        myscroll:''
+        myscroll:'',
+        wrapperHeight: '',
+        page:0,
+        number:6,
       }
     },
     watch:{
@@ -55,11 +59,15 @@
       }
     },
     mounted(){
-      this.myscroll = new IScroll('.now_movie_cnt',{
-        click:true
+      let _this = this;
+      _this.myscroll = new IScroll('.now_movie_cnt',{
+        click:true,
+        probeType: 3,
+        mouseWheel: true
       });
-      this.fetchMovie();
-      this.chooseMovieType(true);
+      _this.chooseMovieType(true);
+      _this.fetchMovie();
+      upDown.fetchMore(_this,_this.fetchMovie,_this.fetchMovie);
 
     },
     methods: {
@@ -67,19 +75,33 @@
         'chooseMovieType'
       ]),
       fetchMovie(){
+        console.log(222222);
         let _this = this;
         _this.loading = true;
         this.$http.get('/mtime/list_home', {
           params: {
-            page: 0
+            page: _this.page || '',
+            number: _this.number || ''
           }
         }).then(function (res) {
-          _this.movieData = res.data;
-          _this.loading = false;
-          setTimeout(function(){
+          //判断服务器返回数据，是否存在,处理数据
+          if (res.data[0] != undefined) {
+            //page=0 就为下拉刷新
+            if(_this.page == 0){
+              console.log('wei 0');
+              _this.movieData = res.data;
+            }else{
+              console.log('buwei0');
+              let data = _this.movieData.concat(res.data);
+              _this.movieData = data;
+            }
+            _this.page++;
+          }else{
+            console.log('没有更多了');
+          }
+          setTimeout(function () {
             _this.myscroll.refresh();
-          },0);
-
+          }, 0);
         })
       }
     }

@@ -4,6 +4,7 @@
     <Tab :head="true" v-show="showNavVal"></Tab>
     <!--<loading v-if="loading"></loading>-->
     <router-view class="app_content"></router-view>
+    <loading v-if="loading"></loading>
   </div>
 </template>
 
@@ -59,7 +60,6 @@ export default {
     flex-direction: column;
     height: 100%;
     & > .app_content {
-      border: 1px solid #000;
       overflow: hidden;
       flex: 1;
     }

@@ -55,7 +55,6 @@
     overflow: hidden;
     .content{
       flex:1;
-      border:1px solid red;
       overflow: hidden;
     }
     .backToHome{
