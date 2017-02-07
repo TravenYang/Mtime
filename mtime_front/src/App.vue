@@ -2,7 +2,7 @@
   <div id="app">
     <HeadAdv></HeadAdv>
     <Tab :head="true" v-show="showNavVal"></Tab>
-    <loading v-if="loading"></loading>
+    <!--<loading v-if="loading"></loading>-->
     <router-view class="app_content"></router-view>
   </div>
 </template>

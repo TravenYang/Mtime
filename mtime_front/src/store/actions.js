@@ -24,6 +24,9 @@ export default{
   getMovieData:({commit},n)=>{
     commit(types.HOME_MOVIE_DATA,n);
   },
+  getWillMovieData:({commit},n)=>{
+    commit(types.WILL_MOVIE_DATA,n);
+  },
   saveCinemaData:({commit},n)=>{
     commit(types.CINEMA_DATA,n);
   },

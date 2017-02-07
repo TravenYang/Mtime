@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{path:routeTarget}" class="title_bar">
-      <div class="title">{{titleName}}(51部)</div>
+      <div class="title">{{titleName}}</div>
       <div class="title_icon"></div>
   </router-link>
 </template>
@@ -23,6 +23,7 @@ export default{
     display: flex;
     color:#000;
     .title{
+      flex:1;
       height:3.6rem;
       line-height:3.6rem;
       font-size:1.8rem;

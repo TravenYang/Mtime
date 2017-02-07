@@ -9,6 +9,7 @@ import {
   SHOW_NAV_AND_SEARCH,
   CHOOSE_MOVIE_TYPE_HOME,
   HOME_MOVIE_DATA,
+  WILL_MOVIE_DATA,
   CINEMA_DATA,
   CURRENT_LOCATION,
   SAVE_ACCOUNT,
@@ -23,6 +24,7 @@ const state = {
   showSearchVal: true,
   isNow: true,
   homeMovieData:[],
+  willMovieData:[],
   cinemaData:'',
   currentLocation:{lng:'',lat:'',place:''},
   account_l:'',
@@ -62,6 +64,9 @@ const getters = {
   homeMovieData:(state)=>{
     return state.homeMovieData;
   },
+  willMovieData:(state)=>{
+    return state.willMovieData;
+  },
   getcinemaData:(state)=>{
     return state.cinemaData;
   }
@@ -92,6 +97,10 @@ const mutations = {
   [HOME_MOVIE_DATA](state, n){
     console.log('val', n);
     state.homeMovieData = n;
+  },
+  [WILL_MOVIE_DATA](state, n){
+    console.log('val', n);
+    state.willMovieData = n;
   },
   [CHOOSE_MOVIE_TYPE_HOME](state, n){
     console.log('val', n);

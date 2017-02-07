@@ -10,8 +10,8 @@
         <LoopAdv></LoopAdv>
       </div>
       <div class="home_movie">
-        <TitleBar :titleName='titleBarName[1]'></TitleBar>
-        <MoviePic :hotMovie="homeMovieData"></MoviePic>
+        <TitleBar :routeTarget='willMovieRoute' :titleName='titleBarName[1]'></TitleBar>
+        <MoviePic :hotMovie="willMovieData"></MoviePic>
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@
       ...mapGetters([
         'url',
         'homeMovieData',
+        'willMovieData',
         'showHeadAdvVal'
       ])
     },
@@ -46,6 +47,7 @@
       return {
         movieData: {},
         hotMovieRoute:'/home_movie/now_movie',
+        willMovieRoute:'/home_movie/will_movie',
         titleBarName:['正在热映','即将上映'],
         myscroll:''
       }
@@ -60,10 +62,12 @@
     methods: {
       ...mapActions([
         'showNavAndSearch',
-        'getMovieData'
+        'getMovieData',
+        'getWillMovieData'
       ]),
       fetchMovie(){
         let _this = this;
+        //获取首页正在热映数据
         _this.$http.get('/mtime/list_home',{
           params: {
             page: 0,
@@ -75,9 +79,26 @@
             _this.myscroll.refresh();
           },0);
         }).catch(function (err) {
-          console.log('home页出错: ', err);
+          console.log('home now: ', err);
         });
         ;
+        //获取首页正在热映数据
+        _this.$http.get('/mtime/list_home',{
+          params: {
+            page: 0,
+            number:8,
+            type:'will'
+          }
+        }).then(function (res) {
+          _this.getWillMovieData(res.data);
+          setTimeout(function(){
+            _this.myscroll.refresh();
+          },0);
+        }).catch(function (err) {
+          console.log('home will: ', err);
+        });
+        ;
+
       }
     },
     components: {

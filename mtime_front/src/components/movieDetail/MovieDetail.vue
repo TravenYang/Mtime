@@ -55,7 +55,7 @@
               <div class="actor_pic_cnt">
                 <div class="director">
                   <div class="type">导演</div>
-                  <div class="info_cnt" >
+                  <div class="info_cnt">
                     <img class="director_pic" :src="url+'actorImg'+actor[0].directorImg">
                     <div class="name">{{actor[0].dirctor}}</div>
                     <div class="name_en">{{actor[0].directorEn}}</div>
@@ -94,8 +94,10 @@
               <div class="commet_box">
                 <div class="content">
                   <span class="name">{{commet.commetAuthor}}</span>
-                  <i class="time">{{commet.timeAndSee}}<b v-if="commet.authorScore != 'null'">-评</b></i>
-                  <b class="score" v-if="commet.authorScore != 'null'">{{commet.authorScore}}</b>
+                  <div class="time_score">
+                    <i class="time">{{commet.timeAndSee}}</i>
+                    <b class="score" v-if="commet.authorScore != 'null'">{{commet.authorScore}}</b>
+                  </div>
                 </div>
                 <p class="txt">{{commet.commetall}}</p>
                 <div class="btn_box">
@@ -131,9 +133,9 @@
         show: false,
         titleBarName: ['演职员', '剧照', '精彩评论'],
         actor: '',
-        movieImage:'',
-        movieCommet:'',
-        myscroll:''
+        movieImage: '',
+        movieCommet: '',
+        myscroll: ''
       }
     },
     computed: {
@@ -142,85 +144,27 @@
         'showHeadAdvVal'
       ])
     },
-    watch:{
+    watch: {
       showHeadAdvVal(){
         this.myscroll.refresh();
         console.log('adv改变了');
       }
     },
     mounted(){
-      this.myscroll = new IScroll('.movie_detail_cnt',{
+      this.myscroll = new IScroll('.movie_detail_cnt', {
         mouseWheel: true,
-        click:true
+        click: true
       });
       this.hideNavAndSearch();
       let _this = this;
       //获取电影一条电影信息
-      _this.$http.get('/mtime/list_now_one/', {
-        params: {
-          movieId: _this.$route.query.movieId
-        }
-      }).then(function (res) {
-        _this.movieData = res.data[0];
-        _this.bgImg = `url('${_this.url}${_this.movieData.imageId}.jpg')`;
-        setTimeout(function(){
-          _this.myscroll.refresh();
-        },0);
-      }).catch(function (err) {
-          console.log('err', err, 'movieData err');
-        }
-      );
+      _this.fetchOneMovie(_this);
       //获取两条演职员信息
-      _this.$http.get('/mtime/list_actor_image/', {
-        params: {
-          movieId: _this.$route.query.movieId
-        }
-      }).then(function (res) {
-        console.log(res.data);
-        //判断服务器返回数据，是否存在
-        if(res.data[0] != undefined){
-          _this.actor = res.data;
-        }
-        setTimeout(function(){
-          _this.myscroll.refresh();
-        },0);
-      }).catch(function (err) {
-          console.log('err', err, 'movie_detail err');
-        }
-      );
+      _this.fetchTwoActor(_this);
       //获取剧照
-      _this.$http.get('/mtime/list_movie_image/').then(function (res) {
-        console.log(res.data);
-        //判断服务器返回数据，是否存在
-        if(res.data[0] != undefined){
-          _this.movieImage = res.data;
-        }
-        setTimeout(function(){
-          _this.myscroll.refresh();
-        },0);
-      }).catch(function (err) {
-          console.log('err', err, 'movie_detail err');
-        }
-      );
-      //
+      _this.fetchMovieImage(_this);
       //获取评论
-      _this.$http.get('/mtime/list_movie_commet/',{
-        params: {
-          movieId: _this.$route.query.movieId
-        }
-      }).then(function (res) {
-        console.log(res.data);
-        //判断服务器返回数据，是否存在
-        if(res.data[0] != undefined){
-          _this.movieCommet = res.data;
-        }
-        setTimeout(function(){
-          _this.myscroll.refresh();
-        },0);
-      }).catch(function (err) {
-          console.log('err', err, 'movie_detail err');
-        }
-      );
+      _this.fetchCommet(_this);
 
     }
     ,
@@ -233,25 +177,97 @@
       },
       showContent(){
         this.show = !this.show;
+      },
+      //获取评论
+      fetchCommet(_this){
+        _this.$http.get('/mtime/list_movie_commet/', {
+          params: {
+            movieId: _this.$route.query.movieId
+          }
+        }).then(function (res) {
+          console.log(res.data);
+          //判断服务器返回数据，是否存在
+          if (res.data[0] != undefined) {
+            _this.movieCommet = res.data;
+          }
+          setTimeout(function () {
+            _this.myscroll.refresh();
+          }, 0);
+        }).catch(function (err) {
+            console.log('err', err, 'movie_detail err');
+          }
+        );
+      },
+      //获取剧照
+      fetchMovieImage(_this){
+        _this.$http.get('/mtime/list_movie_image/').then(function (res) {
+          console.log(res.data);
+          //判断服务器返回数据，是否存在
+          if (res.data[0] != undefined) {
+            _this.movieImage = res.data;
+          }
+          setTimeout(function () {
+            _this.myscroll.refresh();
+          }, 0);
+        }).catch(function (err) {
+            console.log('err', err, 'movie_detail err');
+          }
+        );
+      },
+      //获取两条演职员信息
+      fetchTwoActor(_this){
+        _this.$http.get('/mtime/list_actor_image/', {
+          params: {
+            movieId: _this.$route.query.movieId
+          }
+        }).then(function (res) {
+          console.log(res.data);
+          //判断服务器返回数据，是否存在
+          if (res.data[0] != undefined) {
+            _this.actor = res.data;
+          }
+          setTimeout(function () {
+            _this.myscroll.refresh();
+          }, 0);
+        }).catch(function (err) {
+            console.log('err', err, 'movie_detail err');
+          }
+        );
+      },
+      //获取电影一条电影信息
+      fetchOneMovie(_this){
+        _this.$http.get('/mtime/list_now_one/', {
+          params: {
+            movieId: _this.$route.query.movieId
+          }
+        }).then(function (res) {
+          _this.movieData = res.data[0];
+          _this.bgImg = `url('${_this.url}${_this.movieData.imageId}.jpg')`;
+          setTimeout(function () {
+            _this.myscroll.refresh();
+          }, 0);
+        }).catch(function (err) {
+            console.log('err', err, 'movieData err');
+          }
+        );
       }
-
     }
   };
 
 </script>
 
 <style lang="scss">
-  .movie_detail_wrap{
+  .movie_detail_wrap {
     display: flex;
     height: 100%;
     flex-direction: column;
     .header {
       z-index: 2;
       display: flex;
-      background:#1C2635;
+      background: #1C2635;
       align-items: center;
-      .detail{
-        color:#fff;
+      .detail {
+        color: #fff;
         flex: 3;
         text-align: center;
         font-size: 1.8rem;
@@ -273,7 +289,7 @@
         margin-right: 1rem;
       }
     }
-    .movie_detail_cnt{
+    .movie_detail_cnt {
       flex: 1;
       overflow: hidden;
       .movie_detail {
@@ -444,7 +460,7 @@
         .actor_cnt_border {
           padding-bottom: .5rem;
           .actor_cnt {
-            padding-left: 1.5rem;
+            padding: 0 1.5rem;
             .actor_pic_cnt {
               display: flex;
               font-size: 1.2rem;
@@ -454,8 +470,8 @@
 
               .info_cnt {
                 text-align: center;
-                .top{
-                  height:14rem ;
+                .top {
+                  height: 14rem;
                 }
                 .director_pic {
                   width: 8.55rem;
@@ -526,26 +542,32 @@
               }
             }
             .commet_box {
+              flex: 1;
               .content {
                 font-size: 1.2rem;
                 color: #999;
                 line-height: 1.8;
                 display: flex;
+                flex-direction: column;
                 .name {
                   flex: 1;
 
                 }
-                .time {
-                  font-style: normal;
-                }
-                .score {
-                  font-size: 1.1rem;
-                  background: #659d0e;
-                  width: 2em;
-                  height: 1.8em;
-                  color: #fff;
-                  text-align: center;
-                  margin-left: .5rem;
+                .time_score {
+                  display: flex;
+                  .time {
+                    font-style: normal;
+                    flex: 1;
+                  }
+                  .score {
+                    font-size: 1.1rem;
+                    background: #659d0e;
+                    width: 2em;
+                    height: 1.8em;
+                    color: #fff;
+                    text-align: center;
+                    margin-left: .5rem;
+                  }
                 }
               }
               .txt {
