@@ -1,6 +1,6 @@
 <template>
   <div class="willMovie">
-    <div class="most_want">最受关注<b> ( 10 部 )</b></div>
+    <div class="most_want">最受关注aaa<b> ( 10 部 )</b></div>
     <WillMovieItem></WillMovieItem>
     <LoopAdv class="loopAdv"></LoopAdv>
     <div class="most_want">即将上映<b> ( 36 部 )</b></div>
