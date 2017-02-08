@@ -16,7 +16,7 @@
             <div class="movie_director">导演：<i>{{movie.dirctor}}</i></div>
             <div class="movie_actor">演员：<i>{{movie.acotr}}</i></div>
           </div>
-          <div class="movie_btn">
+          <div class="movie_btn" @click="gotoTicket(movie.movieId)">
             <a class="movie_btn_pre">超前预售</a>
             <a class="movie_btn_pre video">预告片</a>
           </div>
@@ -40,7 +40,13 @@
       movie: {
         type: null
       }
-    }
+    },
+    methods:{
+      gotoTicket(movieId){
+        let _this = this;
+        _this.$router.push({path:'/ticket', query:{movieId:movieId}});
+      }
+  }
   }
 </script>
 

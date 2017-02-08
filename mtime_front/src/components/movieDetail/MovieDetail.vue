@@ -6,6 +6,7 @@
       <div class="favorite"></div>
       <div class="share"></div>
     </div>
+
     <div class="movie_detail_cnt">
       <div>
         <div class="movie_detail" v-if="movieData">
@@ -112,6 +113,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 
