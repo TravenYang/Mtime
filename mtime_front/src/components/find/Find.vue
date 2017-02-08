@@ -2,7 +2,7 @@
   <div class="out_wraper">
     <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
       <div v-show="show" class="animated" style="width:100%;">
-        <SearchBox></SearchBox>
+        <SearchBox  @toSearch="toSearch" :textType="textType"></SearchBox>
         <div class="find" style="height:600px;width:100%;">
           <div id='find' style="height:600px;width:100%"></div>
         </div>
@@ -27,8 +27,11 @@
     data(){
       return {
         loading: true,
-        show:false,
-        AMAP:''
+        show: false,
+        me: '',
+        map:'',
+        keyWord:'',
+        textType:'搜索周边兴趣点'
       }
     },
     computed: {
@@ -39,14 +42,44 @@
     methods: {
       ...mapActions([
         'saveCurrentLocation'
-      ])
+      ]),
+      //搜索附近
+      searchNear(me,long,lati,keyWord) {
+        console.log('开始搜索');
+        alert('开始搜索');
+        me.loading = true;
+        AMap.service(["AMap.PlaceSearch"], function () {
+          let placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+            pageSize: 15,
+            type: keyWord,
+            pageIndex: 1,
+            map: me.map
+          });
+          //中心点坐标
+          let cpoint = [long, lati];
+          placeSearch.searchNearBy('', cpoint, 10000, function (status, result) {
+            console.log(status, result);
+            //请求结束后loading消失
+            me.loading = false;
+            me.map.setZoom(14);
+            console.log('搜索结束');
+            alert('搜索结束');
+          });
+        });
+      },
+      toSearch(keyWord){
+        let _this = this;
+        _this.searchNear(_this,_this.getCurrentLocation.lng,_this.getCurrentLocation.lat,keyWord);
+      }
     },
     mounted(){
       let _this = this;
+      this.me = this;
       //实例化高德地图
       let map = new AMap.Map("find", {
         resizeEnable: true
       });
+      this.map = map;
       //获取地理信息
       if (window.navigator.geolocation) {
         //调用getCurrentPosition方法
@@ -142,11 +175,12 @@
         }
         console.log('handelerr ticket', result);
       }
+
     }
   }
 </script>
 
 <style lang="scss">
-  @import   '../../assets/scss/animate.css';
+  @import '../../assets/scss/animate.css';
 
 </style>

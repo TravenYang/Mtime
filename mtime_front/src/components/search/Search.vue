@@ -5,8 +5,8 @@
       <i></i>
     </div>
     <div class="search_box">
-      <input class="search_text" type="text" placeholder="影片/影院/影人，任你搜">
-      <a class="search_clear"></a>
+      <input class="search_text" @keyup.enter="toSearch" type="text" :placeholder="textType" v-model="keyWord">
+      <a class="search_clear" @click="clear"></a>
     </div>
 
   </div>
@@ -14,7 +14,29 @@
 
 <script type="text/ecmascript-6">
   export default{
+    data(){
+      return{
+        keyWord:''
+      }
+    },
+    props:{
+      textType:{
+        type:null
+      }
+    },
+    methods:{
+      toSearch(){
+        if(this.keyWord){
+          this.$emit('toSearch',this.keyWord);
+        }else{
+          alert('搜索不能为空');
+        }
 
+      },
+      clear(){
+        this.keyWord = '';
+      }
+    }
   };
 </script>
 

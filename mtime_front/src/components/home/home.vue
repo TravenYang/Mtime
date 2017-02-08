@@ -2,7 +2,7 @@
   <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
     <div class="home_cnt animated" v-show="show">
       <div class="home">
-        <SearchBox></SearchBox>
+        <SearchBox :textType="textType"></SearchBox>
         <div class="home_movie">
           <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
           <MoviePic :hotMovie="homeMovieData"></MoviePic>
@@ -53,7 +53,8 @@
         willMovieRoute:'/home_movie/will_movie',
         titleBarName:['正在热映','即将上映'],
         myscroll:'',
-        show:false
+        show:false,
+        textType:'影片/影院/影人，任你搜'
       }
     },
     mounted(){
