@@ -31,7 +31,7 @@
     },
     data(){
       return {
-        myscroll:''
+        myscroll: ''
       }
     },
     computed: {
@@ -50,12 +50,13 @@
     mounted(){
       //key
       //35d76866a498d51fa701a70f7100099a
-      //判断浏览器支持
-      this.myscroll = new IScroll('.scroll_wrap',{
-        mouseWheel: true,
-        click:true
-      });
       let _this = this;
+      _this.myscroll = new IScroll('.scroll_wrap', {
+        mouseWheel: true,
+        click: true
+      });
+
+      //判断浏览器支持
       if (window.navigator.geolocation) {
         //调用getCurrentPosition方法
         window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
@@ -64,49 +65,45 @@
       } else {
         console.log("浏览器不支持html5来获取地理位置信息");
       }
+      //amap获取地址成功
       function handleSuccess(position) {
+        clearTimeout(getDefaultLoacation);
+        console.log('我成功了');
         //经纬度
-        var lng = Math.round(position.coords.longitude * 1000000) / 1000000;
-        var lat = Math.round(position.coords.latitude * 1000000) / 1000000;
-        console.log(position);
-        //let pos = 121.034372 + ',' + 31.1372824;
+        let lng = Math.round(position.coords.longitude * 1000000) / 1000000;
+        let lat = Math.round(position.coords.latitude * 1000000) / 1000000;
         _this.getCurrentLocation.lng = lng;
         _this.getCurrentLocation.lat = lat;
         _this.saveCurrentLocation(_this.getCurrentLocation);
         let pos = lng + ',' + lat;
         //获取地名
         getPlaceName(pos);
-        function getPlaceName(pos) {
-          gaoDeAxios.get('http://restapi.amap.com/v3/geocode/regeo', {
-            params: {
-              output: 'json',
-              location: pos,
-              key: '35d76866a498d51fa701a70f7100099a',
-              radius: 1000,
-              extensions: 'all'
-            }
-          }).then(function (res) {
-            console.log(res.data);
-            if (res.data.regeocode.pois[0] == undefined) {
-              console.log('浏览器未能正确定位，开启默认测试坐标（121.034372，31.137282）');
-              lng = 121.034372;
-              lat = 31.137282;
-              _this.getCurrentLocation.lng = lng;
-              _this.getCurrentLocation.lat = lat;
-              pos = lng + ',' + lat;
-              //获取地名
-              getPlaceName(pos);
-            } else {
-              _this.getCurrentLocation.place = res.data.regeocode.formatted_address;
-              _this.saveCurrentLocation(_this.getCurrentLocation);
-              getCinema(pos);
-            }
-          }).catch(function (err) {
-            console.log('err', err);
-          });
-        }
-
       };
+
+      //获取地名
+      function getPlaceName(pos) {
+        gaoDeAxios.get('http://restapi.amap.com/v3/geocode/regeo', {
+          params: {
+            output: 'json',
+            location: pos,
+            key: '35d76866a498d51fa701a70f7100099a',
+            radius: 1000,
+            extensions: 'all'
+          }
+        }).then(function (res) {
+          if (res.data.regeocode.pois[0] == undefined) {
+            defaultLoacation();
+          } else {
+            _this.getCurrentLocation.place = res.data.regeocode.formatted_address;
+            _this.saveCurrentLocation(_this.getCurrentLocation);
+            getCinema(pos);
+          }
+        }).catch(function (err) {
+          console.log('err', err);
+        });
+      }
+
+      //获取电影院信息
       function getCinema(pos) {
         gaoDeAxios.get('http://restapi.amap.com/v3/place/around', {
           params: {
@@ -120,14 +117,32 @@
         }).then(function (res) {
           console.log(res.data.pois);
           _this.saveCinemaData(res.data.pois);
-          setTimeout(function(){
+          setTimeout(function () {
             _this.myscroll.refresh();
-          },0);
+          }, 0);
         }).catch(function (err) {
           console.log('err', err);
         });
       }
 
+      //获取不到地址时,采用默认地址
+      let getDefaultLoacation = setTimeout(function () {
+        defaultLoacation();
+      }, 3000);
+
+      //默认地址配置获取
+      function defaultLoacation() {
+        console.log('浏览器未能正确定位，开启默认测试坐标（121.034372，31.137282）');
+        let lng = 121.45209;
+        let lat = 31.228829;
+        _this.getCurrentLocation.lng = lng;
+        _this.getCurrentLocation.lat = lat;
+        let pos = lng + ',' + lat;
+        //获取地名
+        getPlaceName(pos);
+      }
+
+      //amap错误处理
       function handleError(error) {
         var result;
         switch (error.code) {
@@ -144,7 +159,7 @@
             result = "发生了位置错误";
             break;
         }
-        alert(result);
+        console.log('handelerr ticket', result);
       }
     }
   };
@@ -158,7 +173,7 @@
       padding: .8rem 0 .8rem 1.5rem;
       border-bottom: 1px solid #D8D8D8;
     }
-    .scroll_wrap{
+    .scroll_wrap {
       overflow: hidden;
       flex: 1;
     }

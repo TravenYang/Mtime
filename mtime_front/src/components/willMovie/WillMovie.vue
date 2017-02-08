@@ -6,13 +6,6 @@
       <LoopAdv></LoopAdv>
       <div class="most_want">即将上映<b> ( 36 部 )</b></div>
       <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
-      <WillMovieItem></WillMovieItem>
     </div>
   </div>
 </template>
@@ -69,7 +62,8 @@
         this.$http.get('/mtime/list_home', {
           params: {
             page: _this.page || '',
-            number: _this.number || ''
+            number: _this.number || '',
+            type:'will'
           }
         }).then(function (res) {
           //判断服务器返回数据，是否存在,处理数据
@@ -110,7 +104,6 @@
       border: 1px solid blue;
     }
     .loopAdv {
-      margin-top: 7rem;
       margin-bottom: 1.5rem;
     }
     .most_want {
