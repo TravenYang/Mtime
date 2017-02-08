@@ -1,33 +1,39 @@
 <template>
-  <div class="now_movie_cnt">
-    <div class="nowMovie">
-      <div class="nowMovie_item" v-for="movie in movieData">
-        <a class="image">
-          <img :src="url+movie.movieInfoImage">
-        </a>
-        <div class="middle">
-          <div class="middle_desc">
-            <h1 class="middle_name">
-              <a class="title">{{movie.movieName}}</a>
-              <span class="score" v-if="movie.score">{{movie.score}}</span>
-            </h1>
-            <h2 class="desc" v-if="movie.desc">
-              <i></i>
-              <span>{{movie.desc}}</span>
-            </h2>
-            <div>
-              <i class="movie_01" v-if="movie.threeD"></i>
-              <i class="movie_01 movie_01_tv" v-if="movie.max"></i>
+
+    <div>
+      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <div v-show="show" class="now_movie_cnt animated">
+        <div class="nowMovie">
+          <div class="nowMovie_item" v-for="movie in movieData">
+            <a class="image">
+              <img :src="url+movie.movieInfoImage">
+            </a>
+            <div class="middle">
+              <div class="middle_desc">
+                <h1 class="middle_name">
+                  <a class="title">{{movie.movieName}}</a>
+                  <span class="score" v-if="movie.score">{{movie.score}}</span>
+                </h1>
+                <h2 class="desc" v-if="movie.desc">
+                  <i></i>
+                  <span>{{movie.desc}}</span>
+                </h2>
+                <div>
+                  <i class="movie_01" v-if="movie.threeD"></i>
+                  <i class="movie_01 movie_01_tv" v-if="movie.max"></i>
+                </div>
+              </div>
+              <div class="cinema">
+                <span>{{movie.playNumber}}</span>
+                <a class="purchase">{{movie.purchaseType}}</a>
+              </div>
             </div>
-          </div>
-          <div class="cinema">
-            <span>{{movie.playNumber}}</span>
-            <a class="purchase">{{movie.purchaseType}}</a>
           </div>
         </div>
       </div>
+      </transition>
+      <loading v-show="loading"></loading>
     </div>
-  </div>
 
 </template>
 
@@ -35,6 +41,7 @@
   import {mapGetters,mapActions} from 'vuex';
   import IScroll from 'IScroll';
   import upDown from '../../assets/js/upDown';
+  import loading from 'components/loading/Loading'
   export default{
     computed: {
       ...mapGetters([
@@ -42,14 +49,19 @@
         'showHeadAdvVal'
       ])
     },
+    components:{
+      loading
+    },
     data(){
       return {
         loading: true,
+        show:false,
         movieData: [],
         myscroll:'',
         wrapperHeight: '',
         page:0,
         number:6,
+
       }
     },
     watch:{
@@ -60,6 +72,7 @@
     },
     mounted(){
       let _this = this;
+
       _this.myscroll = new IScroll('.now_movie_cnt',{
         click:true,
         probeType: 3,
@@ -99,9 +112,13 @@
           }else{
             console.log('没有更多了');
           }
+          //请求结束后,页面出现，loading消失
+          _this.show = true;
+          _this.loading = false;
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
+
         })
       }
     }
@@ -110,8 +127,9 @@
 
 <style lang="scss">
   @import "../../assets/scss/rem";
+  @import   '../../assets/scss/animate.css';
 .now_movie_cnt{
-
+height: 100%;
 }
   .nowMovie {
     .nowMovie_item {

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import loading from 'components/loading/Loading'
 import Tab from 'components/tab/Tab';
 import HeadAdv from 'components/headAdv/HeadAdv';
 import SearchBox from 'components/search/Search'
@@ -19,8 +18,7 @@ export default {
   components:{
     HeadAdv,
     Tab,
-    SearchBox,
-    loading
+    SearchBox
   },
   watch:{
       $route(to){

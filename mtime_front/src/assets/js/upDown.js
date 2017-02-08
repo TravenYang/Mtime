@@ -12,14 +12,11 @@ function fetchMore(_this,up,down){
       //console.log( "放开刷新页面");
       pullDownFlag = 1;
       clearTimeout(timer);
-      _this.myloading = true;
       //判断上拉
     } else if (this.y < (this.maxScrollY - 60)) {
       //console.log( "放开刷新页面");
       pullUpFlag = 1;
       clearTimeout(timer);
-      _this.myloading = true;
-
     }
   }
   function action(){
@@ -33,7 +30,6 @@ function fetchMore(_this,up,down){
         }
         console.log('我下拉刷新了');
         pullDownFlag = 0;
-        _this.myloading = false;
 
       }else if(pullUpFlag==1){
         //pullUpAction();
@@ -42,11 +38,8 @@ function fetchMore(_this,up,down){
         }
         console.log('我上拉加载了');
         pullUpFlag = 0;
-        _this.myloading = false;
-
       }
-    },400);
-
+    },200);
   }
 }
 export default {fetchMore};

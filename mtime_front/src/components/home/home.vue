@@ -1,20 +1,23 @@
 <template>
-  <div class="home_cnt">
-    <div class="home">
-      <SearchBox></SearchBox>
-      <div class="home_movie">
-        <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
-        <MoviePic :hotMovie="homeMovieData"></MoviePic>
-      </div>
-      <div class="loopAdv_container">
-        <LoopAdv></LoopAdv>
-      </div>
-      <div class="home_movie">
-        <TitleBar :routeTarget='willMovieRoute' :titleName='titleBarName[1]'></TitleBar>
-        <MoviePic :hotMovie="willMovieData"></MoviePic>
+  <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+    <div class="home_cnt animated" v-show="show">
+      <div class="home">
+        <SearchBox></SearchBox>
+        <div class="home_movie">
+          <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
+          <MoviePic :hotMovie="homeMovieData"></MoviePic>
+        </div>
+        <div class="loopAdv_container">
+          <LoopAdv></LoopAdv>
+        </div>
+        <div class="home_movie">
+          <TitleBar :routeTarget='willMovieRoute' :titleName='titleBarName[1]'></TitleBar>
+          <MoviePic :hotMovie="willMovieData"></MoviePic>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -49,10 +52,12 @@
         hotMovieRoute:'/home_movie/now_movie',
         willMovieRoute:'/home_movie/will_movie',
         titleBarName:['正在热映','即将上映'],
-        myscroll:''
+        myscroll:'',
+        show:false
       }
     },
     mounted(){
+      this.show = true;
       this.myscroll = new IScroll('.home_cnt',{
         mouseWheel: true,
         click:true
@@ -65,6 +70,9 @@
         'getMovieData',
         'getWillMovieData'
       ]),
+      shows(){
+        this.show = !this.show;
+      },
       fetchMovie(){
         let _this = this;
         //获取首页正在热映数据
@@ -113,6 +121,7 @@
 </script>
 
 <style lang="scss">
+  @import   '../../assets/scss/animate.css';
   .home_cnt{
     .home {
       .home_movie {
