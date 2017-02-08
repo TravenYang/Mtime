@@ -6,114 +6,117 @@
       <div class="favorite"></div>
       <div class="share"></div>
     </div>
+    <div class="out_wraper">
+      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+        <div v-show="showPage" class="movie_detail_cnt animated">
+          <div>
+            <div class="movie_detail" v-if="movieData">
 
-    <div class="movie_detail_cnt">
-      <div>
-        <div class="movie_detail" v-if="movieData">
 
-
-          <div class="bg_cnt">
-            <div class="bg_cinema" :style="{backgroundImage:bgImg}">
-              <div class="bg_img" :style="{backgroundImage:bgImg}"></div>
-              <p></p>
-            </div>
-          </div>
-          <div class="cinemabox">
-            <img :src="url+movieData.imageId+'.jpg'">
-            <div class="cinema_txt">
-              <div class="txt_cnt">
-                <h1 class="title">{{movieData.movieName}}</h1>
-                <h2 class="title_en">{{movieData.englishName}}</h2>
-                <div class="during">{{movieData.duringTime}}</div>
-                <div class="type">{{movieData.mvType}}</div>
-                <div class="playtime">{{movieData.playTime}}</div>
+              <div class="bg_cnt">
+                <div class="bg_cinema" :style="{backgroundImage:bgImg}">
+                  <div class="bg_img" :style="{backgroundImage:bgImg}"></div>
+                  <p></p>
+                </div>
               </div>
-              <div class="btn">
-                <div class="want">我想看</div>
-                <div class="toscore">我要评分</div>
-              </div>
-            </div>
-          </div>
-          <div class="short_desc">
-            <i></i>
-            <b>{{movieData.desc}}</b>
-          </div>
-          <div class="btn_box">
-            <div class="purchase_btn" @click="gotoTicket">{{movieData.purchaseType}}</div>
-          </div>
-          <div class="bar"></div>
-          <div class="long_desc_cnt">
-            <div :class="['long_desc',{show_more:show}]">
-              {{movieData.movieContent}}
-            </div>
-            <div class="show_more_btn" @click="showContent"></div>
-          </div>
-          <div class="bar"></div>
-          <div class="actor_cnt_border" v-if="actor">
-            <div class="actor_cnt">
-              <TitleBar :titleName='titleBarName[0]'></TitleBar>
-              <div class="actor_pic_cnt">
-                <div class="director">
-                  <div class="type">导演</div>
-                  <div class="info_cnt">
-                    <img class="director_pic" :src="url+'actorImg'+actor[0].directorImg">
-                    <div class="name">{{actor[0].dirctor}}</div>
-                    <div class="name_en">{{actor[0].directorEn}}</div>
+              <div class="cinemabox">
+                <img :src="url+movieData.imageId+'.jpg'">
+                <div class="cinema_txt">
+                  <div class="txt_cnt">
+                    <h1 class="title">{{movieData.movieName}}</h1>
+                    <h2 class="title_en">{{movieData.englishName}}</h2>
+                    <div class="during">{{movieData.duringTime}}</div>
+                    <div class="type">{{movieData.mvType}}</div>
+                    <div class="playtime">{{movieData.playTime}}</div>
+                  </div>
+                  <div class="btn">
+                    <div class="want">我想看</div>
+                    <div class="toscore">我要评分</div>
                   </div>
                 </div>
-                <div class="actor">
-                  <div class="type">主要演员</div>
-                  <div class="actor_item">
-                    <div class="info_cnt" v-for="act in actor">
-                      <div class="top">
-                        <img class="actor_fact" :src="url+'actorImg'+act.actorImg">
-                        <div class="name">{{act.actorName}}</div>
-                        <div class="name_en">{{act.actorNameEn}}</div>
+              </div>
+              <div class="short_desc">
+                <i></i>
+                <b>{{movieData.desc}}</b>
+              </div>
+              <div class="btn_box">
+                <div class="purchase_btn" @click="gotoTicket">{{movieData.purchaseType}}</div>
+              </div>
+              <div class="bar"></div>
+              <div class="long_desc_cnt">
+                <div :class="['long_desc',{show_more:show}]">
+                  {{movieData.movieContent}}
+                </div>
+                <div class="show_more_btn" @click="showContent"></div>
+              </div>
+              <div class="bar"></div>
+              <div class="actor_cnt_border" v-if="actor">
+                <div class="actor_cnt">
+                  <TitleBar :titleName='titleBarName[0]'></TitleBar>
+                  <div class="actor_pic_cnt">
+                    <div class="director">
+                      <div class="type">导演</div>
+                      <div class="info_cnt">
+                        <img class="director_pic" :src="url+'actorImg'+actor[0].directorImg">
+                        <div class="name">{{actor[0].dirctor}}</div>
+                        <div class="name_en">{{actor[0].directorEn}}</div>
                       </div>
-                      <img class="actor_role" :src="url+'actorImg'+act.actorImgRole">
-                      <div class="role_name">{{act.actorRole}}</div>
+                    </div>
+                    <div class="actor">
+                      <div class="type">主要演员</div>
+                      <div class="actor_item">
+                        <div class="info_cnt" v-for="act in actor">
+                          <div class="top">
+                            <img class="actor_fact" :src="url+'actorImg'+act.actorImg">
+                            <div class="name">{{act.actorName}}</div>
+                            <div class="name_en">{{act.actorNameEn}}</div>
+                          </div>
+                          <img class="actor_role" :src="url+'actorImg'+act.actorImgRole">
+                          <div class="role_name">{{act.actorRole}}</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="bar"></div>
-          <div class="movie_pic_box" v-if="movieImage">
-            <TitleBar :titleName='titleBarName[1]'></TitleBar>
-            <div class="movie_pic_cnt">
-              <img v-for="movieImg in movieImage" :src='url+movieImg.movieImage'>
-            </div>
-          </div>
-          <div class="short_desc_box">
-            <TitleBar :titleName='titleBarName[2]'></TitleBar>
-            <div class="short_desc_item" v-for="commet in movieCommet">
-              <div class="head_icon">
-                <img :src="url+commet.authorHeadImg">
+              <div class="bar"></div>
+              <div class="movie_pic_box" v-if="movieImage">
+                <TitleBar :titleName='titleBarName[1]'></TitleBar>
+                <div class="movie_pic_cnt">
+                  <img v-for="movieImg in movieImage" :src='url+movieImg.movieImage'>
+                </div>
               </div>
-              <div class="commet_box">
-                <div class="content">
-                  <span class="name">{{commet.commetAuthor}}</span>
-                  <div class="time_score">
-                    <i class="time">{{commet.timeAndSee}}</i>
-                    <b class="score" v-if="commet.authorScore != 'null'">{{commet.authorScore}}</b>
+              <div class="short_desc_box">
+                <TitleBar :titleName='titleBarName[2]'></TitleBar>
+                <div class="short_desc_item" v-for="commet in movieCommet">
+                  <div class="head_icon">
+                    <img :src="url+commet.authorHeadImg">
+                  </div>
+                  <div class="commet_box">
+                    <div class="content">
+                      <span class="name">{{commet.commetAuthor}}</span>
+                      <div class="time_score">
+                        <i class="time">{{commet.timeAndSee}}</i>
+                        <b class="score" v-if="commet.authorScore != 'null'">{{commet.authorScore}}</b>
+                      </div>
+                    </div>
+                    <p class="txt">{{commet.commetall}}</p>
+                    <div class="btn_box">
+                      <i class="feed_icon"></i>
+                      <span class="feed">回复</span>
+                      <i class="good"></i>
+                      <span class="good_num">1</span>
+                    </div>
                   </div>
                 </div>
-                <p class="txt">{{commet.commetall}}</p>
-                <div class="btn_box">
-                  <i class="feed_icon"></i>
-                  <span class="feed">回复</span>
-                  <i class="good"></i>
-                  <span class="good_num">1</span>
-                </div>
               </div>
+
             </div>
           </div>
-
         </div>
-      </div>
+      </transition>
     </div>
-
+    <loading v-show="loading"></loading>
   </div>
 
 
@@ -135,14 +138,16 @@
         movieData: '',
         bgImg: '',
         show: false,
+        showPage:false,
+        loading:true,
         titleBarName: ['演职员', '剧照', '精彩评论'],
         actor: '',
         movieImage: '',
         movieCommet: '',
         myscroll: '',
         wrapperHeight: '',
-        page:0,
-        number:6,
+        page: 0,
+        number: 6,
       }
     },
     computed: {
@@ -174,7 +179,7 @@
       //获取评论
       _this.fetchCommet(_this);
       //获取更多评论,传入的地方要是函数不要传参
-      upDown.fetchMore(_this,_this.fetchCommet);
+      upDown.fetchMore(_this, _this.fetchCommet,_this.fetchCommet);
     }
     ,
     methods: {
@@ -183,7 +188,7 @@
       ]),
       gotoTicket(){
         let _this = this;
-        this.$router.push({path:'/ticket', query:{movieId:_this.$route.query.movieId}})
+        this.$router.push({path: '/ticket', query: {movieId: _this.$route.query.movieId}})
       },
       back(){
         this.$router.push('/home');
@@ -193,7 +198,7 @@
       },
       //获取评论
       fetchCommet(_this){
-        console.log(_this.page);
+        _this.loading = true;
         _this.$http.get('/mtime/list_movie_commet/', {
           params: {
             movieId: _this.$route.query.movieId,
@@ -204,18 +209,21 @@
 
           //判断服务器返回数据，是否存在,处理数据
           if (res.data[0] != undefined) {
-            if(_this.page == 0){
+            if (_this.page == 0) {
               console.log('wei 0');
               _this.movieCommet = res.data;
-            }else{
+            } else {
               console.log('buwei0');
               let data = _this.movieCommet.concat(res.data);
               _this.movieCommet = data;
             }
             _this.page++;
-          }else{
+          } else {
             console.log('没有更多了');
           }
+          //请求结束后,页面出现，loading消失
+          _this.showPage = true;
+          _this.loading = false;
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
@@ -290,16 +298,21 @@
     flex-direction: column;
     .header {
       z-index: 2;
-      display: flex;
       background: #1C2635;
-      align-items: center;
+      height: 4.4rem;
+      position: relative;
       .detail {
         color: #fff;
         flex: 3;
         text-align: center;
         font-size: 1.8rem;
+        line-height: 4.4rem;
+        position: absolute;
+        right:12rem;
+        top:0;
       }
       .back, .share, .favorite {
+
         width: 3rem;
         height: 4.4rem;
         background: url('./h_btn_back.png') no-repeat center;
@@ -308,12 +321,17 @@
       .favorite {
         background: url('./i_h_collection.png') no-repeat center;
         background-size: auto 2.2rem;
-
+position: absolute;
+        right:4rem;
+        top:0;
       }
       .share {
         background: url('./i_h_share.png') no-repeat center;
         background-size: auto 2.2rem;
         margin-right: 1rem;
+        position: absolute;
+        right:0;
+        top:0;
       }
     }
     .movie_detail_cnt {
