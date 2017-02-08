@@ -3,11 +3,20 @@
     <div v-if="getCurrentLocation.place" class="now_location">当前位置：
       <div class="now_location_name">{{getCurrentLocation.place}}</div>
     </div>
-    <div class="scroll_wrap">
-      <div>
-        <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>
-      </div>
+
+    <div class="out_wraper">
+      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+        <div v-show="show" class="scroll_wrap animated">
+          <div>
+            <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>
+          </div>
+        </div>
+      </transition>
+      <loading v-show="loading"></loading>
     </div>
+
+
+    <loading v-show="loading"></loading>
   </div>
 </template>
 
@@ -15,9 +24,12 @@
   import TicketItem from 'components/ticketItem/TicketItem';
   import gaoDeAxios from 'axios';
   import {mapGetters,mapActions} from 'vuex';
+  import loading from 'components/loading/Loading'
+
   export default{
     components: {
-      TicketItem
+      TicketItem,
+      loading
     },
     methods: {
       ...mapActions([
@@ -36,7 +48,9 @@
     },
     data(){
       return {
-        myscroll: ''
+        myscroll: '',
+        loading: true,
+        show: false,
       }
     },
     computed: {
@@ -124,6 +138,9 @@
         }).then(function (res) {
           console.log(res.data.pois);
           _this.saveCinemaData(res.data.pois);
+          //请求结束后,页面出现，loading消失
+          _this.show = true;
+          _this.loading = false;
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
