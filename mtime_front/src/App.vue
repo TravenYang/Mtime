@@ -4,7 +4,6 @@
     <Tab :head="true" v-show="showNavVal"></Tab>
     <!--<loading v-if="loading"></loading>-->
     <router-view class="app_content"></router-view>
-    <loading v-if="loading"></loading>
   </div>
 </template>
 
