@@ -1,6 +1,8 @@
 <template>
   <div class="ticket">
-    <div v-if="getCurrentLocation.place" class="now_location">当前位置：{{getCurrentLocation.place}}</div>
+    <div v-if="getCurrentLocation.place" class="now_location">当前位置：
+      <div class="now_location_name">{{getCurrentLocation.place}}</div>
+    </div>
     <div class="scroll_wrap">
       <div>
         <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>
@@ -21,7 +23,10 @@
       ...mapActions([
         'hideNavAndSearch',
         'saveCinemaData',
-        'saveCurrentLocation'
+        'saveCurrentLocation',
+        'hideLoading',
+        'showLoading',
+        'showNavAndSearch'
       ]),
       goto(name){
         this.$router.push({path: '/ticket/choose_movie', query: {name: name}});
@@ -50,7 +55,9 @@
     mounted(){
       //key
       //35d76866a498d51fa701a70f7100099a
+
       let _this = this;
+      _this.showNavAndSearch();
       _this.myscroll = new IScroll('.scroll_wrap', {
         mouseWheel: true,
         click: true
@@ -170,8 +177,17 @@
     display: flex;
     flex-direction: column;
     .now_location {
-      padding: .8rem 0 .8rem 1.5rem;
+      padding: .8rem 1.5rem;
       border-bottom: 1px solid #D8D8D8;
+      display: flex;
+      line-height: 1.3rem;
+      min-height: 2rem;
+      font-size: 1.1rem;
+      align-items: center;
+      .now_location_name {
+        flex: 1;
+        line-height: 1.3rem;
+      }
     }
     .scroll_wrap {
       overflow: hidden;

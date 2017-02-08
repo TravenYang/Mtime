@@ -1,6 +1,9 @@
 <template>
-  <div class="find" style="height:600px">
-    <div id='find' style="height:600px"></div>
+  <div>
+    <SearchBox></SearchBox>
+    <div class="find" style="height:600px">
+      <div id='find' style="height:600px"></div>
+    </div>
   </div>
 </template>
 
@@ -8,7 +11,11 @@
   import AMap from 'AMap';
   import gaoDeAxios from 'axios';
   import {mapGetters,mapActions} from 'vuex';
+  import SearchBox from 'components/search/Search'
   export default{
+    components:{
+      SearchBox
+    },
     computed: {
       ...mapGetters([
         'getCurrentLocation'

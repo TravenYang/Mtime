@@ -1,11 +1,11 @@
 <template>
   <div class="willMovie">
-    <div class="will_wrap">
-      <div class="most_want">最受关注<b> ( 10 部 )</b></div>
-      <WillMovieItem></WillMovieItem>
+    <div class="will_wrap" v-if="movieData">
+      <div class="most_want">最受关注<b></b></div>
+      <WillMovieItem :movie="movieData[0]"></WillMovieItem>
       <LoopAdv></LoopAdv>
-      <div class="most_want">即将上映<b> ( 36 部 )</b></div>
-      <WillMovieItem></WillMovieItem>
+      <div class="most_want">即将上映<b></b></div>
+      <WillMovieItem v-for="movie in willShow" :movie="movie"></WillMovieItem>
     </div>
   </div>
 </template>
@@ -21,12 +21,15 @@
       ...mapGetters([
         'url',
         'showHeadAdvVal'
-      ])
+      ]),
+      willShow(){
+        return this.movieData.slice(1);
+      }
     },
     data(){
       return {
         loading: true,
-        movieData: {},
+        movieData: [],
         myscroll: '',
         wrapperHeight: '',
         page: 0,
@@ -99,9 +102,7 @@
 
   .willMovie {
     padding: 1.5rem;
-    border: 1px solid red;
     .will_wrap {
-      border: 1px solid blue;
     }
     .loopAdv {
       margin-bottom: 1.5rem;

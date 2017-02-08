@@ -45,7 +45,7 @@
     data(){
       return {
         loading: true,
-        movieData: {},
+        movieData: [],
         myscroll:'',
         wrapperHeight: '',
         page:0,

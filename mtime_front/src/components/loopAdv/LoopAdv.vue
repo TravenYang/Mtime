@@ -28,6 +28,7 @@ export default{
       pagination:'.swiper-pagination',
       paginationClickable :true,
       autoplayDisableOnInteraction : false
+
     });
   }
 }

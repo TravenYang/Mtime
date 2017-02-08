@@ -12,12 +12,7 @@
       <router-link to="/ticket">购票</router-link>
     </div>
     <div class="tab-item">
-      <router-link to="/shop" class="shop">商城
-        <em v-show="head">NEW</em>
-      </router-link>
-    </div>
-    <div class="tab-item">
-      <router-link to="/find">发现</router-link>
+      <router-link to="/find">附近</router-link>
     </div>
     <div class="tab-item">
       <router-link to="/login" class="login">

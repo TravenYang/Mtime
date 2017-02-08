@@ -38,7 +38,7 @@
             <b>{{movieData.desc}}</b>
           </div>
           <div class="btn_box">
-            <div class="purchase_btn">{{movieData.purchaseType}}</div>
+            <div class="purchase_btn" @click="gotoTicket">{{movieData.purchaseType}}</div>
           </div>
           <div class="bar"></div>
           <div class="long_desc_cnt">
@@ -179,6 +179,10 @@
       ...mapActions([
         'hideNavAndSearch'
       ]),
+      gotoTicket(){
+        let _this = this;
+        this.$router.push({path:'/ticket', query:{movieId:_this.$route.query.movieId}})
+      },
       back(){
         this.$router.push('/home');
       },

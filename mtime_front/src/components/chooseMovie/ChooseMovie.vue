@@ -52,7 +52,7 @@
 
               <span class="movie_info_type">{{currentMovie.duringTime}} - {{currentMovie.mvType}}</span>
             </div>
-            <div class="toDetail"></div>
+            <div class="toDetail" @click="gotoMovie"></div>
           </div>
           <div class="adv_bar">
             <span class="pic"></span>
@@ -113,7 +113,7 @@
     watch: {
       showHeadAdvVal(){
         setTimeout(function () {
-          _this.myscroll.refresh();
+          this.myscroll.refresh();
         }, 0);
         console.log('adv改变了');
 
@@ -125,8 +125,8 @@
         click: true
       });
       let _this = this;
-      this.hideNavAndSearch();
       this.showHeadAdv();
+
       _this.loopMovie = new Swiper('.swiper-container-movie', {
         observer: true,
         slidesPerView: 3,
@@ -163,7 +163,6 @@
       ]),
       backToHome(){
         this.$router.push('/ticket');
-        this.showNavAndSearch();
       },
       fetchTime(id){
         let _this = this;
@@ -194,6 +193,10 @@
         }).catch(function (err) {
           console.log('err time', err);
         });
+      },
+      gotoMovie(){
+        let _this = this;
+        this.$router.push({path:'/home_movie/movie_detail', query:{movieId:_this.movieId}})
       }
     },
   };
