@@ -38,11 +38,11 @@ app.use(staticServer(path.join(__dirname, 'dist')));
 
 ////本地
 
-let serverIp = '192.168.1.5';
+//let serverIp = '192.168.1.5';
 
 //服务器
 
-//let serverIp = '45.32.73.184';
+let serverIp = '45.32.73.184';
 
 app.listen(Config.dev.mtime.port,serverIp);
 

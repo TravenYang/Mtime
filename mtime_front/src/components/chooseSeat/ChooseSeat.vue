@@ -54,7 +54,7 @@
           <i>(含服务费￥5/张)</i>
         </span>
           </div>
-          <span class="price_confirm" @click="comfirmTicket">下一步</span>
+          <span class="price_confirm" @click="comfirmTicket">付款</span>
         </div>
       </div>
     </transition>
@@ -88,9 +88,11 @@
       },
       getNowFormatDate() {
         let date = new Date();
+
         function p(s) {
           return s < 10 ? '0' + s : s;
         }
+
         let time = new Date();
         let year = time.getFullYear();
         let month = time.getMonth() + 1;
@@ -103,25 +105,28 @@
     },
     mounted(){
       let _this = this;
-      _this.hideNavAndSearch();
-      this.$http.get('/mtime/list_movie_seat/', {
-        params: {
-          movieId: 1
-        }
-      }).then(function (res) {
-        _this.seat = JSON.parse(res.data[0].seat);
-        _this.emptySeat = JSON.parse(res.data[0].emptySeat);
-        //请求结束后,页面出现，loading消失
-        _this.show = true;
-        _this.loading = false;
-      }).catch(function (err) {
-        console.log('err seat', err);
-      });
+      _this.getSeatInfo(_this);
     },
     methods: {
       ...mapActions([
         'hideNavAndSearch'
       ]),
+      //获取座位信息
+      getSeatInfo(_this){
+        this.$http.get('/mtime/list_movie_seat/', {
+          params: {
+            movieId: 1
+          }
+        }).then(function (res) {
+          _this.seat = JSON.parse(res.data[0].seat);
+          _this.emptySeat = JSON.parse(res.data[0].emptySeat);
+          //请求结束后,页面出现，loading消失
+          _this.show = true;
+          _this.loading = false;
+        }).catch(function (err) {
+          console.log('err seat', err);
+        });
+      },
       gotoTicket(movieId){
         console.log('我来了');
         let _this = this;
@@ -215,7 +220,6 @@
             }
           }
         }
-
         //锁定座位
         //changeTemp();
         //function changeTemp() {
@@ -239,8 +243,9 @@
           //请求结束后,页面出现，loading消失
           _this.loading = false;
           alert('您已购买成功');
-          _this.chooseSeat = '';
+          _this.chooseSeat = [];
           _this.count = 0;
+          _this.getSeatInfo(_this);
         }).catch(function (err) {
           console.log('err post seat', err);
         });
@@ -287,7 +292,7 @@
       position: relative;
       overflow: hidden;
       .seat_cnt {
-        padding-top: 1.5rem;
+        padding-top: .8rem;
         border-bottom: 1px solid #D8D8D8;
         .screen_cnt {
           text-align: center;
