@@ -8,12 +8,12 @@ function fetchMore(_this,up,down){
   _this.myscroll.on('scrollEnd', action);
   function positionJudge() {
     //判断下拉
-    if (this.y > 40) {
+    if (this.y > 20) {
       //console.log( "放开刷新页面");
       pullDownFlag = 1;
       clearTimeout(timer);
       //判断上拉
-    } else if (this.y < (this.maxScrollY - 60)) {
+    } else if (this.y < (this.maxScrollY - 20)) {
       //console.log( "放开刷新页面");
       pullUpFlag = 1;
       clearTimeout(timer);

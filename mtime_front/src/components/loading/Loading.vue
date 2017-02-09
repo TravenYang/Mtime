@@ -18,8 +18,10 @@
   .loading {
     position: fixed;
     top: 50%;
-    width: 100%;
-    left: 0;
+    left:50%;
+    margin-top: -35px;
+    margin-left: -40px;
+    width: 70px;
     height: 70px;
     background: rgba(0, 0, 0, 0);
   }
