@@ -36,8 +36,16 @@ app.use(function *(next) {
 });
 app.use(staticServer(path.join(__dirname, 'dist')));
 
-//app.listen(Config.dev.mtime.port,'192.168.1.5');
-app.listen(Config.dev.mtime.port,'45.32.73.184');
+////本地
+
+//let serverIp = '192.168.1.5';
+
+//服务器
+
+let serverIp = '45.32.73.184';
+
+app.listen(Config.dev.mtime.port,serverIp);
+
 require('figlet').text('Mtime', {
     font: 'Roman'
 }, function (err, data) {
@@ -45,6 +53,6 @@ require('figlet').text('Mtime', {
         return;
     }
     console.log(data);
-    console.log('listen at:' + Config.dev.mtime.port);
+    console.log(`listen at: ${serverIp}:${Config.dev.mtime.port}`);
 });
 

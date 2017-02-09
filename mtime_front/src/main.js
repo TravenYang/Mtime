@@ -9,8 +9,13 @@ import axios from 'axios';
 /* eslint-disable no-new */
 Vue.use(VueRouter);
 const router = new VueRouter(routerConfig);
-//axios.defaults.baseURL = 'http://192.168.1.5:13000';
-axios.defaults.baseURL = 'http://45.32.73.184:6666';
+
+//本地
+//axios.defaults.baseURL = 'http://192.168.1.5:13666';
+
+////服务器
+axios.defaults.baseURL = 'http://45.32.73.184:13666';
+
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.$http = axios;
 new Vue({

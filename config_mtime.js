@@ -4,7 +4,7 @@
 let configObj = {
     dev: {
         mtime: {
-            port: 6666
+            port: 13666
         },
         mysql_mtime: {
             host: '45.32.73.184',
