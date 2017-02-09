@@ -27,9 +27,7 @@ export default{
       loop:true,
       pagination:'.swiper-pagination',
       paginationClickable :true,
-      autoplayDisableOnInteraction : false,
-      observer:true,
-      observeParents:true
+      autoplayDisableOnInteraction : false
     });
   }
 }
@@ -42,7 +40,7 @@ export default{
       width:100%;
     }
     .swiper-pagination-bullets {
-      bottom:2px/$ppr;
+      bottom:1rem;
       .swiper-pagination-bullet-active {
         background: #fff;
       }
