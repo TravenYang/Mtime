@@ -115,15 +115,6 @@
         loading:true
       }
     },
-    watch: {
-      showHeadAdvVal(){
-        setTimeout(function () {
-          this.myscroll.refresh();
-        }, 0);
-        console.log('adv改变了');
-
-      }
-    },
     mounted(){
       this.myscroll = new IScroll('.scroll_wrap', {
         mouseWheel: true,
