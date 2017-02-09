@@ -2,7 +2,7 @@
   <div class="movie_detail_wrap">
     <div class="header">
       <div class="back" @click='back'></div>
-      <div class="detail">影片详</div>
+      <div class="detail">影片详情</div>
       <div class="favorite"></div>
       <div class="share"></div>
     </div>
