@@ -7,7 +7,7 @@
         <div class="movie_type">3D中文</div>
       </div>
     </div>
-    <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+    <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
   <div  v-show="show" class="choose_seat animated">
 
     <div class="seat_cnt">

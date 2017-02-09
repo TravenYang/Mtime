@@ -1,7 +1,7 @@
 <template>
 
   <div class="out_wraper">
-    <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+    <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
       <div v-show="show" class="willMovie animated">
         <div class="will_wrap" v-if="movieData">
           <div class="most_want">最受关注<b></b></div>

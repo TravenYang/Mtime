@@ -7,7 +7,7 @@
       <div class="share"></div>
     </div>
     <div class="out_wraper">
-      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
         <div v-show="showPage" class="movie_detail_cnt animated">
           <div>
             <div class="movie_detail" v-if="movieData">

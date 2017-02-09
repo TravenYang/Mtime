@@ -5,7 +5,7 @@
     </div>
 
     <div class="out_wraper">
-      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
         <div v-show="show" class="scroll_wrap animated">
           <div>
             <TicketItem v-for="(item,index) in getcinemaData" :info="item" @click.native='goto(item.name)'></TicketItem>

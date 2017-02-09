@@ -1,5 +1,5 @@
 <template>
-  <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+  <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
   <div v-show="show" class="login animated">
     <div class="login_page" v-show="!getNickName">
       <div class="login_box">

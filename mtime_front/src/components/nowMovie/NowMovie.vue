@@ -1,7 +1,7 @@
 <template>
 
     <div class="out_wraper">
-      <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+      <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
       <div v-show="show" class="now_movie_cnt animated">
         <div class="nowMovie">
           <div class="nowMovie_item" v-for="movie in movieData">

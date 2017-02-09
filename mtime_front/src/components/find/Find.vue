@@ -1,6 +1,6 @@
 <template>
   <div class="out_wraper">
-    <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+    <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
       <div v-show="show" class="animated" style="width:100%;">
         <SearchBox  @toSearch="toSearch" :textType="textType"></SearchBox>
         <div class="find" style="height:600px;width:100%;">
@@ -45,8 +45,6 @@
       ]),
       //搜索附近
       searchNear(me,long,lati,keyWord) {
-        console.log('开始搜索');
-        alert('开始搜索');
         me.loading = true;
         AMap.service(["AMap.PlaceSearch"], function () {
           let placeSearch = new AMap.PlaceSearch({ //构造地点查询类
@@ -62,8 +60,6 @@
             //请求结束后loading消失
             me.loading = false;
             me.map.setZoom(14);
-            console.log('搜索结束');
-            alert('搜索结束');
           });
         });
       },

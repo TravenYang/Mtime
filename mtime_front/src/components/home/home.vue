@@ -1,7 +1,8 @@
 <template>
-  <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
-    <div class="home_cnt animated" v-show="show">
-      <div class="home">
+
+  <div class="home_cnt">
+    <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
+      <div v-show="show" class="home animated">
         <SearchBox :textType="textType"></SearchBox>
         <div class="home_movie">
           <TitleBar :routeTarget='hotMovieRoute' :titleName='titleBarName[0]'></TitleBar>
@@ -15,8 +16,10 @@
           <MoviePic :hotMovie="willMovieData"></MoviePic>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+    <loading v-show="loading"></loading>
+  </div>
+
 
 </template>
 
@@ -31,6 +34,7 @@
   import{mapGetters,mapActions}from 'vuex';
   import router from 'vue-router'
   import SearchBox from 'components/search/Search'
+  import loading from 'components/loading/Loading'
   export default{
     computed: {
       ...mapGetters([
@@ -40,7 +44,7 @@
         'showHeadAdvVal'
       ])
     },
-    watch:{
+    watch: {
       showHeadAdvVal(){
         this.myscroll.refresh();
         console.log('adv改变了');
@@ -49,19 +53,19 @@
     data(){
       return {
         movieData: {},
-        hotMovieRoute:'/home_movie/now_movie',
-        willMovieRoute:'/home_movie/will_movie',
-        titleBarName:['正在热映','即将上映'],
-        myscroll:'',
-        show:false,
-        textType:'影片/影院/影人，任你搜'
+        hotMovieRoute: '/home_movie/now_movie',
+        willMovieRoute: '/home_movie/will_movie',
+        titleBarName: ['正在热映', '即将上映'],
+        myscroll: '',
+        show: false,
+        loading: true,
+        textType: '影片/影院/影人，任你搜'
       }
     },
     mounted(){
-      this.show = true;
-      this.myscroll = new IScroll('.home_cnt',{
+      this.myscroll = new IScroll('.home_cnt', {
         mouseWheel: true,
-        click:true
+        click: true
       });
       this.fetchMovie();
     },
@@ -77,36 +81,36 @@
       fetchMovie(){
         let _this = this;
         //获取首页正在热映数据
-        _this.$http.get('/mtime/list_home',{
+        _this.$http.get('/mtime/list_home', {
           params: {
             page: 0,
-            number:8
+            number: 8
           }
         }).then(function (res) {
           _this.getMovieData(res.data);
-          setTimeout(function(){
+          setTimeout(function () {
             _this.myscroll.refresh();
-          },0);
+          }, 0);
+          //获取首页正在热映数据
+          _this.$http.get('/mtime/list_home', {
+            params: {
+              page: 0,
+              number: 8,
+              type: 'will'
+            }
+          }).then(function (res) {
+            _this.getWillMovieData(res.data);
+            _this.show = true;
+            _this.loading = false;
+            setTimeout(function () {
+              _this.myscroll.refresh();
+            }, 0);
+          }).catch(function (err) {
+            console.log('home will: ', err);
+          });
         }).catch(function (err) {
           console.log('home now: ', err);
         });
-        //获取首页正在热映数据
-        _this.$http.get('/mtime/list_home',{
-          params: {
-            page: 0,
-            number:8,
-            type:'will'
-          }
-        }).then(function (res) {
-          _this.getWillMovieData(res.data);
-          setTimeout(function(){
-            _this.myscroll.refresh();
-          },0);
-        }).catch(function (err) {
-          console.log('home will: ', err);
-        });
-        ;
-
       }
     },
     components: {
@@ -116,14 +120,16 @@
       LoopAdv,
       News,
       Tab,
-      SearchBox
+      SearchBox,
+      loading
     }
   };
 </script>
 
 <style lang="scss">
-  @import   '../../assets/scss/animate.css';
-  .home_cnt{
+  @import '../../assets/scss/animate.css';
+
+  .home_cnt {
     .home {
       .home_movie {
         padding: .5rem 1.5rem .3rem;
@@ -135,7 +141,6 @@
       }
     }
   }
-
 
 
 </style>
