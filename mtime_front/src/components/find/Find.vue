@@ -56,7 +56,6 @@
           //中心点坐标
           let cpoint = [long, lati];
           placeSearch.searchNearBy('', cpoint, 10000, function (status, result) {
-            console.log(status, result);
             //请求结束后loading消失
             me.loading = false;
             me.map.setZoom(14);
@@ -83,7 +82,7 @@
           enableHighAccuracy: true
         });
       } else {
-        console.log("浏览器不支持html5来获取地理位置信息");
+        alert("浏览器不支持html5来获取地理位置信息");
       }
       //amap获取地址成功
       function handleSuccess(position) {
@@ -93,11 +92,10 @@
         let lat = Math.round(position.coords.latitude * 1000000) / 1000000;
         //高德查找附近
         getNearby(lng, lat);
-        console.log('我定位成功了');
       };
       //获取预设点附近信息
       let getDefaultNear = setTimeout(function () {
-        console.log('未定位成功,进入预设地点');
+        alert('未定位成功,进入预设地点');
         getNearby();
       }, 2000);
       //获取附近
@@ -114,11 +112,10 @@
           });
           let cpoint = [lng, lat];
           placeSearch.searchNearBy('', cpoint, 10000, function (status, result) {
-            console.log(status, result);
             if (status == 'no_data') {
               //定位成功，但是没有周边数据,进入预设地点
               getNearby();
-              console.log('定位成功，但是没有周边数据,进入预设地点');
+              alert('定位成功，但是没有周边数据,进入预设地点');
             }
             //请求结束后,页面出现，loading消失
             _this.show = true;

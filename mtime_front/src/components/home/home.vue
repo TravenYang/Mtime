@@ -47,7 +47,6 @@
     watch: {
       showHeadAdvVal(){
         this.myscroll.refresh();
-        console.log('adv改变了');
       }
     },
     data(){

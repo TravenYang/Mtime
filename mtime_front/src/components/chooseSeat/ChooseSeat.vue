@@ -128,7 +128,6 @@
         });
       },
       gotoTicket(movieId){
-        console.log('我来了');
         let _this = this;
         _this.$router.push({path: '/ticket/choose_movie', query: {movieId: movieId}});
       },
@@ -136,12 +135,10 @@
         let _this = this;
         //tempSelect 多用户并发选座的冲突问题，留待日后优化
         this.seatNum = (rowIdx + 1) + '排' + (colIdx + 1) + '座';
-        console.log(this.seatNum);
         //colData 当前座位信息
         let colData = this.seat[rowIdx][colIdx];
 
         let lastIdx = this.seat[0].length - 1;
-        console.log(lastIdx);
         //选座规则：不允许留下单个空座
         if (colIdx !== 0 && colIdx !== lastIdx) {//排除首尾两个座位后,就可以确保可以再当前座位加一减一
           let prevSeat_1 = this.seat[rowIdx][colIdx - 1];
@@ -155,7 +152,7 @@
                   selectSeat();
                   console.log('可以选择 0');
                 } else {//后一没被买，就会留下单座
-                  console.log('请不要留下单个座位 0');
+                  alert('请不要留下单个座位 0');
                 }
               } else {
                 selectSeat();
@@ -165,7 +162,7 @@
               selectSeat();
               console.log('可以选择 2');
             } else {
-              console.log('请不要留下单个座位 2');
+              alert('请不要留下单个座位 2');
             }
           } else {
             selectSeat();
@@ -239,7 +236,6 @@
             seat: _this.chooseSeat
           }
         )).then(function (res) {
-          console.log(res.data);
           //请求结束后,页面出现，loading消失
           _this.loading = false;
           alert('您已购买成功');

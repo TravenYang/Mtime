@@ -7,7 +7,7 @@ module.exports = function (app) {
     //获取电影信息数据
     app.get('/mtime/list_home/', function*() {
         try {
-            console.log('query', this.query);
+            console.log('list_home', this.query);
             let number = this.query.number || 10;
             let page = this.query.page * number || 0;
             let type = this.query.type || 'now';
@@ -21,11 +21,10 @@ module.exports = function (app) {
     //查询一条电影数据
     app.get('/mtime/list_now_one/', function*() {
         try {
-            console.log('query', this.query);
+            console.log('list_now_one', this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM movieInfo WHERE movieId='${movieId}' ORDER BY playTime LIMIT 1;`;
             let r = yield mysql.query(sortSql);
-            console.log(r);
             this.body = r;
         } catch (e) {
             console.log(e.toString());
@@ -34,7 +33,7 @@ module.exports = function (app) {
     //查询演员图片
     app.get('/mtime/list_actor_image/', function*() {
         try {
-            console.log('query actor', this.query);
+            console.log('list_actor_image', this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM actor WHERE movieId='${movieId}' LIMIT 2;`;
             let r = yield mysql.query(sortSql);
@@ -46,7 +45,7 @@ module.exports = function (app) {
     //查询剧照
     app.get('/mtime/list_movie_image/', function*() {
         try {
-            console.log('query image', this.query);
+            console.log('list_movie_image', this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM movieImage LIMIT 4;`;
             let r = yield mysql.query(sortSql);
@@ -58,7 +57,7 @@ module.exports = function (app) {
     //获取评论
     app.get('/mtime/list_movie_commet/', function*() {
         try {
-            console.log('query commet', this.query);
+            console.log('list_movie_commet', this.query);
             let movieId = this.query.movieId;
             let number = this.query.number || 10;
             let page = this.query.page * number || 0;
@@ -68,7 +67,6 @@ module.exports = function (app) {
                 sortSql = `select * FROM commet LIMIT ${page},${number};`;
                 r = yield mysql.query(sortSql);
             }
-            //console.log('commet', r);
             this.body = r;
         } catch (e) {
             console.log(e.toString());
@@ -77,7 +75,7 @@ module.exports = function (app) {
     //获取场次
     app.get('/mtime/list_movie_time/', function*() {
         try {
-            console.log('query commet', this.query);
+            console.log('list_movie_time', this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM time WHERE movieId='${movieId}' LIMIT 10;`;
             let r = yield mysql.query(sortSql);
@@ -89,7 +87,7 @@ module.exports = function (app) {
     //获取座位
     app.get('/mtime/list_movie_seat/', function*() {
         try {
-            console.log('query seat', this.query);
+            console.log('list_movie_seat', this.query);
             let movieId = this.query.movieId;
             let sortSql = `select * FROM seat WHERE movieId='${movieId}'`;
             let r = yield mysql.query(sortSql);
@@ -104,12 +102,11 @@ module.exports = function (app) {
     //更新座位信息
     app.post('/mtime/update_movie_seat', function*() {
         try {
-            console.log('进来了');
+
             let o = this.request.body;
             let movieId = o.movieId;
             let seat = o.seat;
-            console.log(movieId);
-            console.log(seat);
+            console.log('update_movie_seat',movieId,seat);
             let sortSql = `select * FROM seat WHERE movieId='${movieId}';`;
             let r = yield mysql.query(sortSql);
             let seatInSql = JSON.parse(r[0].seat);
@@ -119,11 +116,7 @@ module.exports = function (app) {
                     let colum = seat[i][k].colum - 1;
                     seat[i][k].confirm = 1;
                     seat[i][k].select = 0;
-                    console.log(row, colum);
-                    console.log(seatInSql[row][colum]);
                     seatInSql[row][colum] = seat[i][k];
-                    console.log('seatInSql[row][colum]', seatInSql[row][colum]);
-
                 }
             }
             let a = JSON.stringify(seatInSql);
@@ -137,10 +130,11 @@ module.exports = function (app) {
     //login
     app.post('/mtime/login', function*() {
         try {
-            console.log('登录');
+            console.log('login');
             let o = this.request.body;
             let account = o.account;
             let pwd = o.pwd;
+            console.log('login',account,pwd);
             let userInfo = `select * FROM user WHERE account='${account}';`;
             let r = yield  mysql.query(userInfo);
             let loginStatus = {};
@@ -167,14 +161,11 @@ module.exports = function (app) {
     //register
     app.post('/mtime/register', function*() {
             try {
-                console.log('注册');
                 let o = this.request.body;
                 let account = o.account;
                 let name = o.name;
                 let pwd = o.pwd;
-                console.log(account);
-                console.log(name);
-                console.log(pwd);
+                console.log('register',account,name,pwd);
                 let searchAccount = `select * FROM user WHERE account='${account}';`;
                 let searchName = `select * FROM user WHERE account='${name}';`;
                 let sName = yield  mysql.query(searchName);

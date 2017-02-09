@@ -21,7 +21,6 @@ export default {
   },
   watch:{
       $route(to){
-        console.log(to);
         switch(to.path) {
           case '/home':
             this.showNavAndSearch();

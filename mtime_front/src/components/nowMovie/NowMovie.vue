@@ -104,16 +104,13 @@
           if (res.data[0] != undefined) {
             //page=0 就为下拉刷新
             if(_this.page == 0){
-              console.log('wei 0');
               _this.movieData = res.data;
             }else{
-              console.log('buwei0');
               let data = _this.movieData.concat(res.data);
               _this.movieData = data;
             }
             _this.page++;
           }else{
-            console.log('没有更多了');
             alert('没有更多了');
           }
           //请求结束后,页面出现，loading消失

@@ -165,7 +165,6 @@
       }
     },
     mounted(){
-      console.log(upDown);
       this.myscroll = new IScroll('.movie_detail_cnt', {
         mouseWheel: true,
         click: true,
@@ -213,16 +212,14 @@
           //判断服务器返回数据，是否存在,处理数据
           if (res.data[0] != undefined) {
             if (_this.page == 0) {
-              console.log('wei 0');
               _this.movieCommet = res.data;
             } else {
-              console.log('buwei0');
               let data = _this.movieCommet.concat(res.data);
               _this.movieCommet = data;
             }
             _this.page++;
           } else {
-            console.log('没有更多了');
+            alert('没有更多了');
           }
           //请求结束后,页面出现，loading消失
           _this.showPage = true;
@@ -238,7 +235,6 @@
       //获取剧照
       fetchMovieImage(_this){
         _this.$http.get('/mtime/list_movie_image/').then(function (res) {
-          console.log(res.data);
           //判断服务器返回数据，是否存在
           if (res.data[0] != undefined) {
             _this.movieImage = res.data;
@@ -258,7 +254,6 @@
             movieId: _this.$route.query.movieId
           }
         }).then(function (res) {
-          console.log(res.data);
           //判断服务器返回数据，是否存在
           if (res.data[0] != undefined) {
             _this.actor = res.data;

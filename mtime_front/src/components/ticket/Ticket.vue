@@ -156,7 +156,7 @@
 
       //默认地址配置获取
       function defaultLoacation() {
-        console.log('浏览器未能正确定位，开启默认测试坐标（121.034372，31.137282）');
+        alert('浏览器未能正确定位，开启默认测试坐标（121.034372，31.137282）');
         let lng = 121.45209;
         let lat = 31.228829;
         _this.getCurrentLocation.lng = lng;
