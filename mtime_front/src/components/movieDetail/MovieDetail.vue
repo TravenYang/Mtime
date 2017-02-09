@@ -1,10 +1,13 @@
 <template>
   <div class="movie_detail_wrap">
     <div class="header">
-      <div class="back" @click='back'></div>
-      <div class="detail">影片详情</div>
-      <div class="favorite"></div>
-      <div class="share"></div>
+      <div class="container">
+        <div class="back" @click='back'></div>
+        <div class="detail">影片详情</div>
+        <div class="favorite"></div>
+        <div class="share"></div>
+      </div>
+
     </div>
     <div class="out_wraper">
       <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
@@ -301,38 +304,44 @@
       background: #1C2635;
       height: 4.4rem;
       position: relative;
-      .detail {
-        color: #fff;
-        flex: 3;
-        text-align: center;
-        font-size: 1.8rem;
-        line-height: 4.4rem;
-        position: absolute;
-        right:12rem;
-        top:0;
-      }
-      .back, .share, .favorite {
+      flex: 0;
+      .container{
+        background: #1C2635;
+        margin-bottom: 10rem;
+        .detail {
+          color: #fff;
+          flex: 3;
+          text-align: center;
+          font-size: 1.8rem;
+          line-height: 4.4rem;
+          position: absolute;
+          right:12rem;
+          top:0;
+        }
+        .back, .share, .favorite {
 
-        width: 3rem;
-        height: 4.4rem;
-        background: url('./h_btn_back.png') no-repeat center;
-        background-size: auto 1.8rem;
+          width: 3rem;
+          height: 4.4rem;
+          background: url('./h_btn_back.png') no-repeat center;
+          background-size: auto 1.8rem;
+        }
+        .favorite {
+          background: url('./i_h_collection.png') no-repeat center;
+          background-size: auto 2.2rem;
+          position: absolute;
+          right:4rem;
+          top:0;
+        }
+        .share {
+          background: url('./i_h_share.png') no-repeat center;
+          background-size: auto 2.2rem;
+          margin-right: 1rem;
+          position: absolute;
+          right:0;
+          top:0;
+        }
       }
-      .favorite {
-        background: url('./i_h_collection.png') no-repeat center;
-        background-size: auto 2.2rem;
-position: absolute;
-        right:4rem;
-        top:0;
-      }
-      .share {
-        background: url('./i_h_share.png') no-repeat center;
-        background-size: auto 2.2rem;
-        margin-right: 1rem;
-        position: absolute;
-        right:0;
-        top:0;
-      }
+
     }
     .movie_detail_cnt {
       flex: 1;

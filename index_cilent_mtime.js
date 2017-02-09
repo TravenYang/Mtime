@@ -36,7 +36,8 @@ app.use(function *(next) {
 });
 app.use(staticServer(path.join(__dirname, 'dist')));
 
-app.listen(Config.dev.mtime.port,'192.168.1.5');
+//app.listen(Config.dev.mtime.port,'192.168.1.5');
+app.listen(Config.dev.mtime.port,'45.32.73.184');
 require('figlet').text('Mtime', {
     font: 'Roman'
 }, function (err, data) {
