@@ -178,7 +178,7 @@ module.exports = function (app) {
                     registerInfo.msg = '昵称已存在';
                     registerInfo.status = false;
                 } else {
-                    let userInfo = `INSERT INTO user SET account='${account}',name='${name}',pwd='${pwd}'，img='default_img.jpg';`;
+                    let userInfo = `INSERT INTO user SET account='${account}',name='${name}',pwd='${pwd}',img='default_img.jpg';`;
                     let r = yield  mysql.query(userInfo);
                     registerInfo.msg = '注册成功';
                     registerInfo.status = true;
