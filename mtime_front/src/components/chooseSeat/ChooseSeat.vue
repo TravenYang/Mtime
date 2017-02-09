@@ -8,55 +8,55 @@
       </div>
     </div>
     <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
-  <div  v-show="show" class="choose_seat animated">
+      <div v-show="show" class="choose_seat animated">
 
-    <div class="seat_cnt">
-      <div class="screen_cnt">
-        <div class="screen">
-          <p class="screen_pic"></p>
-          3号厅 银幕
-          <div class="seat_rest">（剩余{{emptySeat}}个座位）</div>
-          <div class="zoom"></div>
-        </div>
-      </div>
-      <div class="seat_row_cnt">
-        <ul class="seat_row_num">
-          <li class="seat_row_num_item" v-for="(seatData,rowIdx) in seat">{{rowIdx+1}}</li>
-        </ul>
-        <ol class="seat_row_seat_cnt">
-          <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
+        <div class="seat_cnt">
+          <div class="screen_cnt">
+            <div class="screen">
+              <p class="screen_pic"></p>
+              3号厅 荧幕
+              <div class="seat_rest">（剩余{{emptySeat}}个座位）</div>
+              <div class="zoom"></div>
+            </div>
+          </div>
+          <div class="seat_row_cnt">
+            <ul class="seat_row_num">
+              <li class="seat_row_num_item" v-for="(seatData,rowIdx) in seat">{{rowIdx+1}}</li>
+            </ul>
+            <ol class="seat_row_seat_cnt">
+              <li class="seat_row_seat" v-for="(seatData,rowIdx) in seat">
             <span
               :class="['seat_row_seat_item',{seat_temp_select:+seatData.tempSelect},{select:+seatData.select},{confirm:+seatData.confirm},{seatnull:+seatData.seatNull}]"
               v-for="(seatData,colIdx) in seat[rowIdx]" @click="getSeatNum(+rowIdx,+colIdx)"></span>
-          </li>
-        </ol>
-      </div>
-    </div>
-    <div class="seat_select_info">
-      <span class="seat_movie_time">1月29日 (周日) 09:05</span>
-      <span class="seat_time_change">更换场次</span>
-      <div class="seat_movie_loacation">
-        <div class="location">SFC上影影城（永华店）</div>
-        <div class="price">单价：<i>{{price}}￥</i></div>
-      </div>
-      <ul class="seat_ticket_choose">
-        <li class="seat_ticket_choose_item" v-for="ticket in chooseSeat">
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="seat_select_info">
+          <span class="seat_movie_time">1月29日 (周日) 09:05</span>
+          <span class="seat_time_change">更换场次</span>
+          <div class="seat_movie_loacation">
+            <div class="location">SFC上影影城（永华店）</div>
+            <div class="price">单价：<i>{{price}}￥</i></div>
+          </div>
+          <ul class="seat_ticket_choose">
+            <li class="seat_ticket_choose_item" v-for="ticket in chooseSeat">
           <span class="seat_ticket_cnt">
             <i class="seat_ticket" v-for="tik in ticket">{{tik.row}}排{{tik.colum}}座</i>
           </span>
-        </li>
-      </ul>
-    </div>
-    <div class="price_bar">
-      <div class="left">
+            </li>
+          </ul>
+        </div>
+        <div class="price_bar">
+          <div class="left">
         <span class="price_cnt">总价:
           <b class="price">￥{{totalPrice}}</b>
           <i>(含服务费￥5/张)</i>
         </span>
+          </div>
+          <span class="price_confirm" @click="comfirmTicket">下一步</span>
+        </div>
       </div>
-      <span class="price_confirm" @click="comfirmTicket">下一步</span>
-    </div>
-  </div>
     </transition>
     <loading v-show="loading"></loading>
   </div>
@@ -76,10 +76,10 @@
         price: 32,
         count: 0,
         loading: true,
-        show:false,
+        show: false,
       }
     },
-    components:{
+    components: {
       loading
     },
     computed: {
@@ -111,7 +111,7 @@
       gotoTicket(movieId){
         console.log('我来了');
         let _this = this;
-        _this.$router.push({path:'/ticket/choose_movie', query:{movieId:movieId}});
+        _this.$router.push({path: '/ticket/choose_movie', query: {movieId: movieId}});
       },
       getSeatNum(rowIdx, colIdx){
         let _this = this;
@@ -157,9 +157,9 @@
           console.log('可以选择 4');
         }
         function selectSeat() {
-          if(_this.chooseSeat.length>6){
+          if (_this.chooseSeat.length > 6) {
             alert('单次购买不能超过6张');
-          return;
+            return;
           }
 
           if (+colData.confirm == 1) {
@@ -221,7 +221,7 @@
 </script>
 
 <style lang="scss">
-  .out_wraper{
+  .out_wraper {
     display: flex;
     flex-direction: column;
     .choose_seat_header {
@@ -230,6 +230,7 @@
       color: #fff;
       align-items: center;
       position: relative;
+      height: 4.4rem;
       .back {
         width: 4.4rem;
         height: 4.4rem;
@@ -253,8 +254,9 @@
       }
     }
     .choose_seat {
-      width: 100%;
-
+      flex: 1;
+      position: relative;
+      overflow: hidden;
       .seat_cnt {
         padding-top: 1.5rem;
         border-bottom: 1px solid #D8D8D8;
@@ -357,13 +359,13 @@
           width: 100%;
           align-items: center;
           height: 1.6rem;
-          .location{
+          .location {
             flex: 1;
           }
-          .price{
+          .price {
             text-align: right;
             margin-right: 1.5rem;
-            i{
+            i {
               color: #ff8600;
               font-style: normal;
               font-size: 1.6rem;
@@ -376,6 +378,7 @@
           display: flex;
           flex-wrap: wrap;
           padding-top: 1.5rem;
+          flex: 1;
           .seat_ticket_choose_item {
             padding: .2rem 0;
             .seat_ticket_cnt {
@@ -423,12 +426,13 @@
         height: 3.5rem;
         line-height: 3.5rem;
         display: flex;
-        position: fixed;
-        left:.6rem;
+        position: absolute;
+        left: 0;
         bottom: 0;
         width: 100%;
         .left {
           flex: 1;
+          padding-left: .6rem;
           .price {
             vertical-align: middle;
             font-size: 2rem;
