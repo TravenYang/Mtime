@@ -1,7 +1,7 @@
 <template>
   <div class="head-adv" v-show="showHeadAdvVal">
     <a>
-      <div class="head-close" @click.stop="showHeadAdv">
+      <div class="head-close" @click.stop="showHeadAdv()">
         <i class="head-close-pic"></i>
       </div>
       <div class="head-logo">
@@ -23,7 +23,7 @@
     computed: {
       ...mapGetters([
         'showHeadAdvVal'
-      ]),
+      ])
     },
     methods: {
       ...mapActions([
@@ -33,7 +33,7 @@
   };
 </script>
 <style lang="scss">
-  @import "../../assets/scss/rem";;
+  @import "../../assets/scss/rem";
   .head-adv {
     background: #1e2837;
     & > a {

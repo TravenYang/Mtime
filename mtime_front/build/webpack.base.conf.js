@@ -11,6 +11,10 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
+  externals: {
+    'AMap': 'window.AMap',
+    'IScroll':'window.IScroll'
+  },
   entry: {
     app: './src/main.js'
   },

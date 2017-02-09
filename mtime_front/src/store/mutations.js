@@ -7,36 +7,96 @@ import {
   SHOW_SEARCH_VAL,
   HIDE_NAV_AND_SEARCH,
   SHOW_NAV_AND_SEARCH,
-  CHOOSE_MOVIE_TYPE_HOME
+  CHOOSE_MOVIE_TYPE_HOME,
+  HOME_MOVIE_DATA,
+  WILL_MOVIE_DATA,
+  CINEMA_DATA,
+  CURRENT_LOCATION,
+  SAVE_ACCOUNT,
+  SAVE_NICK_NAME,
+  SHOW_LOADING,
+  HIDE_LOADING
 } from './types';
-const state ={
-  url:'http://mokebuy.com:13009/',
-  showHeadAdvVal:true,
-  showNavVal:true,
-  showSearchVal:true,
-  isNow: true
+const state = {
+  url: 'http://mokebuy.com:13009/',
+  showHeadAdvVal: true,
+  showNavVal: true,
+  showSearchVal: true,
+  isNow: true,
+  homeMovieData:[],
+  willMovieData:[],
+  cinemaData:'',
+  currentLocation:{lng:'',lat:'',place:''},
+  account_l:'',
+  nickName_l:'',
+  loading:false,
+  footerShow:true
 };
 
 const getters = {
-  showHeadAdvVal:(state)=>{
+  loading(state){
+    return state.loading;
+  },
+  getAccount:(state)=>{
+    return state.account_l;
+  },
+  getNickName:(state)=>{
+    return state.nickName_l;
+  },
+  getCurrentLocation:(state)=>{
+    return state.currentLocation;
+  },
+  showHeadAdvVal: (state)=> {
     return state.showHeadAdvVal;
   },
-  showNavVal:(state)=>{
+  showNavVal: (state)=> {
     return state.showNavVal;
   },
-  showSearchVal:(state)=>{
+  showSearchVal: (state)=> {
     return state.showSearchVal;
   },
-  url:(state)=>{
+  url: (state)=> {
     return state.url;
   },
-  isNow:(state)=>{
+  isNow: (state)=> {
     return state.isNow;
+  },
+  homeMovieData:(state)=>{
+    return state.homeMovieData;
+  },
+  willMovieData:(state)=>{
+    return state.willMovieData;
+  },
+  getcinemaData:(state)=>{
+    return state.cinemaData;
   }
 }
 const mutations = {
-  [CHOOSE_MOVIE_TYPE_HOME](state,n){
-    console.log('val',n);
+  [HIDE_LOADING](state){
+    state.loading=false;
+  },
+  [SHOW_LOADING](state){
+    state.loading=true;
+  },
+  [SAVE_ACCOUNT](state, n){
+    state.account_l = n;
+  },
+  [SAVE_NICK_NAME](state, n){
+    state.nickName_l = n;
+  },
+  [CURRENT_LOCATION](state, n){
+    state.currentLocation = n;
+  },
+  [CINEMA_DATA](state, n){
+    state.cinemaData = n;
+  },
+  [HOME_MOVIE_DATA](state, n){
+    state.homeMovieData = n;
+  },
+  [WILL_MOVIE_DATA](state, n){
+    state.willMovieData = n;
+  },
+  [CHOOSE_MOVIE_TYPE_HOME](state, n){
     state.isNow = n;
   },
   [SHOW_HEAD_ADV](state){
@@ -48,13 +108,13 @@ const mutations = {
   [SHOW_SEARCH_VAL](state){
     state.showSearchVal = !state.showSearchVal;
   },
-  [HIDE_NAV_AND_SEARCH](state){
-    state.showNavVal = false;
-    state.showSearchVal = false;
+  [HIDE_NAV_AND_SEARCH](state, n1, n2){
+    state.showNavVal = n1 || false;
+    state.showSearchVal = n2 || false;
   },
-  [SHOW_NAV_AND_SEARCH](state){
-    state.showNavVal = true;
-    state.showSearchVal = true;
+  [SHOW_NAV_AND_SEARCH](state, n1, n2){
+    state.showNavVal = n1 || true;
+    state.showSearchVal = n2 || true;
   }
 };
 export default{

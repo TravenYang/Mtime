@@ -2,10 +2,8 @@
   <div id="app">
     <HeadAdv></HeadAdv>
     <Tab :head="true" v-show="showNavVal"></Tab>
-    <SearchBox v-show="showSearchVal"></SearchBox>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <!--<loading v-if="loading"></loading>-->
+    <router-view class="app_content"></router-view>
   </div>
 </template>
 
@@ -46,13 +44,21 @@ export default {
   computed:{
     ...mapGetters([
       'showNavVal',
-      'showSearchVal'
+      'showSearchVal',
+      'loading'
     ])
+
   }
 }
-
 </script>
-
 <style lang='scss'>
-
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    & > .app_content {
+      overflow: hidden;
+      flex: 1;
+    }
+  }
 </style>

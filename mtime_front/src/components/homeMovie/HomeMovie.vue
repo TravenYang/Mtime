@@ -11,10 +11,7 @@
         </router-link>
       </div>
     </div>
-    <SearchBox></SearchBox>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+      <router-view class="content"></router-view>
   </div>
 </template>
 
@@ -49,26 +46,33 @@
 <style lang="scss">
   .homeMovie {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .content{
+      flex:1;
+      overflow: hidden;
+    }
     .backToHome{
       background: url('./h_btn_back.png') no-repeat center center;
       background-size: 1.2rem 1.5rem;
       width:3rem;
-      height:100%;
+      height:3rem;
       position:absolute;
-      left:0;
-      top:0;
+      left:.6rem;
+      top:.8rem;
     }
-    width: 100%;
-    height: 100%;
-    background: #1C2635;
-    height: 4.4rem;
+
     .hotMovie_text_cnt {
       width: 100%;
-      height: 100%;
       display: flex;
       justify-content: center;
       margin: 0 auto;
       align-items: center;
+      background: #1C2635;
+      height: 4.4rem;
       & > div {
         background: #0D121A;
         border-radius: 4rem;
