@@ -152,7 +152,7 @@
       //获取不到地址时,采用默认地址
       let getDefaultLoacation = setTimeout(function () {
         defaultLoacation();
-      }, 3000);
+      }, 2000);
 
       //默认地址配置获取
       function defaultLoacation() {
