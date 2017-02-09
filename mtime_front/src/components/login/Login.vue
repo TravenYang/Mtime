@@ -1,5 +1,6 @@
 <template>
-  <div class="login">
+  <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+  <div v-show="show" class="login animated">
     <div class="login_page" v-show="!getNickName">
       <div class="login_box">
         <div class="login_user">
@@ -36,6 +37,7 @@
       </div>
     </div>
   </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
@@ -44,6 +46,7 @@
   export default{
     mounted(){
       this.hideNavAndSearch(true);
+      this.show = true;
     },
     computed: {
       ...mapGetters([
@@ -59,7 +62,8 @@
         showPwdVal: false,
         register: false,
         btnInfo: '登录',
-        registerInfo:'免费注册'
+        registerInfo:'免费注册',
+        show:false,
       }
     },
     methods: {
@@ -150,6 +154,7 @@
 
 <style lang="scss">
   @import "../../assets/scss/rem";
+  @import   '../../assets/scss/animate.css';
   .login {
     .login_page {
       background: #F6F6F6;

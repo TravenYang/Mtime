@@ -83,7 +83,7 @@
       </div>
     </div>
 
-
+    <loading v-show="loading"></loading>
   </div>
 </template>
 
@@ -91,6 +91,7 @@
   import IScroll from 'IScroll';
   import Swiper from 'assets/js/swiper-3.4.1.min.js'
   import {mapGetters,mapActions} from 'vuex';
+  import loading from 'components/loading/Loading'
   export default{
     computed: {
       ...mapGetters([
@@ -101,13 +102,17 @@
         return this.$route.query.name;
       }
     },
+    components:{
+      loading
+    },
     data(){
       return {
         time: '',
         movie: '',
         currentMovie: '',
         movieId: '',
-        myscroll: ''
+        myscroll: '',
+        loading:true
       }
     },
     watch: {
@@ -172,10 +177,10 @@
           }
         }).then(function (res) {
           _this.time = res.data;
+          _this.loading = false;
           setTimeout(function () {
             _this.myscroll.refresh();
           }, 0);
-          console.log(_this.refs);
         }).catch(function (err) {
           console.log('err time', err);
         });
