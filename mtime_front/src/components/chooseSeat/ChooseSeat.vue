@@ -7,7 +7,7 @@
         <div class="movie_type">3D中文</div>
       </div>
     </div>
-    <transition enter-active-class="bounceInRight" leave-active-class="zoomOutRight">
+    <transition enter-active-class="slideInRight" leave-active-class="zoomOutRight">
       <div v-show="show" class="choose_seat animated">
 
         <div class="seat_cnt">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="seat_select_info">
-          <span class="seat_movie_time">1月29日 (周日) 09:05</span>
+          <span class="seat_movie_time">{{getNowFormatDate}}</span>
           <span class="seat_time_change">更换场次</span>
           <div class="seat_movie_loacation">
             <div class="location">SFC上影影城（永华店）</div>
@@ -85,6 +85,20 @@
     computed: {
       totalPrice(){
         return this.count * (5 + this.price);
+      },
+      getNowFormatDate() {
+        let date = new Date();
+        function p(s) {
+          return s < 10 ? '0' + s : s;
+        }
+        let time = new Date();
+        let year = time.getFullYear();
+        let month = time.getMonth() + 1;
+        let day = time.getDate();
+        let hour = time.getHours();
+        let minutes = time.getMinutes();
+        let currentdate = `${p(month)}月${p(day)}日 ${p(hour)}:${p(minutes)}`;
+        return currentdate;
       }
     },
     mounted(){
@@ -157,32 +171,45 @@
           console.log('可以选择 4');
         }
         function selectSeat() {
-          if (_this.chooseSeat.length > 6) {
-            alert('单次购买不能超过6张');
-            return;
-          }
-
           if (+colData.confirm == 1) {
             alert('已经有人了，请选择其他空座');
           } else if (+colData.tempSelect == 1) {
             alert('已被他人预定，请选择其他空座');
           } else if (+colData.seatNull !== 1 && +colData.tempSelect !== 1 && +colData.confirm !== 1) {
             let key = `${rowIdx}${colIdx}`;
-            if (+colData.select == 0) {
-              colData.select = 1;
-              _this.emptySeat--;
-              _this.count++;
-              _this.chooseSeat[_this.chooseSeat.length] = {};
-              _this.chooseSeat[_this.chooseSeat.length - 1][key] = colData;
-              console.log('加座', _this.chooseSeat);
+            //判断已选座位数是否超限
+            if (_this.chooseSeat.length > 7) {
+              //判断座位状态，进行减一
+              if (+colData.select == 1) {
+                colData.select = 0;
+                _this.emptySeat++;
+                _this.count--;
+                for (let i = 0, l = _this.chooseSeat.length; i < l; i++) {
+                  if (_this.chooseSeat[i][key] !== undefined) {
+                    _this.chooseSeat.splice(i, 1);
+                    console.log('减座', key);
+                  }
+                }
+              } else {
+                alert('单次购买不能超过8张');
+              }
             } else {
-              colData.select = 0;
-              _this.emptySeat++;
-              _this.count--;
-              for (let i = 0, l = _this.chooseSeat.length; i < l; i++) {
-                if (_this.chooseSeat[i][key] !== undefined) {
-                  _this.chooseSeat.splice(i, 1);
-                  console.log('减座', key);
+              if (+colData.select == 0) {
+                colData.select = 1;
+                _this.emptySeat--;
+                _this.count++;
+                _this.chooseSeat[_this.chooseSeat.length] = {};
+                _this.chooseSeat[_this.chooseSeat.length - 1][key] = colData;
+                console.log('加座', _this.chooseSeat);
+              } else {
+                colData.select = 0;
+                _this.emptySeat++;
+                _this.count--;
+                for (let i = 0, l = _this.chooseSeat.length; i < l; i++) {
+                  if (_this.chooseSeat[i][key] !== undefined) {
+                    _this.chooseSeat.splice(i, 1);
+                    console.log('减座', key);
+                  }
                 }
               }
             }
@@ -212,6 +239,8 @@
           //请求结束后,页面出现，loading消失
           _this.loading = false;
           alert('您已购买成功');
+          _this.chooseSeat = '';
+          _this.count = 0;
         }).catch(function (err) {
           console.log('err post seat', err);
         });
