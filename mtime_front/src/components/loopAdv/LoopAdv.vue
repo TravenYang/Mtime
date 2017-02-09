@@ -27,8 +27,9 @@ export default{
       loop:true,
       pagination:'.swiper-pagination',
       paginationClickable :true,
-      autoplayDisableOnInteraction : false
-
+      autoplayDisableOnInteraction : false,
+      observer:true,
+      observeParents:true
     });
   }
 }
