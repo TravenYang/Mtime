@@ -241,6 +241,7 @@
           alert('您已购买成功');
           _this.chooseSeat = [];
           _this.count = 0;
+          _this.loading = true;
           _this.getSeatInfo(_this);
         }).catch(function (err) {
           console.log('err post seat', err);
